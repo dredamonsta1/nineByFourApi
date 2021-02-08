@@ -1,0 +1,27 @@
+"rappers": {
+    {
+        "id": 0,
+        "name": "03 Greedo",
+        "aka": "Jason Jamal Jackson",
+        "region": "West Coast",
+        "albums": [
+            {
+                "name": "God Level",
+                "year": 2018,
+            },
+            {
+                "name": "Still Summer In The Projects",
+                "year": 2019,
+            },
+            {
+                "name": "Netflix & Deal",
+                "year": 2019,
+            },
+            {
+                "name": "Load It Up Vol 01",
+                "year": 2020
+            }
+        ]
+
+    },
+}
