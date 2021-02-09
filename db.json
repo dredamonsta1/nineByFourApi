@@ -1,27 +1,80 @@
-"rappers": {
-    {
-        "id": 0,
-        "name": "03 Greedo",
-        "aka": "Jason Jamal Jackson",
-        "region": "West Coast",
-        "albums": [
+{
+        "rappers": [
             {
-                "name": "God Level",
-                "year": 2018,
+                "id": 0,
+                "name": "03 Greedo",
+                "aka": "Jason Jamal Jackson",
+                "region": "West Coast",
+                "label": "",
+                "albums": [
+                    {
+                        "name": "God Level",
+                        "year": 2018
+                    },
+                    {
+                        "name": "Still Summer In The Projects",
+                        "year": 2019
+                    },
+                    {
+                        "name": "Netflix & Deal",
+                        "year": 2019
+                    },
+                    {
+                        "name": "Load It Up Vol 01",
+                        "year": 2020
+                    }
+                ]
             },
             {
-                "name": "Still Summer In The Projects",
-                "year": 2019,
-            },
-            {
-                "name": "Netflix & Deal",
-                "year": 2019,
-            },
-            {
-                "name": "Load It Up Vol 01",
-                "year": 2020
-            }
-        ]
+                "id": 1,
+                "name": "070 Shake",
+                "aka": "Danielle Balbuena",
+                "region": "New Jersey",
+                "label": "Good",
+                "albums": [
+                    {
+                        "name": "Modus Vivendi",
+                        "year": 2020
+                    }
+                ]
 
-    },
+            },
+            {
+                "id": 2,
+                "name": "12 Gauge",
+                "aka": "na",
+                "region": "",
+                "label": "Scotti Bros",
+                "albums": [
+                    {
+                        "name":"12 Gauge",
+                        "year": 1994
+                    },
+                    {
+                        "name":"Let Me Ride Again",
+                        "year": 1995
+                    },
+                    {
+                        "name":"Freaky One",
+                        "year": 1998
+                    }
+                ]
+
+            },
+            {
+                "id": 3,
+                "name": ""
+
+            },
+            {
+                "id": 4,
+                "name": ""
+
+            },
+            {
+                "id": 5,
+                "name": ""
+
+            },
+        ]
 }
