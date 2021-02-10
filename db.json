@@ -42,13 +42,18 @@
             {
                 "id": 2,
                 "name": "12 Gauge",
-                "aka": "na",
-                "region": "",
+                "aka": "Isiah Pinkney",
+                "region": "Georgia",
                 "label": "Scotti Bros",
                 "albums": [
                     {
                         "name":"12 Gauge",
-                        "year": 1994
+                        "year": 1994,
+                        "billboard": [
+                            {
+                                "billboard 200": 141 
+                            }
+                        ]
                     },
                     {
                         "name":"Let Me Ride Again",
@@ -63,17 +68,170 @@
             },
             {
                 "id": 3,
-                "name": ""
+                "name": "2 Chainz",
+                "aka": "Tauheed Epps",
+                "region": "Georgia",
+                "label": "Gamebread",
+                "albums": [
+                    {
+                        "name": "Based on a T.R.U. Story",
+                        "year": 2012,
+                        "Certifications": "Platinum",
+                        "billboard": [
+                            {
+                                "billboard 200": 72,
+                                "US Top R&B/Hip-Hop Albums": 11
+                            }
+                        ]
+                        
+                        
+                    },
+                    {
+                        "name": "B.O.A.T.S. II: Me Time",
+                        "year": 2013,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": 159,
+                                "US Top R&B/Hip-Hop Albums": 40,
+                                "US Top Rap Albums": 20
+                            }
+                        ]
+                    },
+                    {
+                        "name": "ColleGrove",
+                        "year": 2016,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": 4,
+                                "US Top R&B/Hip-Hop Albums": 2
+                            }
+                        ]
+                        
+                        
+                    },
+                    {
+                        "name": "Pretty Girls Like Trap Music",
+                        "year": 2017,
+                        "Certifications": "Platinum",
+                        "billboard": [
+                            {
+                                "billboard 200": 2,
+                                "US Top R&B/Hip-Hop Albums": 1
+                            }
+                        ]
+                        
+                        
+                    },
+                    {
+                        "name": "Rap or Go to the League",
+                        "year": 2019,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": 4,
+                                "US Top R&B/Hip-Hop Albums": 1
+                            }
+                        ]  
+                    },
+                    {
+                        "name": "So Help Me God!",
+                        "year": 2020,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": 15,
+                                "US Top R&B/Hip-Hop Albums": 8
+                            }
+                        ]
+                        
+                        
+                    }
+                    
+                    
+                ]
+        
 
             },
             {
                 "id": 4,
-                "name": ""
+                "name": "2 Pistols",
+                "aka": "Jeremy Lemont Saunders",
+                "region": "Florida",
+                "label": "Universal Motown",
+                "albums": [
+                    {
+                        "name": "Death Before Dishonor",
+                        "year": 2008,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": 32,
+                                "US Top R&B/Hip-Hop Albums": 10,
+                                "US Billboard Top Rap Albums": 6
+                            }
+                        ]
+
+                    },
+                    {
+                        "name": "Comin Back Hard",
+                        "year": 2014,
+                        "Certifications": "N/A",
+                        "billboard": [
+                            {
+                                "billboard 200": "N/A",
+                                "US Top R&B/Hip-Hop Albums": "N/A",
+                                "US Billboard Top Rap Albums": "N/A"
+                            }
+                        ]
+
+                    }
+
+
+                ]
 
             },
             {
                 "id": 5,
-                "name": ""
+                "name": "",
+                "aka": "",
+                "region": "",
+                "label": "",
+                "albums": [
+                    {
+
+                    }
+
+                ]
+
+            },
+            {
+                "id": 6,
+                "name": "",
+                "aka": "",
+                "region": "",
+                "label": "",
+                "albums": [
+                    {
+
+                    }
+
+                ]
+
+            },
+            {
+                "id": 7,
+                "name": "",
+                "aka": "",
+                "region": "",
+                "label": "",
+                "albums": [
+                    {
+
+                    }
+
+                ]
 
             },
         ]
