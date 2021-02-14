@@ -14,6 +14,6 @@ node package needed:
 
 Steps to get started adding data to the api db.
 - pull the repo 
-- install `json-server`  `npm install` this should update your `package.json`
+- install `json-server` run `npm install` in terminal, this should update your `package.json`
 
 
