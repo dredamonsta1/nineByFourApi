@@ -6,6 +6,23 @@
     line-height: 1.5;
 }
 
-.rapperForm{
+@font-face {
+    font-family: 'Jua', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Jua&family=Rye&family=Thasadith&display=swap');
+}
+
+.body{
+    text-align: center;
+    /* font-family: 'Jua', sans-serif; */
+    font-family: 'Thasadith', sans-serif;
 
 }
+.titleDiv {
+    color: brown;
+    text-align: center;
+
+}
+
+/* .rapperForm{
+
+} */
