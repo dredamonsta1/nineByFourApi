@@ -12,6 +12,7 @@
 }
 
 .body{
+    /* display: flex; */
     text-align: center;
     /* font-family: 'Jua', sans-serif; */
     font-family: 'Thasadith', sans-serif;
