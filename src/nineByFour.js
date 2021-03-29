@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+window.addEventListener("submit", function(e) {
 
     const submitBtn = document.querySelector('submit');
     const rapperForm = document.getElementById(
@@ -22,9 +22,9 @@ window.addEventListener("load", function() {
         );
         // const rapperForm = document.getElementById('rapperForm');
         
-        submitBtn.addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log("hey");
-        });
+        // submitBtn.addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        console.log("hey");
+        // });
         
     });
