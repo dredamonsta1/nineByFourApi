@@ -1,5 +1,10 @@
-const submitBtn = document.querySelector('submit');
-window.addEventListener("submit", function(e) {
+// const submitBtn = document.querySelector('submit');
+
+const handleApiClick = () => {
+    document.getElementById("submit").innerHTML = "hey";
+}
+
+document.addEventListener("submit", function(e) {
 
     const rapperForm = document.getElementById(
         'rapperForm', 
@@ -24,7 +29,7 @@ window.addEventListener("submit", function(e) {
         
         // submitBtn.addEventListener('submit', function(e) {
         //     e.preventDefault();
-        console.log("hey");
+        console.log({billboardHot});
         // });
         
     });
