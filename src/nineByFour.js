@@ -1,7 +1,5 @@
-// const submitBtn = document.querySelector('submit');
-const button = document.querySelector('submit');
-
-button.addEventListener("click", (e) => {
+const submitBtn = document.querySelector('submit');
+window.addEventListener("submit", function(e) {
 
     const rapperForm = document.getElementById(
         'rapperForm', 
@@ -26,7 +24,7 @@ button.addEventListener("click", (e) => {
         
         // submitBtn.addEventListener('submit', function(e) {
         //     e.preventDefault();
-        console.log({goldCert});
+        console.log("hey");
         // });
         
     });
