@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import List from "./components/List"
 
 
 interface IState {
@@ -26,17 +27,12 @@ function App() {
   const [people, setPeople] = useState<IState["people"]>([])
 
 
-  people.map(person => {
-    return person.age = 41;
-  })
-
-
-
 
   return (
     <div className="App">
       <h1>Nine By Four Api</h1>
       <h1>People Invited to my Party</h1>
+      <List people={people}/>
     </div>
   );
 }
