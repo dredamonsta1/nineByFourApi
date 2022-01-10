@@ -4,15 +4,15 @@ import React from 'react';
 interface IProps {
     people: {
       name: string
-      stageName: string,
-        url: string,
-        age: number,
-        home: string,
-        recordLabel: string,
-        numberOfAlbums: number,
-        albumName: string,
-        releaseDate: Date,
-        diamondCert: boolean,
+      stageName: string
+        url: string
+        age: number
+        home: string
+        recordLabel: string
+        numberOfAlbums: number
+        albumName: string
+        releaseDate: Date
+        diamondCert: boolean
         notes?: string
     }[]
   }
