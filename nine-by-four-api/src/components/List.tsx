@@ -11,17 +11,39 @@ interface IProps {
         recordLabel: string
         numberOfAlbums: number
         albumName: string
-        releaseDate: Date
-        diamondCert: boolean
-        notes?: string
+        // releaseDate: Date
+        // diamondCert: boolean
+        note?: string
     }[]
   }
 
 const List: React.FC<IProps> = ({ people }) => {
+
+    const renderList = (): JSX.Element[] => {
+        return people.map((person) => {
+            return (
+                <li className='List'>
+                <div className='List-header'>
+                    <img className='List-img' src={person.url} alt='img'/>
+                    <h2>{person.name}</h2>
+                    </div>
+                        <p>{person.stageName}</p>
+                        <p>{person.age} years old</p>
+                        <p>{person.home}</p>
+                        <p>{person.recordLabel}</p>
+                        <p>{person.numberOfAlbums}</p>
+                        <p>{person.albumName}</p>
+                        <p className='Liat-note'>{person.note}</p>
+                </li>
+            )
+        })
+
+    }
+
     return (
-        <div>
-            I am a list
-        </div>
+        <ul>
+            {renderList()}
+        </ul>
     )
 }
 
