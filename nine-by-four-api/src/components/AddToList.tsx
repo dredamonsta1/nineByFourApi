@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 
 const AddToList = () => {
+
+    const [input, setInput] = useState({
+        name: "",
+        stageName: "",
+        age: "",
+        home: "",
+        recordLabel: "",
+        numberOfAlbums: "",
+        albumName: "",
+        note: "",
+        img: ""
+
+    });
+
     return (
         <div className='AddToList'>
             <input 
