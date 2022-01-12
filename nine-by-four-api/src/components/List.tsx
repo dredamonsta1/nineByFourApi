@@ -1,21 +1,22 @@
 import React from 'react';
+import { IState as IProps } from "../App"
 
 
-interface IProps {
-    people: {
-      name: string
-      stageName: string
-        url: string
-        age: number
-        home: string
-        recordLabel: string
-        numberOfAlbums: number
-        albumName: string
-        // releaseDate: Date
-        // diamondCert: boolean
-        note?: string
-    }[]
-  }
+// interface IProps {
+//     people: {
+//       name: string
+//       stageName: string
+//         url: string
+//         age: number
+//         home: string
+//         recordLabel: string
+//         numberOfAlbums: number
+//         albumName: string
+//         // releaseDate: Date
+//         // diamondCert: boolean
+//         note?: string
+//     }[]
+//   }
 
 const List: React.FC<IProps> = ({ people }) => {
 
