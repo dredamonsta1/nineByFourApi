@@ -48,7 +48,6 @@ function App() {
   return (
     <div className="App">
       <h1>Nine By Four Api</h1>
-      <h1>People Invited to my Party</h1>
       <List people={people}/>
       <AddToList people={people} setPeople={setPeople}/>
     </div>
