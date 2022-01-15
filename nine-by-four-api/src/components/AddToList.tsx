@@ -70,6 +70,7 @@ const AddToList: React.FC<IProps> = ({ people, setPeople}) => {
             note: "",
             img: ""
         })
+        console.log("hi")
     }
 
     return (

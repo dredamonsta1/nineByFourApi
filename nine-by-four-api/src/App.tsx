@@ -25,6 +25,15 @@ export interface IState {
 
 function App() {
 
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("../../../server.js")
+    .then((res) => res.json())
+    .then((data) => setData(data.message))
+  }, []);
+  console.log(data)
+
   const drake = <img src="../public/drake.jpg" alt="" />
 
   const [people, setPeople] = useState<IState["people"]>([
@@ -48,6 +57,7 @@ function App() {
   return (
     <div className="App">
       <h1>Nine By Four Api</h1>
+      <p>{!data ? "Loading..." : data}</p>
       <List people={people}/>
       <AddToList people={people} setPeople={setPeople}/>
     </div>
