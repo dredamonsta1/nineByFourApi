@@ -1,3 +1,4 @@
+// const { faApper } = require('@fortawesome/free-brands-svg-icons');
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
@@ -8,3 +9,6 @@ server.use(middlewares);
 server.use(router);
 
 server.listen(port);
+
+
+app.get("")
