@@ -1,35 +1,59 @@
-const {readFile, writeFile} = require('fs');
-const util = require('util');
-const readFilePromise = util.promisify(readFile)
-const writeFilePromise = util.promisify(writeFile)
+var http = require('http')
+
+var fs= require('fs')
+
+http
+    .createServer(function (req, res) {
+        // const text = fs.readFileSync('./content/first.txt', 'utf8')
+        // res.end(text)
+        const fileStream = fs.createReadStream('./content/first.txt', 'utf8');
+        fileStream.on('open', ()=>{
+            fileStream.pipe(res)
+
+        })
+        fileStream.on('error', (err)=> {
+            res.end(err)
+        })
+
+    })
+    .listen(5000)
 
 
-const start = async() => {
-    try {
-        const first = await readFilePromise('./db.json', 'utf8');
-        const second = await readFilePromise('./content/second.txt', 'utf8');
-        console.log( first, second)
-        
-    } catch (error) {
-        console.log(error)
-        
-    }
-}
 
-start()
 
-// const getText = (path) => {
-//     return new Promise((resolve, reject) => {
-//         readFile(path, 'utf8', (err, data) =>{
-//             if(err){
-//                 reject(err)
-//             } else {
-//                 resolve(data)
-//             }
-//         })
-//     })
-// }
 
-// getText('./db.json')
-// .then(result => console.log(result))
-// .catch(err => console.log(err))
+
+
+
+
+
+
+// const EventEmitter = require ('events');
+
+// const customEmitter = new EventEmitter()
+
+// customEmitter.on('response', (name, id) => {
+//     console.log(`data recieved user ${name} with id:${id}`)
+// })
+
+// customEmitter.on('response', () => {
+//     console.log(`run off on the plug`)
+// })
+
+// customEmitter.emit('response', 'john', 34)
+
+
+
+
+
+
+
+// const { createReadStream } = require('fs')
+
+// const stream = createReadStream('./content/first.txt', {highWaterMark:90000, encoding:'utf8'})
+
+// stream.on('data', (result) => {
+//     console.log(result)
+// })
+
+// stream.on('error', (err) => console.log(err))
