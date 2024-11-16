@@ -1,7 +1,7 @@
 // import sqlite3 from 'sqlite3';
 const sqlite3 = require('sqlite3');
 
-const db =  new sqlite3.Database("./qoute.db", sqlite3.OPEN_READWRITE, (err) => {
+const db =  new sqlite3.Database("./quote.db", sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) return console.error(err);
 });
 
