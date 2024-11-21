@@ -1,5 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
+const res = require("express/lib/response")
+// const { Sequelize, Model, Datatypes } = require('sequelize');
 const app = express();
 
 
@@ -7,7 +9,7 @@ const app = express();
 const sqlite3 = require('sqlite3');
 
 const db =  new sqlite3.Database("./quote.db", sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-    if (err) return console.error(err);
+    if (err) return console.error("this is line 12",err);
 });
 
 // Define the SQL statement
@@ -29,7 +31,7 @@ CREATE TABLE IF NOT EXISTS quote (
 app.use(bodyParser.json());
 
 // post request
-app.post('/quote', (req, res) => {
+app.post('/artist', (req, res) => {
     try {
         console.log(req.body.name)
         res.json({
