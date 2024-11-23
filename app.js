@@ -37,8 +37,14 @@ app.post('/quote', (req, res) => {
         const { artistName, aka, genre, count, state, region, label, album, year, certifications } = req.body;
         sql = "INSERT INTO quote(artistName, aka, genre, count, state, region, label, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?)"
         db.run(sql, [artistName, aka, genre, count, state, region, label, album, year, certifications], (err) => {
-            if (err) return res.json({ status: 300, success: false, error: err });
-            console.log('successful input ', artistName, aka, genre, count, state, region, label, album, year, certifications);
+            if (err) {
+                return res.send({ status: 300, success: false, error: err });//<--------------server response.json
+                
+            } //else {
+                //res.send({})
+            //}
+          
+              console.log('successful input ', artistName, aka, genre, count, state, region, label, album, year, certifications);
         })
         res.json({
             status: 200,
