@@ -31,31 +31,41 @@ const db =  new sqlite3.Database("./quote.db", sqlite3.OPEN_READWRITE | sqlite3.
 app.use(bodyParser.json());
 
 // post request
-app.post('/quote', (req, res) => {
+app.post('/quote', async(req, res) => {
     try {
         // console.log(req.body.aka)
         const { artistName, aka, genre, count, state, region, label, album, year, certifications } = req.body;
         sql = "INSERT INTO quote(artistName, aka, genre, count, state, region, label, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?)"
         db.run(sql, [artistName, aka, genre, count, state, region, label, album, year, certifications], (err) => {
-            if (err) {
-                return res.send({ status: 300, success: false, error: err });//<--------------server response.json
-                
-            } //else {
-                //res.send({})
-            //}
+           // if (err) {
+             //   return res.send({ status: 300, success: false, error: err });//<--------------server response.json
+
+            //} //else {
+                // return;
+            // }
           
               console.log('successful input ', artistName, aka, genre, count, state, region, label, album, year, certifications);
         })
-        res.json({
+        await res.json({
             status: 200,
             success: true,
         })
     }
     catch (error) {
-        return res.json({
+        return await res.json({
             status: 400,
             success: false,
         })
     }
+
+
+
+
+
+
+})
+
+app.get('/artist', async (req, res) => {
+    
 })
 app.listen(3010);
