@@ -66,6 +66,11 @@ app.post('/quote', async(req, res) => {
 })
 
 app.get('/artist', async (req, res) => {
-    
+    const sql = 'SELECT * FROM quote';
+  const rows = await db.all(sql);
+  res.json(rows);
 })
-app.listen(3010);
+
+app.listen(3010, () => {
+    console.log("app is running")
+});
