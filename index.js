@@ -70,11 +70,27 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/api', (req, res) => { 
+    //get all rappers from table
+    res.set('content-type', 'application/json');
+    const sql = 'SELECT * FROM rappers';
+    let data = { rappers: [] };
+    try {
+        DB.all(sql, [], (err, rows) => {
+            if (err) {
+                throw err; //let catch handle it
+            }
+            rows.forEach(row => {
+                data.rappers.push({id: row.rapper_id, name: row.name, genre: row.genre, count: row.count})
+            })
+        })
+    } catch(err){}
 
 });
 
 app.get('/api', (req, res) => { });
+
 app.post('/api', (req, res) => { });
+
 app.delete('/api', (req, res) => { });
 
 app.listen(3010, (err) => {
