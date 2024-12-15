@@ -14,8 +14,8 @@ function connected(err) {
 }
 
 let sql = `CREATE TABLE IF NOT EXIST rappers(
-rapper_id INTEGER PRIMARY KEY,
-name TEXT,
+artist_id INTEGER PRIMARY KEY,
+    artist_name TEXT,
      aka TEXT,
      genre TEXT,
      count INTEGER,
