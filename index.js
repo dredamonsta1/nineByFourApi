@@ -3,10 +3,6 @@ import { DB } from "./connect.js";
 import express from 'express';
 import bodyParser from "body-parser";
 
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const res = require("express/lib/response")
-// const { Sequelize, Model, Datatypes } = require('sequelize');
 const app = express();
 
 
@@ -80,7 +76,7 @@ app.get('/api', (req, res) => {
                 throw err; //let catch handle it
             }
             rows.forEach(row => {
-                data.rappers.push({id: row.rapper_id, name: row.name, genre: row.genre, count: row.count})
+                data.rappers.push({id: row.artist_id, name: row.artist_name, genre: row.genre, count: row.count})
             })
         })
     } catch(err){}
