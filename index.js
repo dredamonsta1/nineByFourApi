@@ -6,59 +6,7 @@ import bodyParser from "body-parser";
 const app = express();
 
 
-
-// const sqlite3 = require('sqlite3');
-// let sql;
-// const db =  new sqlite3.Database("./quote.db", sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-//     if (err) return console.error("this is line 12",err);
-// });
-
-// Define the SQL statement
-// const sql = `
-// CREATE TABLE IF NOT EXISTS quote (
-//     ID INTEGER PRIMARY KEY,
-//     artistName TEXT,
-//     aka TEXT,
-//     genre TEXT,
-//     count INTEGER,
-//     state TEXT,
-//     region TEXT,
-//     label TEXT,
-//     album TEXT,
-//     year INTEGER,
-//     certifications TEXT
-// )`;
-
 app.use(bodyParser.json());
-
-// post request
-// app.post('/quote', async(req, res) => {
-//     try {
-//         // console.log(req.body.aka)
-//         const { artistName, aka, genre, count, state, region, label, album, year, certifications } = req.body;
-//         sql = "INSERT INTO quote(artistName, aka, genre, count, state, region, label, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?)"
-//         db.run(sql, [artistName, aka, genre, count, state, region, label, album, year, certifications], (err) => {
-//            // if (err) {
-//              //   return res.send({ status: 300, success: false, error: err });//<--------------server response.json
-
-//             //} //else {
-//                 // return;
-//             // }
-          
-//               console.log('successful input ', artistName, aka, genre, count, state, region, label, album, year, certifications);
-//         })
-//         await res.json({
-//             status: 200,
-//             success: true,
-//         })
-//     }
-//     catch (error) {
-//         return await res.json({
-//             status: 400,
-//             success: false,
-//         })
-//     }
-// })
 
 app.get('/', async (req, res) => {
     res.status(200);
@@ -76,18 +24,72 @@ app.get('/api', (req, res) => {
                 throw err; //let catch handle it
             }
             rows.forEach(row => {
-                data.rappers.push({id: row.artist_id, name: row.artist_name, genre: row.genre, count: row.count})
-            })
+                data.rappers.push({ id: row.artist_id, name: row.artist_name, genre: row.genre, count: row.count, state: row.state, region: row.region, label: row.label, mixtape: row.mixtape, album: row.album, year: row.year, certifications: row.certifications })
+                
+            });
+            let content = JSON.stringify(data);
+            res.send(content);
         })
-    } catch(err){}
+    } catch (err) {
+        console.log(err.message);
+        res.status(467);
+        res.send(`{ 'code':467, 'status':'${err.message}' }`);
+    }
 
 });
 
-app.get('/api', (req, res) => { });
+app.get('/api', (req, res) => { 
+    //post request
+    res.set('content-type', 'application/json');
+    const sql = 'SELECT * FROM rappers';
+});
 
-app.post('/api', (req, res) => { });
+app.post('/api', (req, res) => {
+    res.set('content-type', 'application/json');
+    const sql = 'INSERT INTO rappers(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+    let newAtristId;
 
-app.delete('/api', (req, res) => { });
+    try {
+        DB.run(sql, [req.body.artist_name, req.body.aka, req.body.genre, req.body.count, req.body.state, req.body.region, req.body.label, req.body.mixtape, req.body.album, req.body.year, req.body.certifications], function(err) {
+            if (err) {
+                throw err;
+            }
+            newAtristId = this.lastID; //this refers to the last row inserted or provides the auto increment value
+            res.status(201);
+            res.send(`{ 'code':201, 'status':'success', 'id':${newAtristId} }`);
+            let content = JSON.stringify(data);
+            res.send(content);
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(468);
+        res.send(`{ 'code':468, 'status':'${err.message}' }`);
+    }
+ });
+
+app.delete('/api', (req, res) => {
+    res.set('content-type', 'application/json');
+    const sql = 'DELETE FROM rappers WHERE artist_id = ?';
+    try {
+        DB.run(sql, [req.query.artist_id], function(err) {
+            if (err) throw err;
+            if (this.changes === 1) {
+                //one item deleted
+                res.status(204);
+                res.send(`{ 'code':204, 'message':'rapper ${req.query.artist_id}was deleted'}`);
+            } else {
+                //no item deleted
+                res.status(204);
+                res.send(`{ 'code':204, 'message':'no operation done' }`);
+            }
+            
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(469);
+        res.send(`{ 'code':469, 'status':'${err.message}' }`);
+    }
+ });
 
 app.listen(3010, (err) => {
     if (err) {
