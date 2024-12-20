@@ -3,7 +3,7 @@ const sql3 = sqlite3.verbose();
 
 // const DB = new sqlite3.Database(':memory', sqlite3.OPEN_READWRITE, connected);
 // const DB = new sqlite3.Database('', sqlite3.OPEN_READWRITE, connected);
-const DB = new sqlite3.Database('./rapper.db', sqlite3.OPEN_READWRITE, connected);
+const DB = new sql3.Database('./rapper.db', sqlite3.OPEN_READWRITE, connected);
 
 function connected(err) {
     if (err) {
@@ -13,7 +13,7 @@ function connected(err) {
     console.log('Created the DB or SQLite DB does already exist');
 }
 
-let sql = `CREATE TABLE IF NOT EXIST rappers(
+let sql = `CREATE TABLE rappers(
 artist_id INTEGER PRIMARY KEY,
     artist_name TEXT,
      aka TEXT,
@@ -28,7 +28,7 @@ artist_id INTEGER PRIMARY KEY,
      certifications TEXT
 )`;
 DB.run(sql, [], (err) => {
-    //callback func
+    //callback function
     if (err) {
         console.log(err,'error creating rappers table');
         return;
