@@ -13,18 +13,18 @@ function connected(err) {
     console.log('Created the DB or SQLite DB does already exist');
 }
 
-let sql = `CREATE TABLE rappers(
+let sql = `CREATE TABLE IF NOT EXISTS rappers(
 artist_id INTEGER PRIMARY KEY,
-    artist_name TEXT,
+    artist_name TEXT NOT NULL,
      aka TEXT,
-     genre TEXT,
-     count INTEGER,
-     state TEXT,
-     region TEXT,
+     genre TEXT NOT NULL,
+     count INTEGER NOT NULL,
+     state TEXT NOT NULL,
+     region TEXT NOT NULL,
      label TEXT,
      mixtape TEXT,
-     album TEXT,
-     year INTEGER,
+     album TEXT NOT NULL,
+     year INTEGER NOT NULL,
      certifications TEXT
 )`;
 DB.run(sql, [], (err) => {
