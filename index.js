@@ -8,11 +8,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/', async (req, res) => {
-    res.status(200);
-    res.send('rapper list is up and running');
-});
-
 app.get('/api', (req, res) => { 
     //get all rappers from table
     res.set('content-type', 'application/json');
