@@ -42,16 +42,17 @@ app.get('/api', (req, res) => {
 app.post('/api', (req, res) => {
     res.set('content-type', 'application/json');
     const sql = 'INSERT INTO rappers(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
-    let newAtristId;
+    let newArtistId;
 
     try {
         DB.run(sql, [req.body.artist_name, req.body.aka, req.body.genre, req.body.count, req.body.state, req.body.region, req.body.label, req.body.mixtape, req.body.album, req.body.year, req.body.certifications], function(err) {
-            if (err) {
-                throw err;
-            }
-            newAtristId = this.lastID; //this refers to the last row inserted or provides the auto increment value
+            if (err) throw err;
+            
+            newArtistId = this.lastID; //this refers to the last row inserted or provides the auto increment value
+
             res.status(201);
-            res.send(`{ 'code':201, 'status':'success', 'id':${newAtristId} }`);
+            let data = {status: 201, message: `new artist ${newArtistId} saved.`};
+            // res.send(`{ 'code':201, 'status':'success', 'id':${newAtristId} }`);
             let content = JSON.stringify(data);
             res.send(content);
         });
