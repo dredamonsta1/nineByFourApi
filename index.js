@@ -19,8 +19,19 @@ app.get('/api', (req, res) => {
                 throw err; //let catch handle it
             }
             rows.forEach(row => {
-                data.rappers.push({ id: row.artist_id, name: row.artist_name, genre: row.genre, count: row.count, state: row.state, region: row.region, label: row.label, mixtape: row.mixtape, album: row.album, year: row.year, certifications: row.certifications })
-                
+                data.rappers.push({
+                    artist_id: row.artist_id,
+                    name: row.artist_name,
+                    genre: row.genre,
+                    count: row.count,
+                    state: row.state,
+                    region: row.region,
+                    label: row.label,
+                    mixtape: row.mixtape,
+                    album: row.album,
+                    year: row.year,
+                    certifications: row.certifications
+                })
             });
             let content = JSON.stringify(data);
             res.send(content);
@@ -52,7 +63,6 @@ app.post('/api', (req, res) => {
 
             res.status(201);
             let data = {status: 201, message: `new artist ${newArtistId} saved.`};
-            // res.send(`{ 'code':201, 'status':'success', 'id':${newAtristId} }`);
             let content = JSON.stringify(data);
             res.send(content);
         });
@@ -77,8 +87,7 @@ app.delete('/api', (req, res) => {
                 //no item deleted
                 res.status(204);
                 res.send(`{ 'code':204, 'message':'no operation done' }`);
-            }
-            
+            } 
         });
     } catch (err) {
         console.log(err.message);
