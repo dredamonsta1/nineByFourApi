@@ -95,7 +95,7 @@ app.delete('/api', (req, res) => {
     }
  });
 
-app.listen(3010, (err) => {
+app.listen(process.env.PORT || 3010, (err) => {
     if (err) {
         console.log('ERROR:', err.message)
     }
