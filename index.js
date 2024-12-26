@@ -43,10 +43,10 @@ app.get('/api', (req, res) => {
 
 });
 
-app.get('/api', (req, res) => { 
-    //post request
-    res.set('content-type', 'application/json');
-    const sql = 'SELECT * FROM rappers';
+// app.get('/api', (req, res) => { 
+//     //post request
+//     res.set('content-type', 'application/json');
+//     const sql = 'SELECT * FROM rappers';
 // });
 
 app.post('/api', (req, res) => {
