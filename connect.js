@@ -4,7 +4,12 @@ const sql3 = sqlite3.verbose();
 // const DB = new sqlite3.Database(':memory', sqlite3.OPEN_READWRITE, connected);
 // const DB = new sqlite3.Database('', sqlite3.OPEN_READWRITE, connected);
 
-const DB = new sql3.Database("./rapper.db", sqlite3.OPEN_READWRITE, connected);
+const DB = new sql3.Database(
+  "./rapper.db",
+  sqlite3.OPEN_READWRITE || sqlite3.OPEN_CREATE,
+  connected
+);
+
 const DB2 = new sql3.Database(
   "./user.db",
   sqlite3.OPEN_READWRITE || sqlite3.OPEN_CREATE,
@@ -57,6 +62,6 @@ DB2.run(sql2, [], (err) => {
     console.log(err, "error creating users table");
     return;
   }
-  console.log("CREATED TABLE");
+  console.log("CREATED DB2 TABLE");
 });
 export { DB, DB2 };
