@@ -117,6 +117,7 @@ app.delete("/api", (req, res) => {
 });
 
 //users api
+
 app.get("/api/users", (req, res) => {
   //get all users
   res.set("content-type", "application/json");
@@ -143,6 +144,59 @@ app.get("/api/users", (req, res) => {
     console.log(err.message);
     res.status(467);
     res.send(`{ 'code':467, 'status':'${err.message}' }`);
+  }
+});
+
+app.post("/api/users", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql =
+    "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
+  let newUserId;
+
+  try {
+    DB2.run(
+      sql,
+      [req.body.username, req.body.password, req.body.email, req.body.role],
+      function (err) {
+        if (err) throw err;
+
+        newUserId = this.lastID; //this refers to the last row inserted or provides the auto increment value
+
+        res.status(201);
+        let data = { status: 201, message: `new user ${newUserId} saved.` };
+        let content = JSON.stringify(data);
+        res.send(content);
+      }
+    );
+  } catch (err) {
+    console.log(err.message);
+    res.status(468);
+    res.send(`{ 'code':468, 'status':'${err.message}' }`);
+  }
+});
+
+app.delete("/api/users", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "DELETE FROM users WHERE user_id = ?";
+  try {
+    DB2.run(sql, [req.query.user_id], function (err) {
+      if (err) throw err;
+      if (this.changes === 1) {
+        //one item deleted
+        res.status(204);
+        res.send(
+          `{ 'code':204, 'message':'user ${req.query.user_id}was deleted'}`
+        );
+      } else {
+        //no item deleted
+        res.status(204);
+        res.send(`{ 'code':204, 'message':'no operation done' }`);
+      }
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(469);
+    res.send(`{ 'code':469, 'status':'${err.message}' }`);
   }
 });
 
