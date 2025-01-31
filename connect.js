@@ -1,6 +1,8 @@
 import sqlite3 from "sqlite3";
 const sql3 = sqlite3.verbose();
+// import cors from "cors";
 
+// app.use(cors());
 // const DB = new sqlite3.Database(':memory', sqlite3.OPEN_READWRITE, connected);
 // const DB = new sqlite3.Database('', sqlite3.OPEN_READWRITE, connected);
 
