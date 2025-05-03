@@ -117,7 +117,9 @@ app.delete("/api", (req, res) => {
 });
 
 //users api
-
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/api/users", (req, res) => {
   //get all users
   res.set("content-type", "application/json");
