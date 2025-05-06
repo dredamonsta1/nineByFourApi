@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 
 import cors from "cors";
 const app = express();
+app.options("*", cors()); // Enable CORS preflight for all routes
 
 app.use(cors());
 app.use(bodyParser.json());
