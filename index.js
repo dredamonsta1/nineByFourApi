@@ -8,7 +8,13 @@ import cors from "cors";
 const app = express();
 app.options("*", cors()); // Enable CORS preflight for all routes
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+  })
+);
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // or 'http://localhost:3000'
   res.header(
