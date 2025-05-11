@@ -219,6 +219,117 @@ app.delete("/api/users", (req, res) => {
   }
 });
 
+// ********* new code below ******
+
+app.get("/api/users/login/:id", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM users WHERE user_id = ?";
+  let data = { users: [] };
+  try {
+    DB2.all(sql, [req.params.id], (err, rows) => {
+      if (err) {
+        throw err; //let catch handle it
+      }
+      rows.forEach((row) => {
+        data.users.push({
+          user_id: row.user_id,
+          username: row.username,
+          password: row.password,
+          email: row.email,
+          role: row.role,
+        });
+      });
+      let content = JSON.stringify(data);
+      res.send(content);
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(467);
+    res.send(`{ 'code':467, 'status':'${err.message}' }`);
+  }
+});
+app.get("/api/users/login", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM users WHERE username = ?";
+  let data = { users: [] };
+  try {
+    DB2.all(sql, [req.query.username], (err, rows) => {
+      if (err) {
+        throw err; //let catch handle it
+      }
+      rows.forEach((row) => {
+        data.users.push({
+          user_id: row.user_id,
+          username: row.username,
+          password: row.password,
+          email: row.email,
+          role: row.role,
+        });
+      });
+      let content = JSON.stringify(data);
+      res.send(content);
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(467);
+    res.send(`{ 'code':467, 'status':'${err.message}' }`);
+  }
+});
+app.get("/api/users/login/:username", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM users WHERE username = ?";
+  let data = { users: [] };
+  try {
+    DB2.all(sql, [req.params.username], (err, rows) => {
+      if (err) {
+        throw err; //let catch handle it
+      }
+      rows.forEach((row) => {
+        data.users.push({
+          user_id: row.user_id,
+          username: row.username,
+          password: row.password,
+          email: row.email,
+          role: row.role,
+        });
+      });
+      let content = JSON.stringify(data);
+      res.send(content);
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(467);
+    res.send(`{ 'code':467, 'status':'${err.message}' }`);
+  }
+});
+app.get("/api/users/login/:username/:password", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+  let data = { users: [] };
+  try {
+    DB2.all(sql, [req.params.username, req.params.password], (err, rows) => {
+      if (err) {
+        throw err; //let catch handle it
+      }
+      rows.forEach((row) => {
+        data.users.push({
+          user_id: row.user_id,
+          username: row.username,
+          password: row.password,
+          email: row.email,
+          role: row.role,
+        });
+      });
+      let content = JSON.stringify(data);
+      res.send(content);
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(467);
+    res.send(`{ 'code':467, 'status':'${err.message}' }`);
+  }
+});
+//********* new code above ******
 app.listen(process.env.PORT || 3010, (err) => {
   if (err) {
     console.log("ERROR:", err.message);
