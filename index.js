@@ -221,6 +221,21 @@ app.delete("/api/users", (req, res) => {
 
 // ********* new code below ******
 
+app.post("/api/users/login", (req, res) => {
+  const { username, password } = req.body;
+  DB2.get(
+    "SELECT * FROM users WHERE username = ? AND password = ?",
+    [username, password],
+    (err, user) => {
+      if (err) return res.status(500).json({ message: "Server error" });
+      if (!user)
+        return res.status(401).json({ message: "Invalid credentials" });
+
+      res.status(200).json({ message: `Welcome back, ${user.username}` });
+    }
+  );
+});
+
 app.get("/api/users/login/:id", (req, res) => {
   res.set("content-type", "application/json");
   const sql = "SELECT * FROM users WHERE user_id = ?";
