@@ -31,8 +31,11 @@ app.use(
 // });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); // Keep this for URL-encoded bodies
 
+// --- JWT Secret ---
+// Store this in a .env file! Never hardcode in production.
+const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 app.get("/api", (req, res) => {
   //get all artists from table
   res.set("content-type", "application/json");
