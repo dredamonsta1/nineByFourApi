@@ -52,6 +52,16 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ message: "Authentication token required." });
   }
 
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      console.error("Token verification error:", err.message);
+      // Return a 403 for invalid/expired tokens
+      return res.status(403).json({ message: "Invalid or expired token." });
+    }
+    req.user = user; // Attach user payload to request
+    next();
+  });
+};
 
 app.get("/api", (req, res) => {
   //get all artists from table
