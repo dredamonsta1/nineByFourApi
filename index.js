@@ -36,6 +36,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // Keep this for URL-encoded
 // --- JWT Secret ---
 // Store this in a .env file! Never hardcode in production.
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
+if (!JWT_SECRET === "your_jwt_secret") {
+  console.warn(
+    "JWT_SECRET is not set in environment variables. Using a default. Please set process.env.JWT_SECRET in your .env file."
+  );
+  // console.error("JWT_SECRET is not set. Please set it in your .env file.");
+  // process.exit(1);
+}
 app.get("/api", (req, res) => {
   //get all artists from table
   res.set("content-type", "application/json");
