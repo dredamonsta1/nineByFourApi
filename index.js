@@ -5,15 +5,18 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3010;
 app.options("*", cors()); // Enable CORS preflight for all routes
 
 app.use(
   cors({
     origin: "*", // Allow all origins
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
     preflightContinue: false,
   })
 );
