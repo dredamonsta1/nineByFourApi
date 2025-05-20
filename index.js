@@ -1,10 +1,12 @@
 import { DB, DB2 } from "./connect.js";
-// import { DB2 } from "./connect.js";
-
 import express from "express";
 import bodyParser from "body-parser";
-
 import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
 app.options("*", cors()); // Enable CORS preflight for all routes
 
