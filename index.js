@@ -127,7 +127,6 @@ app.post("/api", (req, res) => {
           console.log("Error inserting new artist:", err.message);
           return res.status(500).json({ code: 500, status: err.message });
         }
-        // throw err;
         res
           .status(201)
           .json({ status: 201, message: `New artist ${this.lastID} saved.` });
