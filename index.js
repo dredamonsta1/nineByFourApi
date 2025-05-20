@@ -43,6 +43,16 @@ if (!JWT_SECRET === "your_jwt_secret") {
   // console.error("JWT_SECRET is not set. Please set it in your .env file.");
   // process.exit(1);
 }
+
+// --- Authentication Middleware ---
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.header["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Expects "Bearer TOKEN"
+  if (token == null) {
+    return res.status(401).json({ message: "Authentication token required." });
+  }
+
+
 app.get("/api", (req, res) => {
   //get all artists from table
   res.set("content-type", "application/json");
