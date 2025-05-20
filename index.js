@@ -62,7 +62,7 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
+// --- Routes ---
 app.get("/api", (req, res) => {
   //get all artists from table
   res.set("content-type", "application/json");
@@ -71,7 +71,9 @@ app.get("/api", (req, res) => {
   try {
     DB.all(sql, [], (err, rows) => {
       if (err) {
-        throw err; //let catch handle it
+        console.error("Error fetching rappers:", err.message);
+        //throw err; //let catch handle it
+        return res.status(500).json({ code: 500, status: err.message });
       }
       rows.forEach((row) => {
         data.rappers.push({
@@ -88,21 +90,15 @@ app.get("/api", (req, res) => {
           certifications: row.certifications,
         });
       });
-      let content = JSON.stringify(data);
+      let content = JSON.stringify(data); // <-------------might change
       res.send(content);
     });
   } catch (err) {
-    console.log(err.message);
-    res.status(467);
-    res.send(`{ 'code':467, 'status':'${err.message}' }`);
+    console.log("Catch error fetching rappers", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+    // res.send(`{ 'code':467, 'status':'${err.message}' }`);
   }
 });
-
-// app.get("/api", (req, res) => {
-//   //post request
-//   res.set("content-type", "application/json");
-//   const sql = "SELECT * FROM rappers";
-// });
 
 app.post("/api", (req, res) => {
   res.set("content-type", "application/json");
@@ -127,20 +123,26 @@ app.post("/api", (req, res) => {
         req.body.certifications,
       ],
       function (err) {
-        if (err) throw err;
+        if (err) {
+          console.log("Error inserting new artist:", err.message);
+          return res.status(500).json({ code: 500, status: err.message });
+        }
+        // throw err;
+        res
+          .status(201)
+          .json({ status: 201, message: `New artist ${this.lastID} saved.` });
 
-        newArtistId = this.lastID; //this refers to the last row inserted or provides the auto increment value
+        // newArtistId = this.lastID; //this refers to the last row inserted or provides the auto increment value
 
-        res.status(201);
-        let data = { status: 201, message: `new artist ${newArtistId} saved.` };
-        let content = JSON.stringify(data);
-        res.send(content);
+        // res.status(201);
+        // let data = { status: 201, message: `new artist ${newArtistId} saved.` };
+        // let content = JSON.stringify(data);
+        // res.send(content);
       }
     );
   } catch (err) {
-    console.log(err.message);
-    res.status(468);
-    res.send(`{ 'code':468, 'status':'${err.message}' }`);
+    console.error("catch error inserting artist", err.message);
+    res.status(500).json({ code: 500, status: err.message });
   }
 });
 
