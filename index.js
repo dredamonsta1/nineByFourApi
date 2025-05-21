@@ -154,7 +154,7 @@ app.delete("/api", (req, res) => {
         console.error("Error deleting artist:", err.message);
         return res.status(500).json({ code: 500, status: err.message });
       }
-      // throw err;
+
       if (this.changes === 1) {
         //one item deleted
         res.status(200).json({
@@ -168,20 +168,9 @@ app.delete("/api", (req, res) => {
         });
       }
     });
-
-    //     res.send(
-    //       `{ 'code':204, 'message':'rapper ${req.query.artist_id}was deleted'}`
-    //     );
-    //   } else {
-    //     //no item deleted
-    //     res.status(204);
-    //     res.send(`{ 'code':204, 'message':'no operation done' }`);
-    //   }
-    // });
   } catch (err) {
     console.log("Catch error deleting Artist", err.message);
     res.status(500).json({ code: 500, status: err.message });
-    // res.send(`{ 'code':469, 'status':'${err.message}' }`);
   }
 });
 
@@ -224,12 +213,10 @@ app.post("/api/users/register", async (req, res) => {
           }
           return res.status(500).json({ message: "Error registering user." });
         }
-        res
-          .status(201)
-          .json({
-            message: "User registered successfully!",
-            userId: this.lastID,
-          });
+        res.status(201).json({
+          message: "User registered successfully!",
+          userId: this.lastID,
+        });
       }
     );
   } catch (error) {
