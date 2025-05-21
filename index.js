@@ -187,6 +187,54 @@ app.delete("/api", (req, res) => {
 
 // ---User Authentication and Management API---
 //users api
+
+app.post("/api/users/register", async (req, res) => {
+  const { username, password, email, role } = req.body;
+
+  if (!username || !password || !email) {
+    return res
+      .status(400)
+      .json({ message: "Username, password, and email are required." });
+  }
+
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 salt rounds is a good default
+
+    const sql =
+      "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
+    DB2.run(
+      sql,
+      [username, hashedPassword, email, role || "user"],
+      function (err) {
+        if (err) {
+          console.error("Error during user registration:", err.message);
+          if (
+            err.message.includes(
+              "SQLITE_CONSTRAINT: UNIQUE constraint failed: users.username"
+            ) ||
+            err.message.includes(
+              "SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email"
+            )
+          ) {
+            return res
+              .status(409)
+              .json({ message: "Username or email already exists." });
+          }
+          return res.status(500).json({ message: "Error registering user." });
+        }
+        res.status(201).json({
+          message: "User registered successfully!",
+          userId: this.lastID,
+        });
+      }
+    );
+  } catch (error) {
+    console.error("Server error during registration:", error);
+    res.status(500).json({ message: "Server error during registration." });
+  }
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
