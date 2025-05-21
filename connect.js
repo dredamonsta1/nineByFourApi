@@ -8,26 +8,28 @@ const sql3 = sqlite3.verbose();
 
 const DB = new sql3.Database(
   "./rapper.db",
-  sqlite3.OPEN_READWRITE || sqlite3.OPEN_CREATE,
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
   connected
 );
 
 const DB2 = new sql3.Database(
   "./user.db",
-  sqlite3.OPEN_READWRITE || sqlite3.OPEN_CREATE,
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
   connected
 );
 
 function connected(err) {
   if (err) {
-    console.log(err.message);
+    console.error("Error connecting to SQLite DB:", err.message);
+    // You might want to add process.exit(1) here in a real application
+    // if a database connection failure is critical.
     return;
   }
-  console.log("Created the DB or SQLite DB does already exist");
+  console.log("Connected to SQLite DB(s).");
 }
 
 let sql = `CREATE TABLE IF NOT EXISTS rappers(
-artist_id INTEGER PRIMARY KEY,
+artist_id INTEGER PRIMARY KEY AUTOINCREMENT,
     artist_name TEXT NOT NULL,
      aka TEXT,
      genre TEXT NOT NULL,
@@ -42,28 +44,28 @@ artist_id INTEGER PRIMARY KEY,
 )`;
 
 let sql2 = `CREATE TABLE IF NOT EXISTS users(
-    user_id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL,
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    email TEXT NOT NULL,
-    role TEXT NOT NULL
+    email TEXT UNIQUE NOT NULL,
+    role TEXT NOT NULL DEFAULT 'user'
 )`;
 
 DB.run(sql, [], (err) => {
   //callback function
   if (err) {
-    console.log(err, "error creating rappers table");
+    console.error("Error creating rappers table:", err.message);
     return;
   }
-  console.log("CREATED TABLE");
+  console.log("Rappers table created or already exists.");
 });
 
 DB2.run(sql2, [], (err) => {
   //callback function
   if (err) {
-    console.log(err, "error creating users table");
+    console.error("Error creating users table:", err.message);
     return;
   }
-  console.log("CREATED DB2 TABLE");
+  console.log("Users table created or already exists.");
 });
 export { DB, DB2 };
