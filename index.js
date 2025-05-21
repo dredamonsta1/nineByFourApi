@@ -293,6 +293,16 @@ app.post("/api/users/login", async (req, res) => {
   );
 });
 
+// Example of a Protected Route (only accessible with a valid JWT)
+app.get("/api/users/profile", authenticateToken, (req, res) => {
+  // req.user will contain the decoded JWT payload (id, username, role)
+  res.status(200).json({
+    message: `Hello ${req.user.username}, this is your protected profile data!`,
+    user: req.user,
+    accessTime: new Date().toISOString(),
+  });
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
