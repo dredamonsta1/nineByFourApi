@@ -150,26 +150,42 @@ app.delete("/api", (req, res) => {
   const sql = "DELETE FROM rappers WHERE artist_id = ?";
   try {
     DB.run(sql, [req.query.artist_id], function (err) {
-      if (err) throw err;
+      if (err) {
+        console.error("Error deleting artist:", err.message);
+        return res.status(500).json({ code: 500, status: err.message });
+      }
+      // throw err;
       if (this.changes === 1) {
         //one item deleted
-        res.status(204);
-        res.send(
-          `{ 'code':204, 'message':'rapper ${req.query.artist_id}was deleted'}`
-        );
+        res.status(200).json({
+          code: 200,
+          message: `artist ${req.query.artist_id} was deleted`,
+        });
       } else {
-        //no item deleted
-        res.status(204);
-        res.send(`{ 'code':204, 'message':'no operation done' }`);
+        res.status(404).json({
+          code: 404,
+          message: "Artist not found or no operation done",
+        });
       }
     });
+
+    //     res.send(
+    //       `{ 'code':204, 'message':'rapper ${req.query.artist_id}was deleted'}`
+    //     );
+    //   } else {
+    //     //no item deleted
+    //     res.status(204);
+    //     res.send(`{ 'code':204, 'message':'no operation done' }`);
+    //   }
+    // });
   } catch (err) {
-    console.log(err.message);
-    res.status(469);
-    res.send(`{ 'code':469, 'status':'${err.message}' }`);
+    console.log("Catch error deleting Artist", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+    // res.send(`{ 'code':469, 'status':'${err.message}' }`);
   }
 });
 
+// ---User Authentication and Management API---
 //users api
 app.use(cors());
 app.use(bodyParser.json());
