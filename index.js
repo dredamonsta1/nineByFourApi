@@ -303,6 +303,34 @@ app.get("/api/users/profile", authenticateToken, (req, res) => {
   });
 });
 
+// Other user API endpoints (might need protection too)
+app.get("/api/users", authenticateToken, (req, res) => {
+  // Protect this endpoint as well
+  res.set("content-type", "application/json");
+  const sql = "SELECT user_id, username, email, role FROM users"; // Do not return passwords!
+  let data = { users: [] };
+  try {
+    DB2.all(sql, [], (err, rows) => {
+      if (err) {
+        console.error("Error fetching users:", err.message);
+        return res.status(500).json({ code: 500, status: err.message });
+      }
+      rows.forEach((row) => {
+        data.users.push({
+          user_id: row.user_id,
+          username: row.username,
+          email: row.email,
+          role: row.role,
+        });
+      });
+      res.json(data);
+    });
+  } catch (err) {
+    console.error("Catch error fetching users:", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+  }
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
