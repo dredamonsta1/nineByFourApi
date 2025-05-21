@@ -188,6 +188,7 @@ app.delete("/api", (req, res) => {
 // ---User Authentication and Management API---
 //users api
 
+// User Registration
 app.post("/api/users/register", async (req, res) => {
   const { username, password, email, role } = req.body;
 
@@ -223,10 +224,12 @@ app.post("/api/users/register", async (req, res) => {
           }
           return res.status(500).json({ message: "Error registering user." });
         }
-        res.status(201).json({
-          message: "User registered successfully!",
-          userId: this.lastID,
-        });
+        res
+          .status(201)
+          .json({
+            message: "User registered successfully!",
+            userId: this.lastID,
+          });
       }
     );
   } catch (error) {
