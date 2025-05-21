@@ -235,6 +235,64 @@ app.post("/api/users/register", async (req, res) => {
   }
 });
 
+// User Login (Corrected to use bcrypt and JWT)
+app.post("/api/users/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Username and password are required." });
+  }
+
+  DB2.get(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    async (err, user) => {
+      if (err) {
+        console.error("Error during login (DB query):", err.message);
+        return res.status(500).json({ message: "Server error during login." });
+      }
+      if (!user) {
+        // Don't reveal if username exists, just say invalid credentials
+        return res
+          .status(401)
+          .json({ message: "Invalid username or password." });
+      }
+
+      try {
+        // Compare the provided password with the hashed password in the DB
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+          return res
+            .status(401)
+            .json({ message: "Invalid username or password." });
+        }
+
+        // Generate a JWT
+        const token = jwt.sign(
+          { id: user.user_id, username: user.username, role: user.role },
+          JWT_SECRET,
+          { expiresIn: "1h" } // Token expires in 1 hour
+        );
+
+        res.status(200).json({
+          message: `Welcome back, ${user.username}!`,
+          token: token,
+          user: { id: user.user_id, username: user.username, role: user.role }, // Send back some user info (excluding password)
+        });
+      } catch (error) {
+        console.error(
+          "Error during password comparison or JWT generation:",
+          error
+        );
+        res.status(500).json({ message: "Server error during login." });
+      }
+    }
+  );
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
