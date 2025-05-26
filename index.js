@@ -48,18 +48,42 @@ if (!JWT_SECRET === "your_jwt_secret") {
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   // const authHeader = req.headers.authorization;
+  console.log("Backend Auth: Raw Authorization Header:", authHeader); // Debugging
   const token = authHeader && authHeader.split(" ")[1]; // Expects "Bearer TOKEN"
   if (token == null) {
+    console.log("Backend Auth: No token provided or failed extraction."); // Debugging
     return res.status(401).json({ message: "Authentication token required." });
   }
 
+  console.log("Backend Auth: Token received by backend:", token); // Debugging
+  console.log(
+    "Backend Auth: Secret key being used for verification:",
+    JWT_SECRET
+  ); // Debugging
+
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) {
-      console.error("Token verification error:", err.message);
+      console.error("Backend Auth: JWT Verification Error:", err.message);
       // Return a 403 for invalid/expired tokens
-      return res.status(403).json({ message: "Invalid or expired token." });
+      if (err.name === "TokenExpiredError") {
+        console.log("Backend Auth: Token expired."); // Debugging
+        return res
+          .status(401)
+          .json({ message: "Authentication token expired." });
+      }
+      if (err.name === "jsonWebTokenError") {
+        console.log("Backend Auth: Invalid JWT signature or malformed token."); // Debugging
+        return res
+          .status(403)
+          .json({ message: "Invalid Authentication token." });
+      }
+      console.log("Backend Auth Other JWT error:", err.message); // Debugging for other errors
+      return res.status(403).json({ message: "Invalid or expired token." }); // Generic error message for other JWT errors
+
+      // return res.status(403).json({ message: "Invalid or expired token." });
     }
     req.user = user; // Attach user payload to request
+    console.log("Backend Auth: Token successfully verified for user:", user); // Debugging
     next();
   });
 };
