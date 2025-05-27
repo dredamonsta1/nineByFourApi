@@ -12,8 +12,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3010;
-app.options("*", cors()); // Enable CORS preflight for all routes
 
+app.options("*", cors()); // Enable CORS preflight for all routes
 app.use(
   cors({
     origin: "*", // Allow all origins
@@ -22,15 +22,7 @@ app.use(
     // preflightContinue: false,
   })
 );
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*"); // or 'http://localhost:3000'
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   next();
-// });
+app.use("uploads", express.static(path.resolve("uploads")));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Keep this for URL-encoded bodies
@@ -89,6 +81,59 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+//-------Multer Storage Config -------
+const storage  multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Images will be saved in the 'uploads' directory
+  },
+  filename: function (req, file, cb) {
+    // create a unique file name using current timestamp and og extension
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+  }
+});
+
+// Create the multer upload middleware
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+  fileFilter: (req, file, cb) => {
+    // Accept only image files
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb("Error: Images Only Plese!");
+    }
+  }
+});
+
+// --- NEW ROUTE: Upload Rapper Image ---
+// This route will handle uploading a single image for a artist.
+// You might want to protect this route with authenticateToken if only logged-in users can upload.
+app.post("/api/upload-artist-image", authenticateToken, upload.single("artistImage"), (req, res) => {
+  if (req.file) {
+    //req.file contains information about the uploaded file
+    const imageUrl = `/uploads/${req.file.filename}`; // This is the URL to access image
+    res.status(200).json({
+      message: "Image uploaded successfully!",
+      imageUrl: imageUrl, // Send back the URL where the image can be accessed
+      fileName: reqfile.filename // OG file name
+    });
+  } else {
+    res.status(400).json({ message: 'No file uploaded or file type not supported.' });
+  }
+}, (err, req, res, next) => { // Multer error handling
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({ message: error.message });
+  } else if (err) {
+    return res.status(400).json({ message: err.message });
+  }
+  next(); // Pass to the next middleware if no error
+})
 // --- Routes ---
 app.get("/api", (req, res) => {
   //get all artists from table
