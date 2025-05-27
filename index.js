@@ -5,6 +5,8 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import multer from "multer";
+import path from "path";
 
 dotenv.config();
 
