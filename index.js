@@ -6,78 +6,76 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import multer from "multer";
-import path from "path";
+import path from "path"; // Ensure path is imported
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3010;
 
-app.options("*", cors()); // Enable CORS preflight for all routes
+app.options("*", cors());
 app.use(
   cors({
-    origin: "*", // Allow all origins
+    origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
-    // preflightContinue: false,
   })
 );
-app.use("uploads", express.static(path.resolve("uploads")));
+
+// --- FIX 1: Correct the static file serving path ---
+// This makes images accessible via URL (e.g., http://localhost:3010/uploads/image.jpg)
+// Use path.resolve to ensure correct path regardless of OS
+app.use("/uploads", express.static(path.resolve("uploads"))); // ADDED LEADING SLASH
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // Keep this for URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // --- JWT Secret ---
-// Store this in a .env file! Never hardcode in production.
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
-if (!JWT_SECRET === "your_jwt_secret") {
+// Corrected warning condition (from !JWT_SECRET === "your_jwt_secret")
+if (JWT_SECRET === "your_jwt_secret") {
   console.warn(
     "JWT_SECRET is not set in environment variables. Using a default. Please set process.env.JWT_SECRET in your .env file."
   );
-  // console.error("JWT_SECRET is not set. Please set it in your .env file.");
-  // process.exit(1);
 }
 
 // --- Authentication Middleware ---
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
-  // const authHeader = req.headers.authorization;
-  console.log("Backend Auth: Raw Authorization Header:", authHeader); // Debugging
-  const token = authHeader && authHeader.split(" ")[1]; // Expects "Bearer TOKEN"
+  console.log("Backend Auth: Raw Authorization Header:", authHeader);
+  const token = authHeader && authHeader.split(" ")[1];
   if (token == null) {
-    console.log("Backend Auth: No token provided or failed extraction."); // Debugging
+    console.log("Backend Auth: No token provided or failed extraction.");
     return res.status(401).json({ message: "Authentication token required." });
   }
 
-  console.log("Backend Auth: Token received by backend:", token); // Debugging
+  console.log("Backend Auth: Token received by backend:", token);
   console.log(
     "Backend Auth: Secret key being used for verification:",
     JWT_SECRET
-  ); // Debugging
+  );
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) {
       console.error("Backend Auth: JWT Verification Error:", err.message);
-      // Return a 403 for invalid/expired tokens
       if (err.name === "TokenExpiredError") {
-        console.log("Backend Auth: Token expired."); // Debugging
+        console.log("Backend Auth: Token expired.");
         return res
           .status(401)
           .json({ message: "Authentication token expired." });
       }
-      if (err.name === "jsonWebTokenError") {
-        console.log("Backend Auth: Invalid JWT signature or malformed token."); // Debugging
+      if (err.name === "JsonWebTokenError") {
+        // Corrected from jsonWebTokenError (lowercase 'j')
+        console.log("Backend Auth: Invalid JWT signature or malformed token.");
         return res
           .status(403)
           .json({ message: "Invalid Authentication token." });
       }
-      console.log("Backend Auth Other JWT error:", err.message); // Debugging for other errors
-      return res.status(403).json({ message: "Invalid or expired token." }); // Generic error message for other JWT errors
-
-      // return res.status(403).json({ message: "Invalid or expired token." });
+      console.log("Backend Auth Other JWT error:", err.message);
+      return res.status(403).json({ message: "Invalid or expired token." });
     }
-    req.user = user; // Attach user payload to request
-    console.log("Backend Auth: Token successfully verified for user:", user); // Debugging
+    req.user = user;
+    console.log("Backend Auth: Token successfully verified for user:", user);
     next();
   });
 };
@@ -85,10 +83,9 @@ const authenticateToken = (req, res, next) => {
 //-------Multer Storage Config -------
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Images will be saved in the 'uploads' directory
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    // create a unique file name using current timestamp and og extension
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -96,12 +93,10 @@ const storage = multer.diskStorage({
   },
 });
 
-// Create the multer upload middleware
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    // Accept only image files
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(
@@ -111,26 +106,25 @@ const upload = multer({
     if (mimetype && extname) {
       return cb(null, true);
     } else {
-      cb("Error: Images Only Plese!");
+      // Return an Error object for better error handling, not just a string
+      cb(new Error("Error: Images Only Please!"));
     }
   },
 });
 
-// --- NEW ROUTE: Upload Rapper Image ---
-// This route will handle uploading a single image for a artist.
-// You might want to protect this route with authenticateToken if only logged-in users can upload.
+// --- NEW ROUTE: Upload Artist Image ---
 app.post(
   "/api/upload-artist-image",
   authenticateToken,
-  upload.single("artistImage"),
+  upload.single("artistImage"), // Multer expects 'artistImage'
   (req, res) => {
     if (req.file) {
-      //req.file contains information about the uploaded file
-      const imageUrl = `/uploads/${req.file.filename}`; // This is the URL to access image
+      const imageUrl = `/uploads/${req.file.filename}`;
       res.status(200).json({
         message: "Image uploaded successfully!",
-        imageUrl: imageUrl, // Send back the URL where the image can be accessed
-        fileName: reqfile.filename, // OG file name
+        imageUrl: imageUrl,
+        // --- FIX 2: Correct typo from 'reqfile.filename' to 'req.file.filename' ---
+        fileName: req.file.filename, // Corrected typo
       });
     } else {
       res
@@ -139,15 +133,20 @@ app.post(
     }
   },
   (err, req, res, next) => {
-    // Multer error handling
+    // Multer error handling (ensure `err` is consistent and access `err.message`)
     if (err instanceof multer.MulterError) {
-      return res.status(400).json({ message: error.message });
+      console.error("Multer Error:", err); // Log the full error
+      return res.status(400).json({ message: err.message }); // Corrected from `error.message` to `err.message`
     } else if (err) {
-      return res.status(400).json({ message: err.message });
+      console.error("General Upload Error:", err); // Log the full error
+      // If the fileFilter sends a string like 'Error: Images Only Please!',
+      // it will be caught here as `err`.
+      return res.status(400).json({ message: err.message || err }); // Access message property or use err directly
     }
-    next(); // Pass to the next middleware if no error
+    next();
   }
 );
+// ... rest of your index.js (no changes needed for other routes based on this issue)
 // --- Routes ---
 app.get("/api", (req, res) => {
   //get all artists from table
