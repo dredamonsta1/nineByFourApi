@@ -189,7 +189,7 @@ app.get("/api", (req, res) => {
 app.post("/api", (req, res) => {
   res.set("content-type", "application/json");
   const sql =
-    "INSERT INTO rappers(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO rappers(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications, image_url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   let newArtistId;
 
   try {
@@ -207,6 +207,7 @@ app.post("/api", (req, res) => {
         req.body.album,
         req.body.year,
         req.body.certifications,
+        req.body.image_url,
       ],
       function (err) {
         if (err) {
