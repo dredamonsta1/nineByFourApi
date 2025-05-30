@@ -147,6 +147,51 @@ app.post(
   }
 );
 // ... rest of your index.js (no changes needed for other routes based on this issue)
+
+// index.js (Backend)
+
+// ... (your existing imports and setup) ...
+
+app.put("/api/rappers/:artist_id/clout", (req, res) => {
+  const artistId = req.params.artist_id;
+
+  if (!artistId) {
+    return res.status(400).json({ message: "Artist ID is required." });
+  }
+
+  DB.run(
+    "UPDATE rappers SET count = count + 1 WHERE artist_id = ?",
+    [artistId],
+    function (err) {
+      if (err) {
+        console.error(
+          "Error updating clout for artist ID",
+          artistId,
+          ":",
+          err.message
+        );
+        return res
+          .status(500)
+          .json({ message: "Failed to update clout", error: err.message });
+      }
+      if (this.changes === 0) {
+        // No row was updated, meaning artist_id was not found
+        return res
+          .status(404)
+          .json({ message: `Artist with ID ${artistId} not found.` });
+      }
+      // Successfully updated
+      res.json({
+        message: "Clout updated successfully",
+        artist_id: artistId,
+        changes: this.changes,
+      });
+    }
+  );
+});
+
+// ... (your other routes and app.listen) ...
+
 // --- Routes ---
 app.get("/api", (req, res) => {
   //get all artists from table
