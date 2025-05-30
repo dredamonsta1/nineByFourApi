@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import multer from "multer";
-import path from "path"; // Ensure path is imported
+import path from "path";
 
 dotenv.config();
 
@@ -22,17 +22,12 @@ app.use(
   })
 );
 
-// --- FIX 1: Correct the static file serving path ---
-// This makes images accessible via URL (e.g., http://localhost:3010/uploads/image.jpg)
-// Use path.resolve to ensure correct path regardless of OS
-app.use("/uploads", express.static(path.resolve("uploads"))); // ADDED LEADING SLASH
+app.use("/uploads", express.static(path.resolve("uploads")));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// --- JWT Secret ---
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
-// Corrected warning condition (from !JWT_SECRET === "your_jwt_secret")
 if (JWT_SECRET === "your_jwt_secret") {
   console.warn(
     "JWT_SECRET is not set in environment variables. Using a default. Please set process.env.JWT_SECRET in your .env file."
@@ -65,7 +60,6 @@ const authenticateToken = (req, res, next) => {
           .json({ message: "Authentication token expired." });
       }
       if (err.name === "JsonWebTokenError") {
-        // Corrected from jsonWebTokenError (lowercase 'j')
         console.log("Backend Auth: Invalid JWT signature or malformed token.");
         return res
           .status(403)
@@ -106,7 +100,6 @@ const upload = multer({
     if (mimetype && extname) {
       return cb(null, true);
     } else {
-      // Return an Error object for better error handling, not just a string
       cb(new Error("Error: Images Only Please!"));
     }
   },
@@ -116,15 +109,14 @@ const upload = multer({
 app.post(
   "/api/upload-artist-image",
   authenticateToken,
-  upload.single("artistImage"), // Multer expects 'artistImage'
+  upload.single("artistImage"),
   (req, res) => {
     if (req.file) {
       const imageUrl = `/uploads/${req.file.filename}`;
       res.status(200).json({
         message: "Image uploaded successfully!",
         imageUrl: imageUrl,
-        // --- FIX 2: Correct typo from 'reqfile.filename' to 'req.file.filename' ---
-        fileName: req.file.filename, // Corrected typo
+        fileName: req.file.filename,
       });
     } else {
       res
@@ -133,25 +125,56 @@ app.post(
     }
   },
   (err, req, res, next) => {
-    // Multer error handling (ensure `err` is consistent and access `err.message`)
     if (err instanceof multer.MulterError) {
-      console.error("Multer Error:", err); // Log the full error
-      return res.status(400).json({ message: err.message }); // Corrected from `error.message` to `err.message`
+      console.error("Multer Error:", err);
+      return res.status(400).json({ message: err.message });
     } else if (err) {
-      console.error("General Upload Error:", err); // Log the full error
-      // If the fileFilter sends a string like 'Error: Images Only Please!',
-      // it will be caught here as `err`.
-      return res.status(400).json({ message: err.message || err }); // Access message property or use err directly
+      console.error("General Upload Error:", err);
+      return res.status(400).json({ message: err.message || err });
     }
     next();
   }
 );
-// ... rest of your index.js (no changes needed for other routes based on this issue)
 
-// index.js (Backend)
+// --- START: MOVED THIS ROUTE UP ---
+// This should be one of the first routes for /api
+app.get("/api", (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM rappers";
+  let data = { rappers: [] };
+  try {
+    DB.all(sql, [], (err, rows) => {
+      if (err) {
+        console.error("Error fetching rappers:", err.message);
+        return res.status(500).json({ code: 500, status: err.message });
+      }
+      rows.forEach((row) => {
+        data.rappers.push({
+          artist_id: row.artist_id,
+          name: row.artist_name,
+          genre: row.genre,
+          count: row.count,
+          state: row.state,
+          region: row.region,
+          label: row.label,
+          mixtape: row.mixtape,
+          album: row.album,
+          year: row.year,
+          certifications: row.certifications,
+          image_url: row.image_url, // Ensure image_url is included here if it's in DB
+        });
+      });
+      let content = JSON.stringify(data);
+      res.send(content);
+    });
+  } catch (err) {
+    console.log("Catch error fetching rappers", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+  }
+});
+// --- END: MOVED THIS ROUTE UP ---
 
-// ... (your existing imports and setup) ...
-
+// --- Rapper API Endpoints ---
 app.put("/api/rappers/:artist_id/clout", (req, res) => {
   const artistId = req.params.artist_id;
 
@@ -175,12 +198,10 @@ app.put("/api/rappers/:artist_id/clout", (req, res) => {
           .json({ message: "Failed to update clout", error: err.message });
       }
       if (this.changes === 0) {
-        // No row was updated, meaning artist_id was not found
         return res
           .status(404)
           .json({ message: `Artist with ID ${artistId} not found.` });
       }
-      // Successfully updated
       res.json({
         message: "Clout updated successfully",
         artist_id: artistId,
@@ -190,52 +211,10 @@ app.put("/api/rappers/:artist_id/clout", (req, res) => {
   );
 });
 
-// ... (your other routes and app.listen) ...
-
-// --- Routes ---
-app.get("/api", (req, res) => {
-  //get all artists from table
-  res.set("content-type", "application/json");
-  const sql = "SELECT * FROM rappers";
-  let data = { rappers: [] };
-  try {
-    DB.all(sql, [], (err, rows) => {
-      if (err) {
-        console.error("Error fetching rappers:", err.message);
-        //throw err; //let catch handle it
-        return res.status(500).json({ code: 500, status: err.message });
-      }
-      rows.forEach((row) => {
-        data.rappers.push({
-          artist_id: row.artist_id,
-          name: row.artist_name,
-          genre: row.genre,
-          count: row.count,
-          state: row.state,
-          region: row.region,
-          label: row.label,
-          mixtape: row.mixtape,
-          album: row.album,
-          year: row.year,
-          certifications: row.certifications,
-        });
-      });
-      let content = JSON.stringify(data); // <-------------might change
-      res.send(content);
-    });
-  } catch (err) {
-    console.log("Catch error fetching rappers", err.message);
-    res.status(500).json({ code: 500, status: err.message });
-    // res.send(`{ 'code':467, 'status':'${err.message}' }`);
-  }
-});
-
 app.post("/api", (req, res) => {
   res.set("content-type", "application/json");
   const sql =
     "INSERT INTO rappers(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications, image_url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-  let newArtistId;
-
   try {
     DB.run(
       sql,
@@ -261,13 +240,6 @@ app.post("/api", (req, res) => {
         res
           .status(201)
           .json({ status: 201, message: `New artist ${this.lastID} saved.` });
-
-        // newArtistId = this.lastID; //this refers to the last row inserted or provides the auto increment value
-
-        // res.status(201);
-        // let data = { status: 201, message: `new artist ${newArtistId} saved.` };
-        // let content = JSON.stringify(data);
-        // res.send(content);
       }
     );
   } catch (err) {
@@ -287,7 +259,6 @@ app.delete("/api", (req, res) => {
       }
 
       if (this.changes === 1) {
-        //one item deleted
         res.status(200).json({
           code: 200,
           message: `artist ${req.query.artist_id} was deleted`,
@@ -306,8 +277,7 @@ app.delete("/api", (req, res) => {
 });
 
 // ---User Authentication and Management API---
-//users api
-
+// ... (User authentication and management routes - no changes needed here for the 404 issue) ...
 // User Registration
 app.post("/api/users/register", async (req, res) => {
   const { username, password, email, role } = req.body;
@@ -319,8 +289,7 @@ app.post("/api/users/register", async (req, res) => {
   }
 
   try {
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 salt rounds is a good default
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const sql =
       "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
@@ -375,14 +344,12 @@ app.post("/api/users/login", async (req, res) => {
         return res.status(500).json({ message: "Server error during login." });
       }
       if (!user) {
-        // Don't reveal if username exists, just say invalid credentials
         return res
           .status(401)
           .json({ message: "Invalid username or password." });
       }
 
       try {
-        // Compare the provided password with the hashed password in the DB
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -391,17 +358,16 @@ app.post("/api/users/login", async (req, res) => {
             .json({ message: "Invalid username or password." });
         }
 
-        // Generate a JWT
         const token = jwt.sign(
           { id: user.user_id, username: user.username, role: user.role },
           JWT_SECRET,
-          { expiresIn: "1h" } // Token expires in 1 hour
+          { expiresIn: "1h" }
         );
 
         res.status(200).json({
           message: `Welcome back, ${user.username}!`,
           token: token,
-          user: { id: user.user_id, username: user.username, role: user.role }, // Send back some user info (excluding password)
+          user: { id: user.user_id, username: user.username, role: user.role },
         });
       } catch (error) {
         console.error(
@@ -416,7 +382,6 @@ app.post("/api/users/login", async (req, res) => {
 
 // Example of a Protected Route (only accessible with a valid JWT)
 app.get("/api/users/profile", authenticateToken, (req, res) => {
-  // req.user will contain the decoded JWT payload (id, username, role)
   res.status(200).json({
     message: `Hello ${req.user.username}, this is your protected profile data!`,
     user: req.user,
@@ -426,9 +391,8 @@ app.get("/api/users/profile", authenticateToken, (req, res) => {
 
 // Other user API endpoints (might need protection too)
 app.get("/api/users", authenticateToken, (req, res) => {
-  // Protect this endpoint as well
   res.set("content-type", "application/json");
-  const sql = "SELECT user_id, username, email, role FROM users"; // Do not return passwords!
+  const sql = "SELECT user_id, username, email, role FROM users";
   let data = { users: [] };
   try {
     DB2.all(sql, [], (err, rows) => {
@@ -453,7 +417,6 @@ app.get("/api/users", authenticateToken, (req, res) => {
 });
 
 app.delete("/api/users", authenticateToken, (req, res) => {
-  // Consider protecting this
   res.set("content-type", "application/json");
   const sql = "DELETE FROM users WHERE user_id = ?";
   try {
