@@ -1,4 +1,4 @@
-import { DB, DB2 } from "./connect.js";
+import { DB, DB2, DB3 } from "./connect.js";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -438,6 +438,51 @@ app.delete("/api/users", authenticateToken, (req, res) => {
     });
   } catch (err) {
     console.error("Catch error deleting user:", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+  }
+});
+
+app.get("/api/posts", authenticateToken, (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "SELECT * FROM posts";
+  let data = { posts: [] };
+  try {
+    DB3.all(sql, [], (err, rows) => {
+      if (err) {
+        console.error("Error fetching posts:", err.message);
+        return res.status(500).json({ code: 500, status: err.message });
+      }
+      rows.forEach((row) => {
+        data.posts.push({
+          post_id: row.post_id,
+          user_id: row.user_id,
+          content: row.content,
+          created_at: row.created_at,
+        });
+      });
+      res.json(data);
+    });
+  } catch (err) {
+    console.error("Catch error fetching posts:", err.message);
+    res.status(500).json({ code: 500, status: err.message });
+  }
+});
+
+app.post("/api/posts", authenticateToken, (req, res) => {
+  res.set("content-type", "application/json");
+  const sql = "INSERT INTO posts(user_id, content) VALUES (?, ?)";
+  try {
+    DB3.run(sql, [req.user.id, req.body.content], function (err) {
+      if (err) {
+        console.error("Error inserting new post:", err.message);
+        return res.status(500).json({ code: 500, status: err.message });
+      }
+      res
+        .status(201)
+        .json({ status: 201, message: `New post ${this.lastID} saved.` });
+    });
+  } catch (err) {
+    console.error("Catch error inserting post", err.message);
     res.status(500).json({ code: 500, status: err.message });
   }
 });

@@ -18,6 +18,12 @@ const DB2 = new sql3.Database(
   connected
 );
 
+const DB3 = new sql3.Database(
+  "./posts.db",
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+  connected
+);
+
 function connected(err) {
   if (err) {
     console.error("Error connecting to SQLite DB:", err.message);
@@ -51,6 +57,14 @@ let sql2 = `CREATE TABLE IF NOT EXISTS users(
     role TEXT NOT NULL DEFAULT 'user'
 )`;
 
+let sqlPosts = `CREATE TABLE IF NOT EXISTS posts(
+    post_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+)`;
+
 DB.run(sql, [], (err) => {
   //callback function
   if (err) {
@@ -68,4 +82,13 @@ DB2.run(sql2, [], (err) => {
   }
   console.log("Users table created or already exists.");
 });
-export { DB, DB2 };
+
+DB3.run(sqlPosts, [], (err) => {
+  //callback function
+  if (err) {
+    console.error("Error creating posts table:", err.message);
+    return;
+  }
+  console.log("Posts table created or already exists.");
+});
+export { DB, DB2, DB3 };
