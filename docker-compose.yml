@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  # Your React Frontend Service
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.frontend
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+    depends_on:
+      - backend # Frontend depends on backend being up (for API calls)
+
+  # Your Backend API Service
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.backend
+    ports:
+      - "3010:3010" # Ensure this matches your backend's PORT
+    environment:
+      # PostgreSQL connection details for the backend
+      DB_USER: user
+      DB_HOST: db_postgres # This matches the service name of the PostgreSQL container
+      DB_NAME: your_database_name
+      DB_PASSWORD: password
+      DB_PORT: 5432
+      JWT_SECRET: "your_strong_jwt_secret" # Replace with a strong secret!
+    depends_on:
+      - db_postgres # Backend depends on the database service
+    volumes:
+      - ./backend/uploads:/app/uploads # Persist uploaded images
+
+  # PostgreSQL Database Service
+  db_postgres:
+    image: postgres:13-alpine # Use a specific version for stability
+    environment:
+      POSTGRES_DB: your_database_name # The name of the database to create
+      POSTGRES_USER: user # The database user
+      POSTGRES_PASSWORD: password # The database password
+    ports:
+      - "5432:5432" # Expose PostgreSQL port to host (optional, but useful for local access)
+    volumes:
+      - pg_data:/var/lib/postgresql/data # Persist PostgreSQL data
+
+# Define the named volume for PostgreSQL data
+volumes:
+  pg_data:

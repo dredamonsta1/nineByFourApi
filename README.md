@@ -3,7 +3,7 @@ A customized json db object.
 
 ## To see data:
 
-[ninebyfourapi](https://ninebyfourapi.herokuapp.com/rappers)
+[ninebyfourapi](https://ninebyfourapi.herokuapp.com/artists)
 
 ## node package needed:
 

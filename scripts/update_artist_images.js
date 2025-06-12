@@ -14,7 +14,7 @@ dotenv.config();
 
 // --- Configuration ---
 // Adjust these paths if your 'db' or 'uploads' folder is not directly in your project root
-const DB_PATH = path.resolve(process.cwd(), "rapper.db");
+const DB_PATH = path.resolve(process.cwd(), "artist.db");
 const UPLOADS_DIR = path.resolve(process.cwd(), "uploads");
 // --- End Configuration ---
 
@@ -43,7 +43,7 @@ async function updateArtistImages() {
   let artists;
   try {
     artists = await db.all(
-      "SELECT artist_id, artist_name, image_url FROM rappers"
+      "SELECT artist_id, artist_name, image_url FROM artists"
     );
     console.log(`Found ${artists.length} artists in the database.`);
   } catch (dbErr) {
@@ -119,7 +119,7 @@ async function updateArtistImages() {
         );
       } else {
         try {
-          await db.run("UPDATE rappers SET image_url = ? WHERE artist_id = ?", [
+          await db.run("UPDATE artists SET image_url = ? WHERE artist_id = ?", [
             imageUrl,
             artist.artist_id,
           ]);
