@@ -27,12 +27,9 @@ pool.on("error", (err) => {
   process.exit(-1); // Exit process if database connection has a fatal error
 });
 
-// Export the pool to be used in your index.js and createTables for startup
-export { pool };
-
 // --- Initial Schema Setup (Example - you might use migrations for this in production) ---
 // This function will create tables if they don't exist
-async function createTables() {
+export async function createTables() {
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -55,11 +52,18 @@ async function createTables() {
         state VARCHAR(100),
         region VARCHAR(100),
         label VARCHAR(255),
-        mixtape VARCHAR(255),
-        album VARCHAR(255),
+        image_url VARCHAR(255)
+      );
+    `);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS albums (
+        album_id SERIAL PRIMARY KEY,
+        artist_id INTEGER NOT NULL,
+        album_name VARCHAR(255) NOT NULL,
         year INTEGER,
         certifications TEXT,
-        image_url VARCHAR(255)
+        FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
       );
     `);
 
@@ -74,13 +78,13 @@ async function createTables() {
     `);
 
     console.log(
-      'Tables "users", "artists", and "posts" checked/created successfully.'
+      'Tables "users", "artists", "albums", and "posts" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);
     process.exit(1); // Exit if table creation fails
-  } finally {
-    return pool; // Return the pool to indicate readiness
   }
 }
-export { createTables };
+
+// Export the pool to be used throughout the application
+export { pool };

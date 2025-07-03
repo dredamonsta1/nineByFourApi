@@ -27,7 +27,18 @@ router.post(
 
 // GET /api/artists
 router.get("/", async (req, res) => {
-  const sql = "SELECT * FROM artists ORDER BY artist_name ASC";
+  const sql = `
+    SELECT
+      a.*,
+      COALESCE(
+        (SELECT json_agg(alb ORDER BY alb.year DESC, alb.album_name ASC)
+         FROM albums AS alb
+         WHERE alb.artist_id = a.artist_id),
+        '[]'::json
+      ) AS albums
+    FROM artists AS a
+    ORDER BY a.artist_name ASC;
+  `;
   try {
     const result = await pool.query(sql);
     res.json({ artists: result.rows });
@@ -39,45 +50,32 @@ router.get("/", async (req, res) => {
 
 // POST /api/artists
 router.post("/", authenticateToken, async (req, res) => {
-  const sql =
-    "INSERT INTO artists(artist_name, aka, genre, count, state, region, label, mixtape, album, year, certifications, image_url) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *";
-  try {
-    const {
-      artist_name,
-      aka,
-      genre,
-      count,
-      state,
-      region,
-      label,
-      mixtape,
-      album,
-      year,
-      certifications,
-      image_url,
-    } = req.body;
+  const columns = [
+    "artist_name",
+    "aka",
+    "genre",
+    "state",
+    "region",
+    "label",
+    "image_url",
+  ];
 
-    const result = await pool.query(sql, [
-      artist_name,
-      aka,
-      genre,
-      count || 0,
-      state,
-      region,
-      label,
-      mixtape,
-      album,
-      year,
-      certifications,
-      image_url,
-    ]);
+  const values = columns.map((col) => {
+    return req.body[col];
+  });
+
+  const placeholders = columns.map((_, i) => `$${i + 1}`).join(", ");
+  const sql = `INSERT INTO artists(${columns.join(
+    ", "
+  )}) VALUES (${placeholders}) RETURNING *`;
+
+  try {
+    const result = await pool.query(sql, values);
     const newArtist = result.rows[0];
-    res
-      .status(201)
-      .json({
-        message: `New artist ${newArtist.artist_id} saved.`,
-        artist: newArtist,
-      });
+    res.status(201).json({
+      message: `New artist ${newArtist.artist_id} saved.`,
+      artist: newArtist,
+    });
   } catch (err) {
     console.error("Error inserting new artist:", err.message);
     if (err.code === "23505") {
@@ -89,6 +87,148 @@ router.post("/", authenticateToken, async (req, res) => {
     res.status(500).json({ code: 500, status: err.message });
   }
 });
+
+// POST /api/artists/:artist_id/albums
+router.post("/:artist_id/albums", authenticateToken, async (req, res) => {
+  const { artist_id } = req.params;
+  // The body can be a single album object or an array of album objects
+  const albums = Array.isArray(req.body) ? req.body : [req.body];
+
+  if (albums.some((album) => !album.album_name)) {
+    return res
+      .status(400)
+      .json({ message: "Each album must have an album_name." });
+  }
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN"); // Start transaction
+
+    const insertedAlbums = [];
+    for (const album of albums) {
+      const { album_name, year, certifications } = album;
+      const sql =
+        "INSERT INTO albums(artist_id, album_name, year, certifications) VALUES ($1, $2, $3, $4) RETURNING *";
+      const result = await client.query(sql, [
+        artist_id,
+        album_name,
+        year,
+        certifications,
+      ]);
+      insertedAlbums.push(result.rows[0]);
+    }
+
+    await client.query("COMMIT"); // Commit transaction
+    res.status(201).json({
+      message: `Successfully added ${insertedAlbums.length} album(s) to artist ${artist_id}.`,
+      albums: insertedAlbums,
+    });
+  } catch (err) {
+    await client.query("ROLLBACK"); // Rollback on error
+    console.error("Error adding album(s):", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to add album(s).", error: err.message });
+  } finally {
+    client.release(); // Release the client back to the pool
+  }
+});
+
+// PUT /api/artists/:artist_id (to update artist details)
+router.put("/:artist_id", authenticateToken, async (req, res) => {
+  const { artist_id } = req.params;
+  const fields = req.body;
+
+  // Define which columns are allowed to be updated
+  const allowedColumns = [
+    "artist_name",
+    "aka",
+    "genre",
+    "state",
+    "region",
+    "label",
+    "image_url",
+  ];
+
+  const columnsToUpdate = Object.keys(fields).filter((key) =>
+    allowedColumns.includes(key)
+  );
+
+  if (columnsToUpdate.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "No valid fields provided for update." });
+  }
+
+  // Build the SQL query dynamically
+  const setClause = columnsToUpdate
+    .map((col, i) => `${col} = $${i + 1}`)
+    .join(", ");
+  const values = columnsToUpdate.map((col) => fields[col]);
+  values.push(artist_id); // Add artist_id for the WHERE clause
+
+  const sql = `UPDATE artists SET ${setClause} WHERE artist_id = $${
+    columnsToUpdate.length + 1
+  } RETURNING *`;
+
+  try {
+    const result = await pool.query(sql, values);
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `Artist with ID ${artist_id} not found.` });
+    }
+    res.status(200).json({
+      message: `Artist ${artist_id} updated successfully.`,
+      artist: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Error updating artist:", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to update artist.", error: err.message });
+  }
+});
+
+// A more direct way to upload and assign an image in one step
+router.put(
+  "/:artist_id/image",
+  authenticateToken,
+  upload.single("artistImage"),
+  handleMulterError, // Handles errors from multer
+  async (req, res) => {
+    const { artist_id } = req.params;
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No image file provided." });
+    }
+
+    const imageUrl = `/uploads/${req.file.filename}`;
+    const sql =
+      "UPDATE artists SET image_url = $1 WHERE artist_id = $2 RETURNING *";
+
+    try {
+      const result = await pool.query(sql, [imageUrl, artist_id]);
+      if (result.rowCount === 0) {
+        return res
+          .status(404)
+          .json({ message: `Artist with ID ${artist_id} not found.` });
+      }
+      res.status(200).json({
+        message: `Image for artist ${artist_id} updated successfully.`,
+        artist: result.rows[0],
+      });
+    } catch (err) {
+      console.error("Error updating artist image:", err.message);
+      res
+        .status(500)
+        .json({
+          message: "Failed to update artist image.",
+          error: err.message,
+        });
+    }
+  }
+);
 
 // PUT /api/artists/:artist_id/clout
 router.put("/:artist_id/clout", async (req, res) => {
