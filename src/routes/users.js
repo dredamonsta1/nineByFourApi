@@ -87,12 +87,98 @@ router.post("/login", async (req, res) => {
 });
 
 // GET /api/users/profile
-router.get("/profile", authenticateToken, (req, res) => {
-  res.status(200).json({
-    message: `Hello ${req.user.username}, this is your protected profile data!`,
-    user: req.user,
-    accessTime: new Date().toISOString(),
-  });
+router.get("/profile", authenticateToken, async (req, res) => {
+  try {
+    const sql =
+      "SELECT user_id, username, email, role FROM users WHERE user_id = $1";
+    const result = await pool.query(sql, [req.user.id]);
+
+    if (result.rowCount === 0) {
+      // This case is unlikely if the token is valid, but good to handle.
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const userProfile = result.rows[0];
+    res.status(200).json({
+      message: `Hello ${userProfile.username}, this is your protected profile data!`,
+      user: userProfile,
+    });
+  } catch (error) {
+    console.error("Error fetching user profile:", error.message);
+    res.status(500).json({ message: "Server error while fetching profile." });
+  }
+});
+
+// PUT /api/users/:user_id (to update user details)
+router.put("/:user_id", authenticateToken, async (req, res) => {
+  const { user_id } = req.params;
+  const requestingUser = req.user;
+  const { email, role, password } = req.body;
+
+  // Security check: Allow if the user is an 'admin' OR if they are updating their own account.
+  if (
+    requestingUser.role !== "admin" &&
+    requestingUser.id.toString() !== user_id
+  ) {
+    return res.status(403).json({ message: "Permission denied." });
+  }
+
+  // Prevent non-admins from changing roles.
+  if (role && requestingUser.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "You are not authorized to change user roles." });
+  }
+
+  const fieldsToUpdate = [];
+  const values = [];
+  let queryIndex = 1;
+
+  if (email) {
+    fieldsToUpdate.push(`email = $${queryIndex++}`);
+    values.push(email);
+  }
+  if (role && requestingUser.role === "admin") {
+    fieldsToUpdate.push(`role = $${queryIndex++}`);
+    values.push(role);
+  }
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    fieldsToUpdate.push(`password = $${queryIndex++}`);
+    values.push(hashedPassword);
+  }
+
+  if (fieldsToUpdate.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "No valid fields provided for update." });
+  }
+
+  values.push(user_id);
+  const sql = `UPDATE users SET ${fieldsToUpdate.join(
+    ", "
+  )} WHERE user_id = $${queryIndex} RETURNING user_id, username, email, role`;
+
+  try {
+    const result = await pool.query(sql, values);
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `User with ID ${user_id} not found.` });
+    }
+    res.status(200).json({
+      message: `User ${user_id} updated successfully.`,
+      user: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Error updating user:", err.message);
+    if (err.code === "23505") {
+      return res.status(409).json({ message: "Email already in use." });
+    }
+    res
+      .status(500)
+      .json({ message: "Failed to update user.", error: err.message });
+  }
 });
 
 // GET /api/users
@@ -131,13 +217,12 @@ router.delete("/:user_id", authenticateToken, async (req, res) => {
   const sql = "DELETE FROM users WHERE user_id = $1";
   try {
     const result = await pool.query(sql, [user_id]);
-    if (result.rowCount === 1) {
-      res.status(200).json({
-        message: `User ${user_id} was deleted.`,
-      });
-    } else {
-      res.status(404).json({ message: "User not found" });
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `User with ID ${user_id} not found.` });
     }
+    res.status(200).json({ message: `User ${user_id} was deleted.` });
   } catch (err) {
     console.error("Error deleting user:", err.message);
     res.status(500).json({ code: 500, status: err.message });

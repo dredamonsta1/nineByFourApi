@@ -169,15 +169,21 @@ router.put(
   authenticateToken,
   async (req, res) => {
     const { album_id } = req.params;
+    const requestingUser = req.user;
+
+    // Security check: Only allow admins to update albums
+    if (requestingUser.role !== "admin") {
+      return res
+        .status(403)
+        .json({ message: "Permission denied. Admin role required." });
+    }
     const { album_name, year, certifications } = req.body;
 
     if (!album_name && !year && !certifications) {
-      return res
-        .status(400)
-        .json({
-          message:
-            "At least one field (album_name, year, certifications) is required to update.",
-        });
+      return res.status(400).json({
+        message:
+          "At least one field (album_name, year, certifications) is required to update.",
+      });
     }
 
     const fieldsToUpdate = [];
@@ -210,12 +216,10 @@ router.put(
           .status(404)
           .json({ message: `Album with ID ${album_id} not found.` });
       }
-      res
-        .status(200)
-        .json({
-          message: "Album updated successfully.",
-          album: result.rows[0],
-        });
+      res.status(200).json({
+        message: "Album updated successfully.",
+        album: result.rows[0],
+      });
     } catch (err) {
       console.error("Error updating album:", err.message);
       res
@@ -397,15 +401,12 @@ router.delete("/:artist_id", authenticateToken, async (req, res) => {
   const sql = "DELETE FROM artists WHERE artist_id = $1";
   try {
     const result = await pool.query(sql, [artist_id]);
-    if (result.rowCount === 1) {
-      res.status(200).json({
-        message: `Artist ${artist_id} was deleted`,
-      });
-    } else {
-      res.status(404).json({
-        message: "Artist not found",
-      });
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `Artist with ID ${artist_id} not found.` });
     }
+    res.status(200).json({ message: `Artist ${artist_id} was deleted.` });
   } catch (err) {
     console.error("Error deleting Artist", err.message);
     res.status(500).json({ code: 500, status: err.message });
