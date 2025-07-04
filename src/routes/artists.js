@@ -48,6 +48,35 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET /api/artists/:artist_id
+router.get("/:artist_id", async (req, res) => {
+  const { artist_id } = req.params;
+  const sql = `
+    SELECT
+      a.*,
+      COALESCE(
+        (SELECT json_agg(alb ORDER BY alb.year DESC, alb.album_name ASC)
+         FROM albums AS alb
+         WHERE alb.artist_id = a.artist_id),
+        '[]'::json
+      ) AS albums
+    FROM artists AS a
+    WHERE a.artist_id = $1;
+  `;
+  try {
+    const result = await pool.query(sql, [artist_id]);
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `Artist with ID ${artist_id} not found.` });
+    }
+    res.json({ artist: result.rows[0] });
+  } catch (err) {
+    console.error(`Error fetching artist ${artist_id}:`, err.message);
+    res.status(500).json({ code: 500, status: err.message });
+  }
+});
+
 // POST /api/artists
 router.post("/", authenticateToken, async (req, res) => {
   const columns = [
@@ -133,6 +162,101 @@ router.post("/:artist_id/albums", authenticateToken, async (req, res) => {
     client.release(); // Release the client back to the pool
   }
 });
+
+// PUT /api/artists/:artist_id/albums/:album_id (to update a specific album)
+router.put(
+  "/:artist_id/albums/:album_id",
+  authenticateToken,
+  async (req, res) => {
+    const { album_id } = req.params;
+    const { album_name, year, certifications } = req.body;
+
+    if (!album_name && !year && !certifications) {
+      return res
+        .status(400)
+        .json({
+          message:
+            "At least one field (album_name, year, certifications) is required to update.",
+        });
+    }
+
+    const fieldsToUpdate = [];
+    const values = [];
+    let queryIndex = 1;
+
+    if (album_name !== undefined) {
+      fieldsToUpdate.push(`album_name = $${queryIndex++}`);
+      values.push(album_name);
+    }
+    if (year !== undefined) {
+      fieldsToUpdate.push(`year = $${queryIndex++}`);
+      values.push(year);
+    }
+    if (certifications !== undefined) {
+      fieldsToUpdate.push(`certifications = $${queryIndex++}`);
+      values.push(certifications);
+    }
+
+    values.push(album_id);
+
+    const sql = `UPDATE albums SET ${fieldsToUpdate.join(
+      ", "
+    )} WHERE album_id = $${queryIndex} RETURNING *`;
+
+    try {
+      const result = await pool.query(sql, values);
+      if (result.rowCount === 0) {
+        return res
+          .status(404)
+          .json({ message: `Album with ID ${album_id} not found.` });
+      }
+      res
+        .status(200)
+        .json({
+          message: "Album updated successfully.",
+          album: result.rows[0],
+        });
+    } catch (err) {
+      console.error("Error updating album:", err.message);
+      res
+        .status(500)
+        .json({ message: "Failed to update album.", error: err.message });
+    }
+  }
+);
+
+// DELETE /api/artists/:artist_id/albums/:album_id (to delete a specific album)
+router.delete(
+  "/:artist_id/albums/:album_id",
+  authenticateToken,
+  async (req, res) => {
+    const { album_id } = req.params;
+    const requestingUser = req.user;
+
+    // Security check: Only allow admins to delete albums
+    if (requestingUser.role !== "admin") {
+      return res
+        .status(403)
+        .json({ message: "Permission denied. Admin role required." });
+    }
+
+    const sql = "DELETE FROM albums WHERE album_id = $1";
+    try {
+      const result = await pool.query(sql, [album_id]);
+      if (result.rowCount === 0) {
+        return res
+          .status(404)
+          .json({ message: `Album with ID ${album_id} not found.` });
+      }
+      res.status(200).json({ message: `Album ${album_id} was deleted.` });
+    } catch (err) {
+      console.error("Error deleting album:", err.message);
+      res
+        .status(500)
+        .json({ message: "Failed to delete album.", error: err.message });
+    }
+  }
+);
 
 // PUT /api/artists/:artist_id (to update artist details)
 router.put("/:artist_id", authenticateToken, async (req, res) => {
@@ -260,6 +384,15 @@ router.put("/:artist_id/clout", authenticateToken, async (req, res) => {
 
 // DELETE /api/artists/:artist_id
 router.delete("/:artist_id", authenticateToken, async (req, res) => {
+  const requestingUser = req.user;
+
+  // Security check: Only allow users with the 'admin' role to delete artists.
+  if (requestingUser.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Permission denied. Admin role required." });
+  }
+
   const { artist_id } = req.params;
   const sql = "DELETE FROM artists WHERE artist_id = $1";
   try {

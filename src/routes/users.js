@@ -97,6 +97,13 @@ router.get("/profile", authenticateToken, (req, res) => {
 
 // GET /api/users
 router.get("/", authenticateToken, async (req, res) => {
+  // Security check: Only allow users with the 'admin' role to view all users.
+  if (req.user.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Permission denied. Admin role required." });
+  }
+
   const sql = "SELECT user_id, username, email, role FROM users";
   try {
     const result = await pool.query(sql);
