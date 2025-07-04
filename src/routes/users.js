@@ -110,6 +110,17 @@ router.get("/", authenticateToken, async (req, res) => {
 // DELETE /api/users/:user_id
 router.delete("/:user_id", authenticateToken, async (req, res) => {
   const { user_id } = req.params;
+  const requestingUser = req.user;
+
+  // Security check:
+  // Allow if the user is an 'admin' OR if the user is deleting their own account.
+  if (
+    requestingUser.role !== "admin" &&
+    requestingUser.id.toString() !== user_id
+  ) {
+    return res.status(403).json({ message: "Permission denied." });
+  }
+
   const sql = "DELETE FROM users WHERE user_id = $1";
   try {
     const result = await pool.query(sql, [user_id]);
