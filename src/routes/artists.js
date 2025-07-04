@@ -220,18 +220,16 @@ router.put(
       });
     } catch (err) {
       console.error("Error updating artist image:", err.message);
-      res
-        .status(500)
-        .json({
-          message: "Failed to update artist image.",
-          error: err.message,
-        });
+      res.status(500).json({
+        message: "Failed to update artist image.",
+        error: err.message,
+      });
     }
   }
 );
 
 // PUT /api/artists/:artist_id/clout
-router.put("/:artist_id/clout", async (req, res) => {
+router.put("/:artist_id/clout", authenticateToken, async (req, res) => {
   const { artist_id } = req.params;
   const sql =
     "UPDATE artists SET count = count + 1 WHERE artist_id = $1 RETURNING count";
