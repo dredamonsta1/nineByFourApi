@@ -6,16 +6,23 @@ dotenv.config(); // Load environment variables from .env file
 
 const { Pool } = pg;
 
-// Database connection configuration for PostgreSQL
-// These values will be read from your .env file or Docker environment variables
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT || 5432, // Default PostgreSQL port
-  ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false, // For Heroku/Cloud providers, might need SSL
-});
+// Use DATABASE_URL in production (Heroku), otherwise use local config
+const connectionOptions = process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false, // Required for Heroku connections
+      },
+    }
+  : {
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT || 5432,
+    };
+
+const pool = new Pool(connectionOptions);
 
 // Test the connection
 pool.on("connect", () => {

@@ -18,9 +18,14 @@ router.get("/", authenticateToken, async (req, res) => {
 
 // POST /api/posts
 router.post("/", authenticateToken, async (req, res) => {
+  const { content } = req.body;
+  if (!content || content.trim() === "") {
+    return res.status(400).json({ message: "Post content cannot be empty." });
+  }
+
   const sql = "INSERT INTO posts(user_id, content) VALUES ($1, $2) RETURNING *";
   try {
-    const result = await pool.query(sql, [req.user.id, req.body.content]);
+    const result = await pool.query(sql, [req.user.id, content]);
     const newPost = result.rows[0];
     res
       .status(201)
