@@ -1,6 +1,7 @@
 import { pool } from "./connect.js";
 import fs from "fs/promises";
 import path from "path";
+import bcrypt from "bcrypt";
 
 async function seedDatabase() {
   const client = await pool.connect();
@@ -18,6 +19,16 @@ async function seedDatabase() {
     const dataPath = path.resolve(process.cwd(), "db.json");
     const data = await fs.readFile(dataPath, "utf-8");
     const { artists: artistsToSeed } = JSON.parse(data);
+
+    // Add a default user for testing
+    console.log("Inserting a default user...");
+    const defaultPassword = "password123";
+    const hashedPassword = await bcrypt.hash(defaultPassword, 10);
+    await client.query(
+      `INSERT INTO users(username, password, email, role) VALUES ($1, $2, $3, $4)`,
+      ["admin", hashedPassword, "admin@example.com", "admin"]
+    );
+    console.log("Default user 'admin' with password 'password123' created.");
 
     let artistCount = 0;
     let albumCount = 0;
