@@ -24,22 +24,24 @@ async function seedDatabase() {
 
     for (const artistData of artistsToSeed) {
       // Skip empty artist entries from db.json
-      if (!artistData.name) {
+      if (!artistData.artist_name) {
         continue;
       }
 
       // Insert artist
       const artistSql = `
-        INSERT INTO artists (artist_name, aka, state, region, label)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO artists (artist_name, aka, state, region, label, image_url, genre)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING artist_id;
       `;
       const artistResult = await client.query(artistSql, [
-        artistData.name,
+        artistData.artist_name,
         artistData.aka,
         artistData.state,
         artistData.region,
         artistData.label,
+        artistData.image_url,
+        artistData.genre,
       ]);
       const { artist_id } = artistResult.rows[0];
       artistCount++;
@@ -47,14 +49,14 @@ async function seedDatabase() {
       // Insert albums for the artist
       if (artistData.albums && artistData.albums.length > 0) {
         for (const albumData of artistData.albums) {
-          if (!albumData.name) continue;
+          if (!albumData.album_name) continue;
           const albumSql = `INSERT INTO albums (artist_id, album_name, year, certifications) VALUES ($1, $2, $3, $4);`;
           // Handle inconsistent key casing ('Certifications' vs 'certifications')
           const certifications =
             albumData.Certifications || albumData.certifications;
           await client.query(albumSql, [
             artist_id,
-            albumData.name,
+            albumData.album_name,
             albumData.year,
             certifications,
           ]);
