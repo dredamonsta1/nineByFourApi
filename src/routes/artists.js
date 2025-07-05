@@ -264,6 +264,15 @@ router.delete(
 
 // PUT /api/artists/:artist_id (to update artist details)
 router.put("/:artist_id", authenticateToken, async (req, res) => {
+  const requestingUser = req.user;
+
+  // Security check: Only allow admins to update artist details.
+  if (requestingUser.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Permission denied. Admin role required." });
+  }
+
   const { artist_id } = req.params;
   const fields = req.body;
 
