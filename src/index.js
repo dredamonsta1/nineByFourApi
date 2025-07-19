@@ -10,6 +10,7 @@ import path from "path";
 import artistsRouter from "./routes/artists.js";
 import usersRouter from "./routes/users.js";
 import postsRouter from "./routes/posts.js";
+import profileListRoutes from "./routes/profileListRoutes.js";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ if (JWT_SECRET === "your_jwt_secret") {
 app.use("/api/artists", artistsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/profile", profileListRoutes);
 
 const startServer = async () => {
   try {
