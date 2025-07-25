@@ -73,7 +73,7 @@ router.get("/", async (req, res) => {
     const query = `
       SELECT p.*, u.username 
       FROM image_posts p
-      LEFT JOIN users u ON p.user_id = u.id
+      LEFT JOIN users u ON p.user_id = u.user_id
       ORDER BY p.created_at DESC;
     `;
     const result = await pool.query(query);
