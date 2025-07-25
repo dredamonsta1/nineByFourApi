@@ -11,6 +11,7 @@ import artistsRouter from "./routes/artists.js";
 import usersRouter from "./routes/users.js";
 import postsRouter from "./routes/posts.js";
 import profileListRoutes from "./routes/profileListRoutes.js";
+import imagePostsRouter from "./routes/imagePosts.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/artists", artistsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/profile", profileListRoutes);
+app.use("/api/image-posts", imagePostsRouter);
 
 const startServer = async () => {
   try {
