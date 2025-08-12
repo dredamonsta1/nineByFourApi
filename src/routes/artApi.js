@@ -47,7 +47,7 @@ router.get("/youtube-feed", async (req, res) => {
 
   // This is the ID for a public playlist of art documentaries.
   // You can find others on YouTube and swap this ID.
-  const PLAYLIST_ID = "PL-wG1d9x4i51j8v4_wK2GzXo2S2dfGoAl";
+  const PLAYLIST_ID = "PL8a32L6x3uU7sAnv6g1Mgao22j_b5d5a-";
 
   const options = {
     params: {
