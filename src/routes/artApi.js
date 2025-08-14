@@ -80,7 +80,7 @@ router.get("/youtube-feed", async (req, res) => {
   console.log("--- Received request for /youtube-feed ---");
 
   const YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/playlistItems";
-  const PLAYLIST_ID = "PL8a32L6x3uU7sAnv6g1Mgao22j_b5d5a-"; // The Met Museum playlist
+  const PLAYLIST_ID = "PL8HAkqKX065Bm4la3BM3C3bSkn-Xxu8Hp"; // The Met Museum playlist
 
   const apiKey = process.env.YOUTUBE_API_KEY;
 
