@@ -3,13 +3,14 @@ import { pool } from "../connect.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { authenticateToken } from "../middleware.js";
+import { isWaitlistEnabled } from "./waitlist.js";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
 // POST /api/users/register
 router.post("/register", async (req, res) => {
-  const { username, password, email, role } = req.body;
+  const { username, password, email, role, invite_code } = req.body;
 
   if (!username || !password || !email) {
     return res
@@ -18,6 +19,37 @@ router.post("/register", async (req, res) => {
   }
 
   try {
+    // ===== NEW: Check if waitlist is enabled =====
+    const waitlistActive = await isWaitlistEnabled();
+
+    if (waitlistActive) {
+      // Require invite code when waitlist is active
+      if (!invite_code) {
+        return res.status(403).json({
+          error: "Registration is currently invite-only",
+          waitlist_enabled: true,
+          message: "Please join our waitlist to get an invite code",
+        });
+      }
+
+      // Verify invite code matches this email
+      const waitlistResult = await pool.query(
+        `SELECT waitlist_id, email, status 
+         FROM waitlist 
+         WHERE invite_code = $1 AND status = $2 AND email = $3`,
+        [invite_code, "approved", email]
+      );
+
+      if (waitlistResult.rows.length === 0) {
+        return res.status(403).json({
+          error: "Invalid invite code or email mismatch",
+          waitlist_enabled: true,
+          message: "Please use the email associated with your invite code",
+        });
+      }
+    }
+    // ===== END NEW CODE =====
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const sql =
       "INSERT INTO users(username, password, email, role) VALUES ($1,$2,$3,$4) RETURNING user_id";
@@ -28,6 +60,18 @@ router.post("/register", async (req, res) => {
       role || "user",
     ]);
     const newUserId = result.rows[0].user_id;
+
+    // ===== NEW: Mark invite code as used =====
+    if (waitlistActive && invite_code) {
+      await pool.query(
+        `UPDATE waitlist 
+         SET invite_code = NULL, 
+             notes = COALESCE(notes || ' - ', '') || 'Used by user on ' || NOW()::TEXT
+         WHERE invite_code = $1`,
+        [invite_code]
+      );
+    }
+    // ===== END NEW CODE =====
 
     res.status(201).json({
       message: "User registered successfully!",
@@ -43,6 +87,43 @@ router.post("/register", async (req, res) => {
     res.status(500).json({ message: "Server error during registration." });
   }
 });
+
+// POST /api/users/register
+// router.post("/register", async (req, res) => {
+//   const { username, password, email, role } = req.body;
+
+//   if (!username || !password || !email) {
+//     return res
+//       .status(400)
+//       .json({ message: "Username, password, and email are required." });
+//   }
+
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const sql =
+//       "INSERT INTO users(username, password, email, role) VALUES ($1,$2,$3,$4) RETURNING user_id";
+//     const result = await pool.query(sql, [
+//       username,
+//       hashedPassword,
+//       email,
+//       role || "user",
+//     ]);
+//     const newUserId = result.rows[0].user_id;
+
+//     res.status(201).json({
+//       message: "User registered successfully!",
+//       userId: newUserId,
+//     });
+//   } catch (error) {
+//     console.error("Error during user registration:", error.message);
+//     if (error.code === "23505") {
+//       return res
+//         .status(409)
+//         .json({ message: "Username or email already exists." });
+//     }
+//     res.status(500).json({ message: "Server error during registration." });
+//   }
+// });
 
 // POST /api/users/login
 router.post("/login", async (req, res) => {

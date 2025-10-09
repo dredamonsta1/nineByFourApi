@@ -84,8 +84,59 @@ export async function createTables() {
       );
     `);
 
+    // === WAITLIST TABLES ===
+    try {
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS waitlist (
+          waitlist_id SERIAL PRIMARY KEY,
+          email VARCHAR(255) UNIQUE NOT NULL,
+          full_name VARCHAR(255),
+          status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+          invite_code VARCHAR(50) UNIQUE,
+          requested_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+          approved_at TIMESTAMP WITH TIME ZONE,
+          approved_by INTEGER,
+          notes TEXT,
+          FOREIGN KEY (approved_by) REFERENCES users(user_id) ON DELETE SET NULL
+        );
+      `);
+
+      await pool.query(`
+        CREATE INDEX IF NOT EXISTS idx_waitlist_email ON waitlist(email);
+      `);
+
+      await pool.query(`
+        CREATE INDEX IF NOT EXISTS idx_waitlist_status ON waitlist(status);
+      `);
+
+      await pool.query(`
+        CREATE INDEX IF NOT EXISTS idx_waitlist_invite_code ON waitlist(invite_code);
+      `);
+
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS app_settings (
+          setting_id SERIAL PRIMARY KEY,
+          setting_key VARCHAR(100) UNIQUE NOT NULL,
+          setting_value VARCHAR(255) NOT NULL,
+          updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
+      // Insert default setting (waitlist enabled)
+      await pool.query(`
+        INSERT INTO app_settings (setting_key, setting_value) 
+        VALUES ('waitlist_enabled', 'true')
+        ON CONFLICT (setting_key) DO NOTHING;
+      `);
+
+      console.log("Waitlist tables created/verified successfully.");
+    } catch (err) {
+      console.error("Error creating waitlist tables:", err.message);
+      // Don't exit - let other tables still work
+    }
+
     console.log(
-      'Tables "users", "artists", "albums", and "posts" checked/created successfully.'
+      'Tables "users", "artists", "albums", "posts", and "waitlist" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);
