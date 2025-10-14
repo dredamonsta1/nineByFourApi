@@ -62,6 +62,16 @@ export async function createTables() {
         image_url VARCHAR(255)
       );
     `);
+    await pool.query(`
+  CREATE TABLE IF NOT EXISTS user_profile_artists (
+    user_id INTEGER NOT NULL,
+    artist_id INTEGER NOT NULL,
+    added_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, artist_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
+  );
+`);
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS albums (
@@ -83,6 +93,17 @@ export async function createTables() {
         FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
       );
     `);
+
+    await pool.query(`
+  CREATE TABLE IF NOT EXISTS image_posts (
+    post_id SERIAL PRIMARY KEY,
+    image_url VARCHAR(255) NOT NULL,
+    caption TEXT,
+    user_id INTEGER NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+  );
+`);
 
     // === WAITLIST TABLES ===
     try {
