@@ -1,14 +1,11 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  test: {
-    globals: true,
-    environment: "node",
-    coverage: {
-      provider: "v8",
-      reporter: ["text", "json", "html"],
-      exclude: ["node_modules/", "src/seed.js", "vitest.config.js", "tests/"],
-    },
-    setupFiles: ["./tests/setup.js"], // Optional: global test setup
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true,
   },
 });
