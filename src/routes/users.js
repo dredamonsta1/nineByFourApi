@@ -262,6 +262,43 @@ router.put("/:user_id", authenticateToken, async (req, res) => {
   }
 });
 
+// POST /api/users/register-admin
+// USE THIS ONCE, THEN DELETE THE ROUTE OR PROTECT IT
+router.post("/register-admin", async (req, res) => {
+  const { username, password } = req.body;
+
+  // 1. Basic Validation
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password required" });
+  }
+
+  try {
+    // 2. Check if user exists
+    const userCheck = await pool.query(
+      "SELECT * FROM users WHERE username = $1",
+      [username]
+    );
+    if (userCheck.rows.length > 0) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // 3. Hash the password (Salt rounds: 10 is standard)
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // 4. Insert into DB (Assuming 'role' column exists based on your login code)
+    const newUser = await pool.query(
+      "INSERT INTO users (username, password, role) VALUES ($1, $2, $3) RETURNING user_id, username, role",
+      [username, hashedPassword, "admin"]
+    );
+
+    res.status(201).json(newUser.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // GET /api/users
 router.get("/", authenticateToken, async (req, res) => {
   // Security check: Only allow users with the 'admin' role to view all users.
