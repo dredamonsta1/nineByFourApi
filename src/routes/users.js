@@ -264,40 +264,40 @@ router.put("/:user_id", authenticateToken, async (req, res) => {
 
 // POST /api/users/register-admin
 // USE THIS ONCE, THEN DELETE THE ROUTE OR PROTECT IT
-router.post("/register-admin", async (req, res) => {
-  // 1. EXTRACT EMAIL FROM BODY
-  const { username, password, email } = req.body;
+// router.post("/register-admin", async (req, res) => {
+// 1. EXTRACT EMAIL FROM BODY
+// const { username, password, email } = req.body;
 
-  if (!username || !password || !email) {
-    return res
-      .status(400)
-      .json({ message: "Username, email, and password required" });
-  }
+//   if (!username || !password || !email) {
+//     return res
+//       .status(400)
+//       .json({ message: "Username, email, and password required" });
+//   }
 
-  try {
-    const userCheck = await pool.query(
-      "SELECT * FROM users WHERE username = $1",
-      [username]
-    );
-    if (userCheck.rows.length > 0) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+//   try {
+//     const userCheck = await pool.query(
+//       "SELECT * FROM users WHERE username = $1",
+//       [username]
+//     );
+//     if (userCheck.rows.length > 0) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // 2. UPDATE SQL TO INSERT EMAIL
-    const newUser = await pool.query(
-      "INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING user_id, username, role",
-      [username, email, hashedPassword, "admin"]
-    );
+//     // 2. UPDATE SQL TO INSERT EMAIL
+//     const newUser = await pool.query(
+//       "INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING user_id, username, role",
+//       [username, email, hashedPassword, "admin"]
+//     );
 
-    res.status(201).json(newUser.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     res.status(201).json(newUser.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 // GET /api/users
 router.get("/", authenticateToken, async (req, res) => {
