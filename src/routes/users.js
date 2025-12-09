@@ -125,6 +125,42 @@ router.post("/register", async (req, res) => {
 //   }
 // });
 
+// POST /api/users/register-admin
+// TEMPORARY: Use this to create local test users
+// router.post("/register-admin", async (req, res) => {
+//   const { username, password, email } = req.body; // Added email to fix the previous bug
+
+//   if (!username || !password || !email) {
+//     return res
+//       .status(400)
+//       .json({ message: "Username, email, and password required" });
+//   }
+
+//   try {
+//     const userCheck = await pool.query(
+//       "SELECT * FROM users WHERE username = $1",
+//       [username]
+//     );
+//     if (userCheck.rows.length > 0) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
+
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(password, salt);
+
+//     // Ensure this matches your table structure
+//     const newUser = await pool.query(
+//       "INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING user_id, username, role",
+//       [username, email, hashedPassword, "user"] // Defaulting to 'user' instead of 'admin' for these tests
+//     );
+
+//     res.status(201).json(newUser.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
 // POST /api/users/login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;

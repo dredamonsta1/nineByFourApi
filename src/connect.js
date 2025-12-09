@@ -4,15 +4,22 @@ import dotenv from "dotenv";
 
 dotenv.config(); // Load environment variables from .env file
 
+// 1. Check if we are local
+const isLocal =
+  process.env.DATABASE_URL.includes("localhost") ||
+  process.env.DATABASE_URL.includes("127.0.0.1");
+
 const { Pool } = pg;
 
 // Use DATABASE_URL in production (Heroku), otherwise use local config
 const connectionOptions = process.env.DATABASE_URL
   ? {
       connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false, // Required for Heroku connections
-      },
+      ssl: isLocal
+        ? false
+        : {
+            rejectUnauthorized: false, // Required for Heroku connections
+          },
     }
   : {
       user: process.env.DB_USER,
@@ -28,7 +35,15 @@ const pool = new Pool(connectionOptions);
 pool.on("connect", () => {
   console.log("Connected to PostgreSQL database!");
 });
-
+//********************   */
+pool.on("connect", () => {
+  console.log("Database connected!");
+});
+const dbName = process.env.DATABASE_URL.split("/").pop();
+console.log("---------------------");
+console.log("🚨 APP IS CONNECTED TO DATABASE:", dbName);
+console.log("---------------------");
+//********************   */
 pool.on("error", (err) => {
   console.error("Unexpected error on idle client", err);
   process.exit(-1); // Exit process if database connection has a fatal error
