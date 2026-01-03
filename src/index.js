@@ -15,6 +15,7 @@ import imagePostsRouter from "./routes/imagePosts.js";
 import artApi from "./routes/artApi.js";
 import waitlistRouter from "./routes/waitlist.js";
 import followsRouter from "./routes/follower.js";
+import musicRouter from "./routes/music.js";
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.use("/api/image-posts", imagePostsRouter);
 app.use("/api/art", artApi);
 app.use("/api/waitlist", waitlistRouter);
 app.use("/api/users", followsRouter);
+app.use("/api/music", musicRouter);
 
 const startServer = async () => {
   try {
