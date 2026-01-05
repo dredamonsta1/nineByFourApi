@@ -72,4 +72,20 @@ router.patch("/approve-creator", async (req, res) => {
   }
 });
 
+// src/routes/admin.js
+
+// GET all waitlist entries for the admin
+router.get("/waitlist-entries", async (req, res) => {
+  try {
+    // We order by status and date so 'pending' ones are at the top
+    const result = await pool.query(
+      "SELECT * FROM waitlist ORDER BY status = 'pending' DESC, created_at DESC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Waitlist fetch error:", err);
+    res.status(500).json({ error: "Failed to fetch waitlist" });
+  }
+});
+
 export default router;
