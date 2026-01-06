@@ -92,7 +92,7 @@ router.get("/waitlist-entries", async (req, res) => {
 // ******************* new code ********************
 
 // src/routes/admin.js
-import { Resend } from "resend";
+// import { Resend } from "resend";
 // ... other imports
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -116,20 +116,21 @@ router.patch("/approve-creator", async (req, res) => {
     // 2. Trigger the automated email
     // NOTE: If you haven't verified a domain, 'from' must be 'onboarding@resend.dev'
     const { data, error } = await resend.emails.send({
-      from: "9by4 <invites@yourdomain.com>", // Update this after domain verification
+      from: process.env.FROM_EMAIL,
       to: [email],
-      subject: "Your 9by4 Creator Invite Code is Here!",
+      subject: "Your 9by4 Creator Invite",
       html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: auto;">
-            <h2>Welcome to the inner circle, ${fullName || "Creator"}!</h2>
-            <p>You've been approved to join 9by4. Use the code below to complete your registration.</p>
-            <div style="background: #f4f4f4; padding: 20px; text-align: center; border-radius: 8px;">
-            <h1 style="letter-spacing: 5px; color: #2563eb;">${inviteCode}</h1>
-            </div>
-            <p>Go to <a href="https://your-app-url.com/signup">9by4 Signup</a> to get started.</p>
-            <p style="font-size: 0.8rem; color: #666;">This code is tied to your email address.</p>
-            </div>
-            `,
+    <div style="font-family: sans-serif;">
+      <h1>You're in.</h1>
+      <p>Your request to join 9by4 as a creator has been approved.</p>
+      <p>Your unique invite code is: <strong>${inviteCode}</strong></p>
+      <a href="https://your-app-url.com/signup?code=${inviteCode}&email=${email}" 
+         style="background: black; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
+         Complete Registration
+      </a>
+      <p style="margin-top: 20px; font-size: 0.8rem;">Note: This code only works with the email ${email}.</p>
+    </div>
+  `,
     });
 
     if (error) {
