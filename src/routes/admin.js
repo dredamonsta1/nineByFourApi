@@ -78,14 +78,17 @@ router.patch("/approve-creator", async (req, res) => {
 // GET all waitlist entries for the admin
 router.get("/waitlist-entries", async (req, res) => {
   try {
-    // We order by status and date so 'pending' ones are at the top
+    // Now that created_at exists, this query is safe.
+    // We trim the data in the query to handle any leftover padding issues.
     const result = await pool.query(
-      "SELECT * FROM waitlist ORDER BY status = 'pending' DESC, created_at DESC"
+      "SELECT waitlist_id, TRIM(email) as email, full_name, status, TRIM(invite_code) as invite_code, created_at FROM waitlist ORDER BY status = 'pending' DESC, created_at DESC"
     );
     res.json(result.rows);
   } catch (err) {
-    console.error("Waitlist fetch error:", err);
-    res.status(500).json({ error: "Failed to fetch waitlist" });
+    console.error("Waitlist fetch error:", err.message);
+    res
+      .status(500)
+      .json({ error: "Database error. Check schema for created_at column." });
   }
 });
 
