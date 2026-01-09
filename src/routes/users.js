@@ -77,5 +77,56 @@ router.post("/register", async (req, res) => {
       .status(500)
       .json({ message: "Internal server error during registration." });
   }
+  // POST /api/users/login
+  router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    // 1. Validation
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ message: "Username and password are required." });
+    }
+
+    try {
+      // 2. Fetch User - Use TRIM() here too to stay consistent with your registration cleanup
+      const result = await pool.query(
+        "SELECT * FROM users WHERE TRIM(username) = $1",
+        [username.trim()]
+      );
+      const user = result.rows[0];
+
+      // 3. Verify existence and password
+      if (!user) {
+        return res
+          .status(401)
+          .json({ message: "Invalid username or password." });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res
+          .status(401)
+          .json({ message: "Invalid username or password." });
+      }
+
+      // 4. Generate JWT
+      const token = jwt.sign(
+        { id: user.user_id, username: user.username, role: user.role },
+        JWT_SECRET,
+        { expiresIn: "24h" } // Increased to 24h so you don't get kicked out while testing
+      );
+
+      // 5. Send Response
+      res.status(200).json({
+        message: `Welcome back, ${user.username}!`,
+        token,
+        user: { id: user.user_id, username: user.username, role: user.role },
+      });
+    } catch (error) {
+      console.error("Login Error:", error.message);
+      res.status(500).json({ message: "Server error during login." });
+    }
+  });
 });
 export default router;
