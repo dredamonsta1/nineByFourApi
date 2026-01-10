@@ -295,16 +295,19 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// --- ROUTE 3: GET CURRENT USER (For Persistence) ---
+// src/routes/users.js
 router.get("/me", authenticateToken, async (req, res) => {
   try {
+    // req.user comes from your authenticateToken middleware
     const result = await pool.query(
       "SELECT user_id, username, email, role FROM users WHERE user_id = $1",
       [req.user.id]
     );
+    if (result.rows.length === 0)
+      return res.status(404).json({ message: "User not found" });
     res.json(result.rows[0]);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch user" });
+    res.status(500).json({ error: "Failed to fetch user context" });
   }
 });
 
