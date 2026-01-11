@@ -152,4 +152,23 @@ router.patch("/approve-creator", async (req, res) => {
   }
 });
 
+// src/routes/admin.js
+router.get("/stats", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin")
+    return res.status(403).json({ message: "Forbidden" });
+
+  try {
+    const statsQuery = `
+      SELECT 
+        (SELECT COUNT(*) FROM users) as total_users,
+        (SELECT COUNT(*) FROM waitlist WHERE status = 'pending') as pending_waitlist,
+        (SELECT COUNT(*) FROM posts) as total_posts
+    `;
+    const result = await pool.query(statsQuery);
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch stats" });
+  }
+});
+
 export default router;
