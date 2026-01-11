@@ -28,44 +28,109 @@ router.get("/stats", authenticateToken, async (req, res) => {
 });
 
 // --- 2. APPROVE CREATOR ROUTE ---
+// src/routes/admin.js
+
 router.patch("/approve-creator", authenticateToken, async (req, res) => {
+  // 1. Authorization Check
   if (req.user.role !== "admin")
     return res.status(403).json({ message: "Forbidden" });
 
   const { email } = req.body;
+  if (!email) return res.status(400).json({ message: "Email is required" });
+
+  // 2. GENERATE THE ONLY CODE (Single Source of Truth)
   const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 
   try {
+    // 3. Update the Database
     const result = await pool.query(
       `UPDATE waitlist SET status = 'approved', invite_code = $1 
-       WHERE email = $2 RETURNING *`,
-      [inviteCode, email]
+       WHERE TRIM(email) = $2 RETURNING *`,
+      [inviteCode, email.trim()]
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found on waitlist" });
     }
 
-    // Trigger the automated email
+    // 4. Send the Email using the SAME inviteCode variable
+    let emailSent = false;
     try {
       if (process.env.RESEND_API_KEY) {
         await resend.emails.send({
           from: process.env.FROM_EMAIL || "onboarding@resend.dev",
-          to: [email],
+          to: [email.trim()],
           subject: "Your 9by4 Creator Invite",
-          html: `<h1>You're in.</h1><p>Code: <strong>${inviteCode}</strong></p>`,
+          html: `
+            <div style="font-family: sans-serif; padding: 20px; background: #f9f9f9;">
+              <h1 style="color: #000;">You're in.</h1>
+              <p>Your invite code for 9by4 is: <strong style="font-size: 1.2rem; letter-spacing: 2px;">${inviteCode}</strong></p>
+              <p>Click below to complete your registration:</p>
+              <a href="https://ninebyfour.herokuapp.com/register?code=${inviteCode}&email=${email}" 
+                 style="display: inline-block; background: black; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
+                Complete Registration
+              </a>
+            </div>
+          `,
         });
+        emailSent = true;
       }
     } catch (emailErr) {
-      console.error("Resend Error (Non-Fatal):", emailErr);
+      console.error("Resend failure:", emailErr.message);
     }
 
-    res.json({ message: "Creator approved!", inviteCode });
+    // 5. Respond to the Admin Frontend
+    res.json({
+      message: emailSent
+        ? "Creator approved and emailed!"
+        : "Approved, but email failed.",
+      inviteCode, // This matches what was emailed
+      emailSent,
+    });
   } catch (err) {
     console.error("System failure:", err);
     res.status(500).json({ error: "System failure during approval" });
   }
 });
+
+// router.patch("/approve-creator", authenticateToken, async (req, res) => {
+//   if (req.user.role !== "admin")
+//     return res.status(403).json({ message: "Forbidden" });
+
+//   const { email } = req.body;
+//   const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+//   try {
+//     const result = await pool.query(
+//       `UPDATE waitlist SET status = 'approved', invite_code = $1
+//        WHERE email = $2 RETURNING *`,
+//       [inviteCode, email]
+//     );
+
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     // Trigger the automated email
+//     try {
+//       if (process.env.RESEND_API_KEY) {
+//         await resend.emails.send({
+//           from: process.env.FROM_EMAIL || "onboarding@resend.dev",
+//           to: [email],
+//           subject: "Your 9by4 Creator Invite",
+//           html: `<h1>You're in.</h1><p>Code: <strong>${inviteCode}</strong></p>`,
+//         });
+//       }
+//     } catch (emailErr) {
+//       console.error("Resend Error (Non-Fatal):", emailErr);
+//     }
+
+//     res.json({ message: "Creator approved!", inviteCode });
+//   } catch (err) {
+//     console.error("System failure:", err);
+//     res.status(500).json({ error: "System failure during approval" });
+//   }
+// });
 
 // --- 3. WAITLIST ENTRIES ---
 router.get("/waitlist-entries", authenticateToken, async (req, res) => {
