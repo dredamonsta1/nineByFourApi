@@ -28,7 +28,6 @@ router.get("/stats", authenticateToken, async (req, res) => {
 });
 
 // --- 2. APPROVE CREATOR ROUTE ---
-// src/routes/admin.js
 
 router.patch("/approve-creator", authenticateToken, async (req, res) => {
   // 1. Authorization Check
@@ -93,45 +92,6 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
   }
 });
 
-// router.patch("/approve-creator", authenticateToken, async (req, res) => {
-//   if (req.user.role !== "admin")
-//     return res.status(403).json({ message: "Forbidden" });
-
-//   const { email } = req.body;
-//   const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-
-//   try {
-//     const result = await pool.query(
-//       `UPDATE waitlist SET status = 'approved', invite_code = $1
-//        WHERE email = $2 RETURNING *`,
-//       [inviteCode, email]
-//     );
-
-//     if (result.rows.length === 0) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     // Trigger the automated email
-//     try {
-//       if (process.env.RESEND_API_KEY) {
-//         await resend.emails.send({
-//           from: process.env.FROM_EMAIL || "onboarding@resend.dev",
-//           to: [email],
-//           subject: "Your 9by4 Creator Invite",
-//           html: `<h1>You're in.</h1><p>Code: <strong>${inviteCode}</strong></p>`,
-//         });
-//       }
-//     } catch (emailErr) {
-//       console.error("Resend Error (Non-Fatal):", emailErr);
-//     }
-
-//     res.json({ message: "Creator approved!", inviteCode });
-//   } catch (err) {
-//     console.error("System failure:", err);
-//     res.status(500).json({ error: "System failure during approval" });
-//   }
-// });
-
 // --- 3. WAITLIST ENTRIES ---
 router.get("/waitlist-entries", authenticateToken, async (req, res) => {
   if (req.user.role !== "admin")
@@ -143,6 +103,41 @@ router.get("/waitlist-entries", authenticateToken, async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: "Database error" });
+  }
+});
+
+// src/routes/admin.js
+
+// DELETE /api/admin/reset-user
+router.delete("/reset-user", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin")
+    return res.status(403).json({ message: "Forbidden" });
+
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ message: "Email is required" });
+
+  try {
+    await pool.query("BEGIN");
+
+    // 1. Wipe from users table
+    await pool.query("DELETE FROM users WHERE TRIM(email) = $1", [
+      email.trim(),
+    ]);
+
+    // 2. Wipe from waitlist table
+    await pool.query("DELETE FROM waitlist WHERE TRIM(email) = $1", [
+      email.trim(),
+    ]);
+
+    await pool.query("COMMIT");
+
+    res.json({
+      message: `User ${email} has been completely wiped from the system.`,
+    });
+  } catch (err) {
+    await pool.query("ROLLBACK");
+    console.error("Reset Error:", err.message);
+    res.status(500).json({ error: "Failed to reset user" });
   }
 });
 
