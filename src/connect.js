@@ -127,7 +127,7 @@ export async function createTables() {
           waitlist_id SERIAL PRIMARY KEY,
           email VARCHAR(255) UNIQUE NOT NULL,
           full_name VARCHAR(255),
-          status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+          status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected', 'registered')),
           invite_code VARCHAR(50) UNIQUE,
           requested_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
           approved_at TIMESTAMP WITH TIME ZONE,

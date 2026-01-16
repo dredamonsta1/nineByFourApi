@@ -56,7 +56,8 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
     let emailSent = false;
     try {
       if (process.env.RESEND_API_KEY) {
-        await resend.emails.send({
+        console.log(`Sending invite email to ${email.trim()} with code ${inviteCode}`);
+        const emailResult = await resend.emails.send({
           from: process.env.FROM_EMAIL || "onboarding@resend.dev",
           to: [email.trim()],
           subject: "Your 9by4 Creator Invite",
@@ -65,17 +66,20 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
               <h1 style="color: #000;">You're in.</h1>
               <p>Your invite code for 9by4 is: <strong style="font-size: 1.2rem; letter-spacing: 2px;">${inviteCode}</strong></p>
               <p>Click below to complete your registration:</p>
-              <a href="https://ninebyfour.herokuapp.com/register?code=${inviteCode}&email=${email}" 
+              <a href="https://ninebyfour.herokuapp.com/register?code=${inviteCode}&email=${encodeURIComponent(email.trim())}"
                  style="display: inline-block; background: black; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
                 Complete Registration
               </a>
             </div>
           `,
         });
+        console.log("Resend response:", JSON.stringify(emailResult));
         emailSent = true;
+      } else {
+        console.warn("RESEND_API_KEY not set - skipping email");
       }
     } catch (emailErr) {
-      console.error("Resend failure:", emailErr.message);
+      console.error("Resend failure:", emailErr.message, emailErr);
     }
 
     // 5. Respond to the Admin Frontend
