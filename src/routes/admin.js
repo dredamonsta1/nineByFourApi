@@ -56,9 +56,11 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
     let emailSent = false;
     try {
       if (process.env.RESEND_API_KEY) {
-        console.log(`Sending invite email to ${email.trim()} with code ${inviteCode}`);
+        console.log(
+          `Sending invite email to ${email.trim()} with code ${inviteCode}`
+        );
         const emailResult = await resend.emails.send({
-          from: process.env.FROM_EMAIL || "onboarding@resend.dev",
+          from: process.env.FROM_EMAIL || "onboarding@vedioz.me",
           to: [email.trim()],
           subject: "Your 9by4 Creator Invite",
           html: `
@@ -66,7 +68,9 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
               <h1 style="color: #000;">You're in.</h1>
               <p>Your invite code for 9by4 is: <strong style="font-size: 1.2rem; letter-spacing: 2px;">${inviteCode}</strong></p>
               <p>Click below to complete your registration:</p>
-              <a href="https://ninebyfour.herokuapp.com/register?code=${inviteCode}&email=${encodeURIComponent(email.trim())}"
+              <a href="https://vedioz.me/register?code=${inviteCode}&email=${encodeURIComponent(
+            email.trim()
+          )}"
                  style="display: inline-block; background: black; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
                 Complete Registration
               </a>
