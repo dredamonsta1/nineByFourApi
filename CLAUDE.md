@@ -56,7 +56,7 @@ Tables are created automatically in `connect.js`: `users`, `artists`, `albums`, 
 - `DATABASE_URL` - PostgreSQL connection (Heroku format with SSL)
 - `JWT_SECRET` - Secret for signing tokens
 - `RESEND_API_KEY` - Resend email API key
-- `FROM_EMAIL` - Sender email for Resend (defaults to onboarding@resend.dev)
+- `FROM_EMAIL` - Sender email for Resend (defaults to onboarding@vedioz.me)
 
 ### Testing
 Tests use Vitest with Supertest. Test files in `tests/routes/*.test.js`. Mocks configured in `tests/setup.js` for database pool, middleware, and file uploads.
