@@ -17,6 +17,7 @@ import waitlistRouter from "./routes/waitlist.js";
 import followsRouter from "./routes/follower.js";
 import musicRouter from "./routes/music.js";
 import adminRouter from "./routes/admin.js";
+import feedRouter from "./routes/feed.js";
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/waitlist", waitlistRouter);
 app.use("/api/users", followsRouter);
 app.use("/api/music", musicRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/feed", feedRouter);
 
 const startServer = async () => {
   try {
