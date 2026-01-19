@@ -1,66 +1,48 @@
 // routes/imagePosts.js
 
 import express from "express";
-import multer from "multer";
-import path from "path";
-import fs from "fs";
-import { pool } from "../connect.js"; // Import your database pool
+import { pool } from "../connect.js";
+import { authenticateToken, upload, handleMulterError } from "../middleware.js";
 
 const router = express.Router();
-
-// --- Multer Configuration ---
-// Ensures the 'uploads' directory exists
-const uploadDir = "uploads";
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-
-// Configure storage for uploaded files
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Append extension
-  },
-});
-
-const upload = multer({ storage: storage });
-
-// --- API Endpoints ---
 
 /**
  * @route   POST /api/image-posts
  * @desc    Create a new image post
- * @access  Private (You might want to add authentication middleware here)
+ * @access  Private
  */
-router.post("/", upload.single("image"), async (req, res) => {
-  const { caption } = req.body;
-  // const userId = req.user.id; // Get user ID from your JWT auth middleware
+router.post(
+  "/",
+  authenticateToken,
+  upload.single("image"),
+  handleMulterError,
+  async (req, res) => {
+    const { caption } = req.body;
+    const userId = req.user.id; // Get user ID from JWT token
 
-  if (!req.file) {
-    return res.status(400).json({ msg: "Image file is required." });
+    if (!req.file) {
+      return res.status(400).json({ message: "Image file is required." });
+    }
+
+    // Construct the URL for the image
+    const imageUrl = `/uploads/${req.file.filename}`;
+
+    try {
+      const query = `
+        INSERT INTO image_posts (image_url, caption, user_id)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+      `;
+      const values = [imageUrl, caption || "", userId];
+
+      const result = await pool.query(query, values);
+      res.status(201).json(result.rows[0]);
+    } catch (err) {
+      console.error("Database error on image post creation:", err);
+      res.status(500).json({ message: "Server error creating image post." });
+    }
   }
-
-  // Construct the full URL for the image
-  const imageUrl = `/uploads/${req.file.filename}`;
-
-  try {
-    const query = `
-      INSERT INTO image_posts (image_url, caption, user_id) 
-      VALUES ($1, $2, $3) 
-      RETURNING *;
-    `;
-    // Replace '1' with the actual user ID from your auth logic
-    const values = [imageUrl, caption, 1];
-
-    const result = await pool.query(query, values);
-    res.status(201).json(result.rows[0]);
-  } catch (err) {
-    console.error("Database error on image post creation:", err);
-    res.status(500).send("Server Error");
-  }
-});
+);
 
 /**
  * @route   GET /api/image-posts
@@ -69,9 +51,8 @@ router.post("/", upload.single("image"), async (req, res) => {
  */
 router.get("/", async (req, res) => {
   try {
-    // Query to get posts and join with users table to get usernames, for example
     const query = `
-      SELECT p.*, u.username 
+      SELECT p.*, u.username
       FROM image_posts p
       LEFT JOIN users u ON p.user_id = u.user_id
       ORDER BY p.created_at DESC;
@@ -80,7 +61,41 @@ router.get("/", async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error("Database error fetching image posts:", err);
-    res.status(500).send("Server Error");
+    res.status(500).json({ message: "Server error fetching image posts." });
+  }
+});
+
+/**
+ * @route   DELETE /api/image-posts/:id
+ * @desc    Delete an image post
+ * @access  Private (owner or admin)
+ */
+router.delete("/:id", authenticateToken, async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  const userRole = req.user.role;
+
+  try {
+    // Check if post exists and belongs to user (or user is admin)
+    const postCheck = await pool.query(
+      "SELECT * FROM image_posts WHERE post_id = $1",
+      [id]
+    );
+
+    if (postCheck.rows.length === 0) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    const post = postCheck.rows[0];
+    if (post.user_id !== userId && userRole !== "admin") {
+      return res.status(403).json({ message: "Not authorized to delete this post." });
+    }
+
+    await pool.query("DELETE FROM image_posts WHERE post_id = $1", [id]);
+    res.json({ message: "Post deleted successfully." });
+  } catch (err) {
+    console.error("Database error deleting image post:", err);
+    res.status(500).json({ message: "Server error deleting image post." });
   }
 });
 
