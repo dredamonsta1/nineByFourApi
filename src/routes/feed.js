@@ -30,7 +30,7 @@ router.get("/", authenticateToken, async (req, res) => {
       UNION ALL
 
       SELECT
-        ip.post_id as id,
+        ip.id,
         ip.user_id,
         NULL as content,
         ip.image_url,
@@ -127,7 +127,6 @@ router.post(
       );
       const post = {
         ...result.rows[0],
-        id: result.rows[0].post_id,
         username: userQuery.rows[0]?.username,
       };
 
@@ -150,11 +149,12 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
   const userRole = req.user.role;
 
   const table = type === "image" ? "image_posts" : "posts";
+  const idColumn = type === "image" ? "id" : "post_id";
 
   try {
     // Check if post exists and get owner
     const checkQuery = await pool.query(
-      `SELECT user_id FROM ${table} WHERE post_id = $1`,
+      `SELECT user_id FROM ${table} WHERE ${idColumn} = $1`,
       [id]
     );
 
@@ -169,7 +169,7 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
       return res.status(403).json({ message: "Not authorized to delete this post." });
     }
 
-    await pool.query(`DELETE FROM ${table} WHERE post_id = $1`, [id]);
+    await pool.query(`DELETE FROM ${table} WHERE ${idColumn} = $1`, [id]);
     res.json({ message: "Post deleted successfully." });
   } catch (err) {
     console.error("Error deleting post:", err);
