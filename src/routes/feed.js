@@ -16,13 +16,13 @@ router.get("/", authenticateToken, async (req, res) => {
     // Use UNION ALL to combine both tables with a type identifier
     const query = `
       SELECT
-        post_id as id,
-        user_id,
-        content,
+        p.post_id as id,
+        p.user_id,
+        p.content,
         NULL as image_url,
         NULL as caption,
         'text' as post_type,
-        created_at,
+        p.created_at,
         u.username
       FROM posts p
       LEFT JOIN users u ON p.user_id = u.user_id
@@ -30,13 +30,13 @@ router.get("/", authenticateToken, async (req, res) => {
       UNION ALL
 
       SELECT
-        post_id as id,
-        user_id,
+        ip.post_id as id,
+        ip.user_id,
         NULL as content,
-        image_url,
-        caption,
+        ip.image_url,
+        ip.caption,
         'image' as post_type,
-        created_at,
+        ip.created_at,
         u.username
       FROM image_posts ip
       LEFT JOIN users u ON ip.user_id = u.user_id
