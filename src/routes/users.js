@@ -119,4 +119,27 @@ router.get("/me", authenticateToken, async (req, res) => {
   }
 });
 
+// --- ROUTE: PUBLIC USER PROFILE ---
+router.get("/:userId/profile", authenticateToken, async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT user_id, username, role FROM users WHERE user_id = $1",
+      [userId]
+    );
+    const user = result.rows[0];
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    res.json({
+      user_id: user.user_id,
+      username: user.username,
+      role: user.role,
+    });
+  } catch (err) {
+    console.error("Error fetching user profile:", err.message);
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
 export default router;
