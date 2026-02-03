@@ -2,7 +2,7 @@
 
 import { Router } from "express";
 import { pool } from "../connect.js";
-import { authenticateToken, upload, handleMulterError } from "../middleware.js";
+import { authenticateToken, upload, videoUpload, handleMulterError } from "../middleware.js";
 
 const router = Router();
 
@@ -21,6 +21,8 @@ router.get("/", authenticateToken, async (req, res) => {
         p.content,
         NULL as image_url,
         NULL as caption,
+        NULL as video_url,
+        NULL as video_type,
         'text' as post_type,
         p.created_at,
         u.username
@@ -35,11 +37,29 @@ router.get("/", authenticateToken, async (req, res) => {
         NULL as content,
         ip.image_url,
         ip.caption,
+        NULL as video_url,
+        NULL as video_type,
         'image' as post_type,
         ip.created_at,
         u.username
       FROM image_posts ip
       LEFT JOIN users u ON ip.user_id = u.user_id
+
+      UNION ALL
+
+      SELECT
+        vp.id,
+        vp.user_id,
+        NULL as content,
+        NULL as image_url,
+        vp.caption,
+        vp.video_url,
+        vp.video_type,
+        'video' as post_type,
+        vp.created_at,
+        u.username
+      FROM video_posts vp
+      LEFT JOIN users u ON vp.user_id = u.user_id
 
       ORDER BY created_at DESC
       LIMIT 50;
@@ -139,8 +159,107 @@ router.post(
 );
 
 /**
+ * @route   POST /api/feed/video
+ * @desc    Upload a video file post
+ * @access  Private
+ */
+router.post(
+  "/video",
+  authenticateToken,
+  videoUpload.single("video"),
+  handleMulterError,
+  async (req, res) => {
+    const { caption } = req.body;
+    const userId = req.user.id;
+
+    if (!req.file) {
+      return res.status(400).json({ message: "Video file is required." });
+    }
+
+    const videoUrl = `/uploads/${req.file.filename}`;
+
+    try {
+      const query = `
+        INSERT INTO video_posts (user_id, video_url, video_type, caption)
+        VALUES ($1, $2, 'upload', $3)
+        RETURNING *, 'video' as post_type;
+      `;
+      const result = await pool.query(query, [userId, videoUrl, caption || ""]);
+
+      const userQuery = await pool.query(
+        "SELECT username FROM users WHERE user_id = $1",
+        [userId]
+      );
+      const post = {
+        ...result.rows[0],
+        username: userQuery.rows[0]?.username,
+      };
+
+      res.status(201).json(post);
+    } catch (err) {
+      console.error("Error creating video post:", err);
+      res.status(500).json({ message: "Failed to create video post." });
+    }
+  }
+);
+
+/**
+ * @route   POST /api/feed/video-url
+ * @desc    Create a video post from a URL (YouTube, etc.)
+ * @access  Private
+ */
+router.post("/video-url", authenticateToken, async (req, res) => {
+  const { videoUrl, caption } = req.body;
+  const userId = req.user.id;
+
+  if (!videoUrl || videoUrl.trim() === "") {
+    return res.status(400).json({ message: "Video URL is required." });
+  }
+
+  // Detect YouTube URLs and extract video ID
+  let finalUrl = videoUrl.trim();
+  let videoType = "url";
+
+  const youtubeMatch = finalUrl.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  if (youtubeMatch) {
+    finalUrl = youtubeMatch[1]; // Store just the video ID
+    videoType = "youtube";
+  }
+
+  try {
+    const query = `
+      INSERT INTO video_posts (user_id, video_url, video_type, caption)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *, 'video' as post_type;
+    `;
+    const result = await pool.query(query, [
+      userId,
+      finalUrl,
+      videoType,
+      caption || "",
+    ]);
+
+    const userQuery = await pool.query(
+      "SELECT username FROM users WHERE user_id = $1",
+      [userId]
+    );
+    const post = {
+      ...result.rows[0],
+      username: userQuery.rows[0]?.username,
+    };
+
+    res.status(201).json(post);
+  } catch (err) {
+    console.error("Error creating video URL post:", err);
+    res.status(500).json({ message: "Failed to create video post." });
+  }
+});
+
+/**
  * @route   DELETE /api/feed/:type/:id
- * @desc    Delete a post (text or image)
+ * @desc    Delete a post (text, image, or video)
  * @access  Private (owner or admin)
  */
 router.delete("/:type/:id", authenticateToken, async (req, res) => {
@@ -148,8 +267,17 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
   const userId = req.user.id;
   const userRole = req.user.role;
 
-  const table = type === "image" ? "image_posts" : "posts";
-  const idColumn = type === "image" ? "id" : "post_id";
+  let table, idColumn;
+  if (type === "image") {
+    table = "image_posts";
+    idColumn = "id";
+  } else if (type === "video") {
+    table = "video_posts";
+    idColumn = "id";
+  } else {
+    table = "posts";
+    idColumn = "post_id";
+  }
 
   try {
     // Check if post exists and get owner

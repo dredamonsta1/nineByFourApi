@@ -64,6 +64,35 @@ export const upload = multer({
   },
 });
 
+//-------Video Multer Config -------
+const videoStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, "video-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+export const videoUpload = multer({
+  storage: videoStorage,
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100MB for videos
+  fileFilter: (req, file, cb) => {
+    const filetypes = /mp4|webm|mov|avi/;
+    const mimetypes = /video\/mp4|video\/webm|video\/quicktime|video\/x-msvideo/;
+    const mimetype = mimetypes.test(file.mimetype);
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb(new Error("Error: Video files only (mp4, webm, mov, avi)!"));
+    }
+  },
+});
+
 // Multer error handler middleware
 export const handleMulterError = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {

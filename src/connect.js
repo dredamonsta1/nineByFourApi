@@ -120,6 +120,19 @@ export async function createTables() {
   );
 `);
 
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS video_posts (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        video_url VARCHAR(512) NOT NULL,
+        video_type VARCHAR(20) NOT NULL DEFAULT 'upload',
+        caption TEXT,
+        thumbnail_url VARCHAR(512),
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+      );
+    `);
+
     // === WAITLIST TABLES ===
     try {
       await pool.query(`
