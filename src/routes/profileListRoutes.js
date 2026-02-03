@@ -25,6 +25,24 @@ router.get("/list", authenticateToken, async (req, res) => {
   }
 });
 
+// GET /api/profile/user/:userId - Fetch a specific user's artist list
+router.get("/user/:userId", authenticateToken, async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const sql = `
+      SELECT a.* FROM artists a
+      JOIN user_profile_artists upa ON a.artist_id = upa.artist_id
+      WHERE upa.user_id = $1
+      ORDER BY a.count DESC;
+    `;
+    const result = await pool.query(sql, [userId]);
+    res.status(200).json({ list: result.rows });
+  } catch (error) {
+    console.error("Error fetching user profile list:", error.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // POST /api/profile/list/:artistId - Add an artist to the user's list
 router.post("/list/:artistId", authenticateToken, async (req, res) => {
   const userId = req.user.id;
