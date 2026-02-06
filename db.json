@@ -684,6 +684,730 @@
                     "certifications": null
                 }
             ]
+        },
+        {
+            "artist_id": 18,
+            "artist_name": "Travis Scott",
+            "aka": "Jacques Bermon Webster II",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "Cactus Jack / Epic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 60,
+                    "artist_id": 18,
+                    "album_name": "Utopia",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 61,
+                    "artist_id": 18,
+                    "album_name": "Astroworld",
+                    "year": 2018,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 62,
+                    "artist_id": 18,
+                    "album_name": "Birds in the Trap Sing McKnight",
+                    "year": 2016,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 63,
+                    "artist_id": 18,
+                    "album_name": "Rodeo",
+                    "year": 2015,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 19,
+            "artist_name": "Lil Wayne",
+            "aka": "Dwayne Michael Carter Jr.",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Louisiana",
+            "region": "South",
+            "label": "Young Money / Cash Money",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 64,
+                    "artist_id": 19,
+                    "album_name": "Funeral",
+                    "year": 2020,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 65,
+                    "artist_id": 19,
+                    "album_name": "Tha Carter V",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 66,
+                    "artist_id": 19,
+                    "album_name": "Tha Carter IV",
+                    "year": 2011,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 67,
+                    "artist_id": 19,
+                    "album_name": "Tha Carter III",
+                    "year": 2008,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 68,
+                    "artist_id": 19,
+                    "album_name": "Tha Carter II",
+                    "year": 2005,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 20,
+            "artist_name": "Nas",
+            "aka": "Nasir bin Olu Dara Jones",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Mass Appeal / Def Jam",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 69,
+                    "artist_id": 20,
+                    "album_name": "King's Disease III",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 70,
+                    "artist_id": 20,
+                    "album_name": "King's Disease II",
+                    "year": 2021,
+                    "certifications": null
+                },
+                {
+                    "album_id": 71,
+                    "artist_id": 20,
+                    "album_name": "King's Disease",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 72,
+                    "artist_id": 20,
+                    "album_name": "Life Is Good",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 73,
+                    "artist_id": 20,
+                    "album_name": "Stillmatic",
+                    "year": 2001,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 74,
+                    "artist_id": 20,
+                    "album_name": "It Was Written",
+                    "year": 1996,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 75,
+                    "artist_id": 20,
+                    "album_name": "Illmatic",
+                    "year": 1994,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 21,
+            "artist_name": "Eminem",
+            "aka": "Marshall Bruce Mathers III",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Michigan",
+            "region": "Midwest",
+            "label": "Shady / Aftermath / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 76,
+                    "artist_id": 21,
+                    "album_name": "Music to Be Murdered By",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 77,
+                    "artist_id": 21,
+                    "album_name": "Kamikaze",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 78,
+                    "artist_id": 21,
+                    "album_name": "The Marshall Mathers LP 2",
+                    "year": 2013,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 79,
+                    "artist_id": 21,
+                    "album_name": "Recovery",
+                    "year": 2010,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 80,
+                    "artist_id": 21,
+                    "album_name": "The Eminem Show",
+                    "year": 2002,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 81,
+                    "artist_id": 21,
+                    "album_name": "The Marshall Mathers LP",
+                    "year": 2000,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 82,
+                    "artist_id": 21,
+                    "album_name": "The Slim Shady LP",
+                    "year": 1999,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 22,
+            "artist_name": "Snoop Dogg",
+            "aka": "Cordozar Calvin Broadus Jr.",
+            "genre": "Hip Hop / G-Funk",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Death Row / Doggy Style",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 83,
+                    "artist_id": 22,
+                    "album_name": "I Wanna Thank Me",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 84,
+                    "artist_id": 22,
+                    "album_name": "Neva Left",
+                    "year": 2017,
+                    "certifications": null
+                },
+                {
+                    "album_id": 85,
+                    "artist_id": 22,
+                    "album_name": "Tha Blue Carpet Treatment",
+                    "year": 2006,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 86,
+                    "artist_id": 22,
+                    "album_name": "Tha Doggfather",
+                    "year": 1996,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 87,
+                    "artist_id": 22,
+                    "album_name": "Doggystyle",
+                    "year": 1993,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 23,
+            "artist_name": "50 Cent",
+            "aka": "Curtis James Jackson III",
+            "genre": "Hip Hop / Gangsta Rap",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "G-Unit / Shady / Aftermath",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 88,
+                    "artist_id": 23,
+                    "album_name": "Animal Ambition",
+                    "year": 2014,
+                    "certifications": null
+                },
+                {
+                    "album_id": 89,
+                    "artist_id": 23,
+                    "album_name": "Before I Self Destruct",
+                    "year": 2009,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 90,
+                    "artist_id": 23,
+                    "album_name": "Curtis",
+                    "year": 2007,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 91,
+                    "artist_id": 23,
+                    "album_name": "The Massacre",
+                    "year": 2005,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 92,
+                    "artist_id": 23,
+                    "album_name": "Get Rich or Die Tryin'",
+                    "year": 2003,
+                    "certifications": "9x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 24,
+            "artist_name": "Nicki Minaj",
+            "aka": "Onika Tanya Maraj-Petty",
+            "genre": "Hip Hop / Pop",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Young Money / Cash Money / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 93,
+                    "artist_id": 24,
+                    "album_name": "Pink Friday 2",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 94,
+                    "artist_id": 24,
+                    "album_name": "Queen",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 95,
+                    "artist_id": 24,
+                    "album_name": "The Pinkprint",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 96,
+                    "artist_id": 24,
+                    "album_name": "Pink Friday: Roman Reloaded",
+                    "year": 2012,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 97,
+                    "artist_id": 24,
+                    "album_name": "Pink Friday",
+                    "year": 2010,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 25,
+            "artist_name": "Megan Thee Stallion",
+            "aka": "Megan Jovon Ruth Pete",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "Hot Girl Productions / Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 98,
+                    "artist_id": 25,
+                    "album_name": "Megan",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 99,
+                    "artist_id": 25,
+                    "album_name": "Traumazine",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 100,
+                    "artist_id": 25,
+                    "album_name": "Good News",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 26,
+            "artist_name": "Cardi B",
+            "aka": "Belcalis Marlenis Almanzar",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 101,
+                    "artist_id": 26,
+                    "album_name": "Invasion of Privacy",
+                    "year": 2018,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 27,
+            "artist_name": "21 Savage",
+            "aka": "Shéyaa Bin Abraham-Joseph",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Slaughter Gang / Epic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 102,
+                    "artist_id": 27,
+                    "album_name": "American Dream",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 103,
+                    "artist_id": 27,
+                    "album_name": "I Am > I Was",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 104,
+                    "artist_id": 27,
+                    "album_name": "Issa Album",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 105,
+                    "artist_id": 27,
+                    "album_name": "Savage Mode II",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 28,
+            "artist_name": "Future",
+            "aka": "Nayvadius DeMun Wilburn",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Freebandz / Epic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 106,
+                    "artist_id": 28,
+                    "album_name": "I Never Liked You",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 107,
+                    "artist_id": 28,
+                    "album_name": "High Off Life",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 108,
+                    "artist_id": 28,
+                    "album_name": "The Wizrd",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 109,
+                    "artist_id": 28,
+                    "album_name": "Future",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 110,
+                    "artist_id": 28,
+                    "album_name": "DS2",
+                    "year": 2015,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 111,
+                    "artist_id": 28,
+                    "album_name": "Pluto",
+                    "year": 2012,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 29,
+            "artist_name": "Lil Baby",
+            "aka": "Dominique Armani Jones",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Quality Control / Motown / Capitol",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 112,
+                    "artist_id": 29,
+                    "album_name": "It's Only Me",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 113,
+                    "artist_id": 29,
+                    "album_name": "The Voice of the Heroes",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 114,
+                    "artist_id": 29,
+                    "album_name": "My Turn",
+                    "year": 2020,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 115,
+                    "artist_id": 29,
+                    "album_name": "Harder Than Ever",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 30,
+            "artist_name": "Metro Boomin",
+            "aka": "Leland Tyler Wayne",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Missouri",
+            "region": "Midwest",
+            "label": "Boominati / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 116,
+                    "artist_id": 30,
+                    "album_name": "Heroes & Villains",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 117,
+                    "artist_id": 30,
+                    "album_name": "Not All Heroes Wear Capes",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 31,
+            "artist_name": "Tyler, the Creator",
+            "aka": "Tyler Gregory Okonma",
+            "genre": "Hip Hop / Alternative",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Odd Future / Columbia",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 118,
+                    "artist_id": 31,
+                    "album_name": "CHROMAKOPIA",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 119,
+                    "artist_id": 31,
+                    "album_name": "Call Me If You Get Lost",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 120,
+                    "artist_id": 31,
+                    "album_name": "Igor",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 121,
+                    "artist_id": 31,
+                    "album_name": "Flower Boy",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 122,
+                    "artist_id": 31,
+                    "album_name": "Cherry Bomb",
+                    "year": 2015,
+                    "certifications": null
+                },
+                {
+                    "album_id": 123,
+                    "artist_id": 31,
+                    "album_name": "Wolf",
+                    "year": 2013,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 32,
+            "artist_name": "A$AP Rocky",
+            "aka": "Rakim Athelston Mayers",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "AWGE / RCA / Polo Grounds",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 124,
+                    "artist_id": 32,
+                    "album_name": "Testing",
+                    "year": 2018,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 125,
+                    "artist_id": 32,
+                    "album_name": "At.Long.Last.A$AP",
+                    "year": 2015,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 126,
+                    "artist_id": 32,
+                    "album_name": "Long.Live.A$AP",
+                    "year": 2013,
+                    "certifications": "2x Platinum"
+                }
+            ]
         }
     ]
 }
