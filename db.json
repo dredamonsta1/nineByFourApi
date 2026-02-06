@@ -1408,6 +1408,808 @@
                     "certifications": "2x Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 33,
+            "artist_name": "Lil Durk",
+            "aka": "Durk Devontay Banks",
+            "genre": "Hip Hop / Drill",
+            "count": 0,
+            "state": "Illinois",
+            "region": "Midwest",
+            "label": "Only the Family / Alamo",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 127,
+                    "artist_id": 33,
+                    "album_name": "Almost Healed",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 128,
+                    "artist_id": 33,
+                    "album_name": "7220",
+                    "year": 2022,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 129,
+                    "artist_id": 33,
+                    "album_name": "The Voice",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 130,
+                    "artist_id": 33,
+                    "album_name": "Love Songs 4 the Streets 2",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 34,
+            "artist_name": "Gunna",
+            "aka": "Sergio Giavanni Kitchens",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "YSL / 300 / Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 131,
+                    "artist_id": 34,
+                    "album_name": "One of Wun",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 132,
+                    "artist_id": 34,
+                    "album_name": "A Gift & a Curse",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 133,
+                    "artist_id": 34,
+                    "album_name": "DS4Ever",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 134,
+                    "artist_id": 34,
+                    "album_name": "Wunna",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 135,
+                    "artist_id": 34,
+                    "album_name": "Drip or Drown 2",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 35,
+            "artist_name": "Young Thug",
+            "aka": "Jeffery Lamar Williams",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "YSL / 300 / Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 136,
+                    "artist_id": 35,
+                    "album_name": "Business is Business",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 137,
+                    "artist_id": 35,
+                    "album_name": "Punk",
+                    "year": 2021,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 138,
+                    "artist_id": 35,
+                    "album_name": "So Much Fun",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 139,
+                    "artist_id": 35,
+                    "album_name": "Beautiful Thugger Girls",
+                    "year": 2017,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 36,
+            "artist_name": "Lil Uzi Vert",
+            "aka": "Symere Bysil Woods",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Pennsylvania",
+            "region": "East Coast",
+            "label": "Generation Now / Atlantic / Roc Nation",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 140,
+                    "artist_id": 36,
+                    "album_name": "Pink Tape",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 141,
+                    "artist_id": 36,
+                    "album_name": "Eternal Atake",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 142,
+                    "artist_id": 36,
+                    "album_name": "Luv Is Rage 2",
+                    "year": 2017,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 37,
+            "artist_name": "Post Malone",
+            "aka": "Austin Richard Post",
+            "genre": "Hip Hop / Pop",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 143,
+                    "artist_id": 37,
+                    "album_name": "Austin",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 144,
+                    "artist_id": 37,
+                    "album_name": "Twelve Carat Toothache",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 145,
+                    "artist_id": 37,
+                    "album_name": "Hollywood's Bleeding",
+                    "year": 2019,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 146,
+                    "artist_id": 37,
+                    "album_name": "Beerbongs & Bentleys",
+                    "year": 2018,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 147,
+                    "artist_id": 37,
+                    "album_name": "Stoney",
+                    "year": 2016,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 38,
+            "artist_name": "DaBaby",
+            "aka": "Jonathan Lyndale Kirk",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "North Carolina",
+            "region": "South",
+            "label": "Interscope / South Coast",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 148,
+                    "artist_id": 38,
+                    "album_name": "Blame It on Baby",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 149,
+                    "artist_id": 38,
+                    "album_name": "Kirk",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 150,
+                    "artist_id": 38,
+                    "album_name": "Baby on Baby",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 39,
+            "artist_name": "Roddy Ricch",
+            "aka": "Rodrick Wayne Moore Jr.",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Atlantic / Bird Vision",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 151,
+                    "artist_id": 39,
+                    "album_name": "Live Life Fast",
+                    "year": 2021,
+                    "certifications": null
+                },
+                {
+                    "album_id": 152,
+                    "artist_id": 39,
+                    "album_name": "Please Excuse Me for Being Antisocial",
+                    "year": 2019,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 40,
+            "artist_name": "Polo G",
+            "aka": "Taurus Tremani Bartlett",
+            "genre": "Hip Hop / Drill",
+            "count": 0,
+            "state": "Illinois",
+            "region": "Midwest",
+            "label": "Columbia / ODA",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 153,
+                    "artist_id": 40,
+                    "album_name": "Hood Poet",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 154,
+                    "artist_id": 40,
+                    "album_name": "Hall of Fame",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 155,
+                    "artist_id": 40,
+                    "album_name": "The Goat",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 156,
+                    "artist_id": 40,
+                    "album_name": "Die a Legend",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 41,
+            "artist_name": "Jack Harlow",
+            "aka": "Jackman Thomas Harlow",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Kentucky",
+            "region": "South",
+            "label": "Generation Now / Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 157,
+                    "artist_id": 41,
+                    "album_name": "Jackman",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 158,
+                    "artist_id": 41,
+                    "album_name": "Come Home the Kids Miss You",
+                    "year": 2022,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 159,
+                    "artist_id": 41,
+                    "album_name": "Thats What They All Say",
+                    "year": 2020,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 42,
+            "artist_name": "Juice WRLD",
+            "aka": "Jarad Anthony Higgins",
+            "genre": "Hip Hop / Emo Rap",
+            "count": 0,
+            "state": "Illinois",
+            "region": "Midwest",
+            "label": "Grade A / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 160,
+                    "artist_id": 42,
+                    "album_name": "Fighting Demons",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 161,
+                    "artist_id": 42,
+                    "album_name": "Legends Never Die",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 162,
+                    "artist_id": 42,
+                    "album_name": "Death Race for Love",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 163,
+                    "artist_id": 42,
+                    "album_name": "Goodbye & Good Riddance",
+                    "year": 2018,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 43,
+            "artist_name": "Pop Smoke",
+            "aka": "Bashar Barakah Jackson",
+            "genre": "Hip Hop / Brooklyn Drill",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Victor Victor / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 164,
+                    "artist_id": 43,
+                    "album_name": "Faith",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 165,
+                    "artist_id": 43,
+                    "album_name": "Shoot for the Stars, Aim for the Moon",
+                    "year": 2020,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 44,
+            "artist_name": "Playboi Carti",
+            "aka": "Jordan Terrell Carter",
+            "genre": "Hip Hop / Rage",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Opium / Interscope / AWGE",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 166,
+                    "artist_id": 44,
+                    "album_name": "Music",
+                    "year": 2025,
+                    "certifications": null
+                },
+                {
+                    "album_id": 167,
+                    "artist_id": 44,
+                    "album_name": "Whole Lotta Red",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 168,
+                    "artist_id": 44,
+                    "album_name": "Die Lit",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 45,
+            "artist_name": "Ice Cube",
+            "aka": "O'Shea Jackson",
+            "genre": "Hip Hop / Gangsta Rap",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Lench Mob / Priority",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 169,
+                    "artist_id": 45,
+                    "album_name": "Everythangs Corrupt",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 170,
+                    "artist_id": 45,
+                    "album_name": "I Am the West",
+                    "year": 2010,
+                    "certifications": null
+                },
+                {
+                    "album_id": 171,
+                    "artist_id": 45,
+                    "album_name": "The Predator",
+                    "year": 1992,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 172,
+                    "artist_id": 45,
+                    "album_name": "Death Certificate",
+                    "year": 1991,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 173,
+                    "artist_id": 45,
+                    "album_name": "AmeriKKKa's Most Wanted",
+                    "year": 1990,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 46,
+            "artist_name": "Dr. Dre",
+            "aka": "Andre Romell Young",
+            "genre": "Hip Hop / G-Funk",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Aftermath / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 174,
+                    "artist_id": 46,
+                    "album_name": "Compton",
+                    "year": 2015,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 175,
+                    "artist_id": 46,
+                    "album_name": "2001",
+                    "year": 1999,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 176,
+                    "artist_id": 46,
+                    "album_name": "The Chronic",
+                    "year": 1992,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 47,
+            "artist_name": "Pusha T",
+            "aka": "Terrence LeVarr Thornton",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Virginia",
+            "region": "East Coast",
+            "label": "Heir Wave / Def Jam",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 177,
+                    "artist_id": 47,
+                    "album_name": "It's Almost Dry",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 178,
+                    "artist_id": 47,
+                    "album_name": "Daytona",
+                    "year": 2018,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 179,
+                    "artist_id": 47,
+                    "album_name": "My Name Is My Name",
+                    "year": 2013,
+                    "certifications": null
+                }
+            ]
+        },
+        {
+            "artist_id": 48,
+            "artist_name": "2Pac",
+            "aka": "Tupac Amaru Shakur",
+            "genre": "Hip Hop / Gangsta Rap",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Death Row / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 180,
+                    "artist_id": 48,
+                    "album_name": "All Eyez on Me",
+                    "year": 1996,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 181,
+                    "artist_id": 48,
+                    "album_name": "Me Against the World",
+                    "year": 1995,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 182,
+                    "artist_id": 48,
+                    "album_name": "Strictly 4 My N.I.G.G.A.Z.",
+                    "year": 1993,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 183,
+                    "artist_id": 48,
+                    "album_name": "2Pacalypse Now",
+                    "year": 1991,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 49,
+            "artist_name": "The Notorious B.I.G.",
+            "aka": "Christopher George Latore Wallace",
+            "genre": "Hip Hop / Gangsta Rap",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Bad Boy / Arista",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 184,
+                    "artist_id": 49,
+                    "album_name": "Life After Death",
+                    "year": 1997,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 185,
+                    "artist_id": 49,
+                    "album_name": "Ready to Die",
+                    "year": 1994,
+                    "certifications": "6x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 50,
+            "artist_name": "Lil Nas X",
+            "aka": "Montero Lamar Hill",
+            "genre": "Hip Hop / Pop",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Columbia",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 186,
+                    "artist_id": 50,
+                    "album_name": "Montero",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 51,
+            "artist_name": "The Weeknd",
+            "aka": "Abel Makkonen Tesfaye",
+            "genre": "R&B / Pop",
+            "count": 0,
+            "state": "Ontario",
+            "region": "Canada",
+            "label": "XO / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 187,
+                    "artist_id": 51,
+                    "album_name": "Dawn FM",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 188,
+                    "artist_id": 51,
+                    "album_name": "After Hours",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 189,
+                    "artist_id": 51,
+                    "album_name": "Starboy",
+                    "year": 2016,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 190,
+                    "artist_id": 51,
+                    "album_name": "Beauty Behind the Madness",
+                    "year": 2015,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 52,
+            "artist_name": "SZA",
+            "aka": "Solána Imani Rowe",
+            "genre": "R&B / Neo-Soul",
+            "count": 0,
+            "state": "New Jersey",
+            "region": "East Coast",
+            "label": "Top Dawg / RCA",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 191,
+                    "artist_id": 52,
+                    "album_name": "SOS",
+                    "year": 2022,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 192,
+                    "artist_id": 52,
+                    "album_name": "Ctrl",
+                    "year": 2017,
+                    "certifications": "3x Platinum"
+                }
+            ]
         }
     ]
 }
