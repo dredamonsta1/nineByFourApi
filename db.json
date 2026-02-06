@@ -2210,6 +2210,679 @@
                     "certifications": "3x Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 53,
+            "artist_name": "Gucci Mane",
+            "aka": "Radric Delantic Davis",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Atlantic / 1017 Records",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 193,
+                    "artist_id": 53,
+                    "album_name": "So Icy Boyz",
+                    "year": 2021,
+                    "certifications": null
+                },
+                {
+                    "album_id": 194,
+                    "artist_id": 53,
+                    "album_name": "Woptober II",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 195,
+                    "artist_id": 53,
+                    "album_name": "Evil Genius",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 196,
+                    "artist_id": 53,
+                    "album_name": "Mr. Davis",
+                    "year": 2017,
+                    "certifications": null
+                },
+                {
+                    "album_id": 197,
+                    "artist_id": 53,
+                    "album_name": "Everybody Looking",
+                    "year": 2016,
+                    "certifications": null
+                },
+                {
+                    "album_id": 198,
+                    "artist_id": 53,
+                    "album_name": "Trap House III",
+                    "year": 2013,
+                    "certifications": null
+                }
+            ]
+        },
+        {
+            "artist_id": 54,
+            "artist_name": "Migos",
+            "aka": "Quavo, Offset, Takeoff",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Quality Control / Motown / Capitol",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 199,
+                    "artist_id": 54,
+                    "album_name": "Culture III",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 200,
+                    "artist_id": 54,
+                    "album_name": "Culture II",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 201,
+                    "artist_id": 54,
+                    "album_name": "Culture",
+                    "year": 2017,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 202,
+                    "artist_id": 54,
+                    "album_name": "Yung Rich Nation",
+                    "year": 2015,
+                    "certifications": null
+                }
+            ]
+        },
+        {
+            "artist_id": 55,
+            "artist_name": "Kodak Black",
+            "aka": "Bill Kahan Kapri",
+            "genre": "Hip Hop / Trap",
+            "count": 0,
+            "state": "Florida",
+            "region": "South",
+            "label": "Atlantic / Sniper Gang",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 203,
+                    "artist_id": 55,
+                    "album_name": "Back for Everything",
+                    "year": 2022,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 204,
+                    "artist_id": 55,
+                    "album_name": "Haitian Boy Kodak",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 205,
+                    "artist_id": 55,
+                    "album_name": "Bill Israel",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 206,
+                    "artist_id": 55,
+                    "album_name": "Dying to Live",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 207,
+                    "artist_id": 55,
+                    "album_name": "Painting Pictures",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 56,
+            "artist_name": "NBA YoungBoy",
+            "aka": "Kentrell DeSean Gaulden",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Louisiana",
+            "region": "South",
+            "label": "Motown / Never Broke Again",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 208,
+                    "artist_id": 56,
+                    "album_name": "Richest Opp",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 209,
+                    "artist_id": 56,
+                    "album_name": "I Rest My Case",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 210,
+                    "artist_id": 56,
+                    "album_name": "Richest Opp",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 211,
+                    "artist_id": 56,
+                    "album_name": "The Last Slimeto",
+                    "year": 2022,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 212,
+                    "artist_id": 56,
+                    "album_name": "Sincerely, Kentrell",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 213,
+                    "artist_id": 56,
+                    "album_name": "Top",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 214,
+                    "artist_id": 56,
+                    "album_name": "AI YoungBoy 2",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 57,
+            "artist_name": "Lil Yachty",
+            "aka": "Miles Parks McCollum",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Georgia",
+            "region": "South",
+            "label": "Quality Control / Motown / Capitol",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 215,
+                    "artist_id": 57,
+                    "album_name": "Let's Start Here",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 216,
+                    "artist_id": 57,
+                    "album_name": "Lil Boat 3",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 217,
+                    "artist_id": 57,
+                    "album_name": "Nuthin' 2 Prove",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 218,
+                    "artist_id": 57,
+                    "album_name": "Lil Boat 2",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 219,
+                    "artist_id": 57,
+                    "album_name": "Teenage Emotions",
+                    "year": 2017,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 58,
+            "artist_name": "Mac Miller",
+            "aka": "Malcolm James McCormick",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Pennsylvania",
+            "region": "East Coast",
+            "label": "Rostrum / Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 220,
+                    "artist_id": 58,
+                    "album_name": "Circles",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 221,
+                    "artist_id": 58,
+                    "album_name": "Swimming",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 222,
+                    "artist_id": 58,
+                    "album_name": "The Divine Feminine",
+                    "year": 2016,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 223,
+                    "artist_id": 58,
+                    "album_name": "GO:OD AM",
+                    "year": 2015,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 224,
+                    "artist_id": 58,
+                    "album_name": "Watching Movies with the Sound Off",
+                    "year": 2013,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 225,
+                    "artist_id": 58,
+                    "album_name": "Blue Slide Park",
+                    "year": 2011,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 59,
+            "artist_name": "Wiz Khalifa",
+            "aka": "Cameron Jibril Thomaz",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Pennsylvania",
+            "region": "East Coast",
+            "label": "Atlantic / Taylor Gang",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 226,
+                    "artist_id": 59,
+                    "album_name": "Multiverse",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 227,
+                    "artist_id": 59,
+                    "album_name": "Rolling Papers 2",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 228,
+                    "artist_id": 59,
+                    "album_name": "Blacc Hollywood",
+                    "year": 2014,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 229,
+                    "artist_id": 59,
+                    "album_name": "O.N.I.F.C.",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 230,
+                    "artist_id": 59,
+                    "album_name": "Rolling Papers",
+                    "year": 2011,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 60,
+            "artist_name": "Big Sean",
+            "aka": "Sean Michael Leonard Anderson",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Michigan",
+            "region": "Midwest",
+            "label": "GOOD Music / Def Jam",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 231,
+                    "artist_id": 60,
+                    "album_name": "Detroit 2",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 232,
+                    "artist_id": 60,
+                    "album_name": "I Decided.",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 233,
+                    "artist_id": 60,
+                    "album_name": "Dark Sky Paradise",
+                    "year": 2015,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 234,
+                    "artist_id": 60,
+                    "album_name": "Hall of Fame",
+                    "year": 2013,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 235,
+                    "artist_id": 60,
+                    "album_name": "Finally Famous",
+                    "year": 2011,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 61,
+            "artist_name": "Chance the Rapper",
+            "aka": "Chancelor Johnathan Bennett",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Illinois",
+            "region": "Midwest",
+            "label": "Independent",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 236,
+                    "artist_id": 61,
+                    "album_name": "Star Line Gallery",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 237,
+                    "artist_id": 61,
+                    "album_name": "The Big Day",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 238,
+                    "artist_id": 61,
+                    "album_name": "Coloring Book",
+                    "year": 2016,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 239,
+                    "artist_id": 61,
+                    "album_name": "Acid Rap",
+                    "year": 2013,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 62,
+            "artist_name": "Logic",
+            "aka": "Sir Robert Bryson Hall II",
+            "genre": "Hip Hop",
+            "count": 0,
+            "state": "Maryland",
+            "region": "East Coast",
+            "label": "Def Jam / Visionary",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 240,
+                    "artist_id": 62,
+                    "album_name": "College Park",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 241,
+                    "artist_id": 62,
+                    "album_name": "Vinyl Days",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 242,
+                    "artist_id": 62,
+                    "album_name": "No Pressure",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 243,
+                    "artist_id": 62,
+                    "album_name": "Confessions of a Dangerous Mind",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 244,
+                    "artist_id": 62,
+                    "album_name": "Bobby Tarantino II",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 245,
+                    "artist_id": 62,
+                    "album_name": "Everybody",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 246,
+                    "artist_id": 62,
+                    "album_name": "The Incredible True Story",
+                    "year": 2015,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 247,
+                    "artist_id": 62,
+                    "album_name": "Under Pressure",
+                    "year": 2014,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 63,
+            "artist_name": "Kid Cudi",
+            "aka": "Scott Ramon Seguro Mescudi",
+            "genre": "Hip Hop / Alternative",
+            "count": 0,
+            "state": "Ohio",
+            "region": "Midwest",
+            "label": "Republic / Wicked Awesome",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 248,
+                    "artist_id": 63,
+                    "album_name": "Insano",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 249,
+                    "artist_id": 63,
+                    "album_name": "Man on the Moon III: The Chosen",
+                    "year": 2020,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 250,
+                    "artist_id": 63,
+                    "album_name": "Kids See Ghosts",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 251,
+                    "artist_id": 63,
+                    "album_name": "Passion, Pain & Demon Slayin'",
+                    "year": 2016,
+                    "certifications": null
+                },
+                {
+                    "album_id": 252,
+                    "artist_id": 63,
+                    "album_name": "Indicud",
+                    "year": 2013,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 253,
+                    "artist_id": 63,
+                    "album_name": "Man on the Moon II: The Legend of Mr. Rager",
+                    "year": 2010,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 254,
+                    "artist_id": 63,
+                    "album_name": "Man on the Moon: The End of Day",
+                    "year": 2009,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 64,
+            "artist_name": "ScHoolboy Q",
+            "aka": "Quincy Matthew Hanley",
+            "genre": "Hip Hop / West Coast",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Top Dawg / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 255,
+                    "artist_id": 64,
+                    "album_name": "Blue Lips",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 256,
+                    "artist_id": 64,
+                    "album_name": "CrasH Talk",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 257,
+                    "artist_id": 64,
+                    "album_name": "Blank Face LP",
+                    "year": 2016,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 258,
+                    "artist_id": 64,
+                    "album_name": "Oxymoron",
+                    "year": 2014,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 259,
+                    "artist_id": 64,
+                    "album_name": "Habits & Contradictions",
+                    "year": 2012,
+                    "certifications": null
+                }
+            ]
         }
     ]
 }
