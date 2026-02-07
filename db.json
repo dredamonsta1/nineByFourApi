@@ -4817,6 +4817,756 @@
                     "certifications": "Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 96,
+            "artist_name": "Metallica",
+            "aka": null,
+            "genre": "Heavy Metal / Thrash Metal",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Blackened / Elektra",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 461,
+                    "artist_id": 96,
+                    "album_name": "72 Seasons",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 462,
+                    "artist_id": 96,
+                    "album_name": "Hardwired... to Self-Destruct",
+                    "year": 2016,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 463,
+                    "artist_id": 96,
+                    "album_name": "Death Magnetic",
+                    "year": 2008,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 464,
+                    "artist_id": 96,
+                    "album_name": "St. Anger",
+                    "year": 2003,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 465,
+                    "artist_id": 96,
+                    "album_name": "Reload",
+                    "year": 1997,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 466,
+                    "artist_id": 96,
+                    "album_name": "Load",
+                    "year": 1996,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 467,
+                    "artist_id": 96,
+                    "album_name": "Metallica (Black Album)",
+                    "year": 1991,
+                    "certifications": "16x Platinum"
+                },
+                {
+                    "album_id": 468,
+                    "artist_id": 96,
+                    "album_name": "...And Justice for All",
+                    "year": 1988,
+                    "certifications": "8x Platinum"
+                },
+                {
+                    "album_id": 469,
+                    "artist_id": 96,
+                    "album_name": "Master of Puppets",
+                    "year": 1986,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 470,
+                    "artist_id": 96,
+                    "album_name": "Ride the Lightning",
+                    "year": 1984,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 471,
+                    "artist_id": 96,
+                    "album_name": "Kill 'Em All",
+                    "year": 1983,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 97,
+            "artist_name": "AC/DC",
+            "aka": null,
+            "genre": "Hard Rock",
+            "count": 0,
+            "state": null,
+            "region": "Australia",
+            "label": "Columbia / Albert",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 472,
+                    "artist_id": 97,
+                    "album_name": "Power Up",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 473,
+                    "artist_id": 97,
+                    "album_name": "Rock or Bust",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 474,
+                    "artist_id": 97,
+                    "album_name": "Black Ice",
+                    "year": 2008,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 475,
+                    "artist_id": 97,
+                    "album_name": "Ballbreaker",
+                    "year": 1995,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 476,
+                    "artist_id": 97,
+                    "album_name": "The Razors Edge",
+                    "year": 1990,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 477,
+                    "artist_id": 97,
+                    "album_name": "Blow Up Your Video",
+                    "year": 1988,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 478,
+                    "artist_id": 97,
+                    "album_name": "For Those About to Rock We Salute You",
+                    "year": 1981,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 479,
+                    "artist_id": 97,
+                    "album_name": "Back in Black",
+                    "year": 1980,
+                    "certifications": "25x Platinum"
+                },
+                {
+                    "album_id": 480,
+                    "artist_id": 97,
+                    "album_name": "Highway to Hell",
+                    "year": 1979,
+                    "certifications": "7x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 98,
+            "artist_name": "Foo Fighters",
+            "aka": null,
+            "genre": "Rock / Alternative",
+            "count": 0,
+            "state": "Washington",
+            "region": "West Coast",
+            "label": "RCA / Roswell",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 481,
+                    "artist_id": 98,
+                    "album_name": "But Here We Are",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 482,
+                    "artist_id": 98,
+                    "album_name": "Medicine at Midnight",
+                    "year": 2021,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 483,
+                    "artist_id": 98,
+                    "album_name": "Concrete and Gold",
+                    "year": 2017,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 484,
+                    "artist_id": 98,
+                    "album_name": "Sonic Highways",
+                    "year": 2014,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 485,
+                    "artist_id": 98,
+                    "album_name": "Wasting Light",
+                    "year": 2011,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 486,
+                    "artist_id": 98,
+                    "album_name": "Echoes, Silence, Patience & Grace",
+                    "year": 2007,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 487,
+                    "artist_id": 98,
+                    "album_name": "In Your Honor",
+                    "year": 2005,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 488,
+                    "artist_id": 98,
+                    "album_name": "One by One",
+                    "year": 2002,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 489,
+                    "artist_id": 98,
+                    "album_name": "There Is Nothing Left to Lose",
+                    "year": 1999,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 490,
+                    "artist_id": 98,
+                    "album_name": "The Colour and the Shape",
+                    "year": 1997,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 491,
+                    "artist_id": 98,
+                    "album_name": "Foo Fighters",
+                    "year": 1995,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 99,
+            "artist_name": "Linkin Park",
+            "aka": null,
+            "genre": "Nu Metal / Alternative Rock",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 492,
+                    "artist_id": 99,
+                    "album_name": "From Zero",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 493,
+                    "artist_id": 99,
+                    "album_name": "One More Light",
+                    "year": 2017,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 494,
+                    "artist_id": 99,
+                    "album_name": "The Hunting Party",
+                    "year": 2014,
+                    "certifications": null
+                },
+                {
+                    "album_id": 495,
+                    "artist_id": 99,
+                    "album_name": "Living Things",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 496,
+                    "artist_id": 99,
+                    "album_name": "A Thousand Suns",
+                    "year": 2010,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 497,
+                    "artist_id": 99,
+                    "album_name": "Minutes to Midnight",
+                    "year": 2007,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 498,
+                    "artist_id": 99,
+                    "album_name": "Meteora",
+                    "year": 2003,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 499,
+                    "artist_id": 99,
+                    "album_name": "Hybrid Theory",
+                    "year": 2000,
+                    "certifications": "Diamond"
+                }
+            ]
+        },
+        {
+            "artist_id": 100,
+            "artist_name": "Nirvana",
+            "aka": null,
+            "genre": "Grunge / Alternative Rock",
+            "count": 0,
+            "state": "Washington",
+            "region": "West Coast",
+            "label": "DGC / Sub Pop",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 500,
+                    "artist_id": 100,
+                    "album_name": "In Utero",
+                    "year": 1993,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 501,
+                    "artist_id": 100,
+                    "album_name": "Nevermind",
+                    "year": 1991,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 502,
+                    "artist_id": 100,
+                    "album_name": "Bleach",
+                    "year": 1989,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 101,
+            "artist_name": "Green Day",
+            "aka": null,
+            "genre": "Punk Rock / Pop Punk",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Reprise / Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 503,
+                    "artist_id": 101,
+                    "album_name": "Saviors",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 504,
+                    "artist_id": 101,
+                    "album_name": "Father of All...",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 505,
+                    "artist_id": 101,
+                    "album_name": "Revolution Radio",
+                    "year": 2016,
+                    "certifications": null
+                },
+                {
+                    "album_id": 506,
+                    "artist_id": 101,
+                    "album_name": "21st Century Breakdown",
+                    "year": 2009,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 507,
+                    "artist_id": 101,
+                    "album_name": "American Idiot",
+                    "year": 2004,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 508,
+                    "artist_id": 101,
+                    "album_name": "Warning",
+                    "year": 2000,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 509,
+                    "artist_id": 101,
+                    "album_name": "Nimrod",
+                    "year": 1997,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 510,
+                    "artist_id": 101,
+                    "album_name": "Insomniac",
+                    "year": 1995,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 511,
+                    "artist_id": 101,
+                    "album_name": "Dookie",
+                    "year": 1994,
+                    "certifications": "Diamond"
+                }
+            ]
+        },
+        {
+            "artist_id": 102,
+            "artist_name": "BLACKPINK",
+            "aka": null,
+            "genre": "K-Pop / Pop",
+            "count": 0,
+            "state": null,
+            "region": "South Korea",
+            "label": "YG Entertainment / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 512,
+                    "artist_id": 102,
+                    "album_name": "Born Pink",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 513,
+                    "artist_id": 102,
+                    "album_name": "The Album",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 103,
+            "artist_name": "Katy Perry",
+            "aka": "Katheryn Elizabeth Hudson",
+            "genre": "Pop",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Capitol",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 514,
+                    "artist_id": 103,
+                    "album_name": "143",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 515,
+                    "artist_id": 103,
+                    "album_name": "Smile",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 516,
+                    "artist_id": 103,
+                    "album_name": "Witness",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 517,
+                    "artist_id": 103,
+                    "album_name": "Prism",
+                    "year": 2013,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 518,
+                    "artist_id": 103,
+                    "album_name": "Teenage Dream",
+                    "year": 2010,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 519,
+                    "artist_id": 103,
+                    "album_name": "One of the Boys",
+                    "year": 2008,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 104,
+            "artist_name": "Selena Gomez",
+            "aka": "Selena Marie Gomez",
+            "genre": "Pop / Dance Pop",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 520,
+                    "artist_id": 104,
+                    "album_name": "Rare",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 521,
+                    "artist_id": 104,
+                    "album_name": "Revival",
+                    "year": 2015,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 522,
+                    "artist_id": 104,
+                    "album_name": "Stars Dance",
+                    "year": 2013,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 105,
+            "artist_name": "Miley Cyrus",
+            "aka": "Destiny Hope Cyrus",
+            "genre": "Pop / Rock",
+            "count": 0,
+            "state": "Tennessee",
+            "region": "South",
+            "label": "Columbia / RCA",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 523,
+                    "artist_id": 105,
+                    "album_name": "Endless Summer Vacation",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 524,
+                    "artist_id": 105,
+                    "album_name": "Plastic Hearts",
+                    "year": 2020,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 525,
+                    "artist_id": 105,
+                    "album_name": "Younger Now",
+                    "year": 2017,
+                    "certifications": null
+                },
+                {
+                    "album_id": 526,
+                    "artist_id": 105,
+                    "album_name": "Bangerz",
+                    "year": 2013,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 527,
+                    "artist_id": 105,
+                    "album_name": "Can't Be Tamed",
+                    "year": 2010,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 528,
+                    "artist_id": 105,
+                    "album_name": "Breakout",
+                    "year": 2008,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 106,
+            "artist_name": "The Chainsmokers",
+            "aka": null,
+            "genre": "EDM / Pop",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Disruptor / Columbia",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 529,
+                    "artist_id": 106,
+                    "album_name": "Summertime Friends",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 530,
+                    "artist_id": 106,
+                    "album_name": "So Far So Good",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 531,
+                    "artist_id": 106,
+                    "album_name": "World War Joy",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 532,
+                    "artist_id": 106,
+                    "album_name": "Sick Boy",
+                    "year": 2018,
+                    "certifications": null
+                },
+                {
+                    "album_id": 533,
+                    "artist_id": 106,
+                    "album_name": "Memories...Do Not Open",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 107,
+            "artist_name": "Rauw Alejandro",
+            "aka": "Raúl Alejandro Ocasio Ruiz",
+            "genre": "Reggaeton / Latin R&B",
+            "count": 0,
+            "state": null,
+            "region": "Puerto Rico",
+            "label": "Sony Music Latin",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 534,
+                    "artist_id": 107,
+                    "album_name": "Cosa Nuestra",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 535,
+                    "artist_id": 107,
+                    "album_name": "Playa Saturno",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 536,
+                    "artist_id": 107,
+                    "album_name": "Saturno",
+                    "year": 2022,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 537,
+                    "artist_id": 107,
+                    "album_name": "Vice Versa",
+                    "year": 2021,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 538,
+                    "artist_id": 107,
+                    "album_name": "Afrodisíaco",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                }
+            ]
         }
     ]
 }
