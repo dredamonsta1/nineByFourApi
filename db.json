@@ -5567,6 +5567,513 @@
                     "certifications": "Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 108,
+            "artist_name": "Michael Jackson",
+            "aka": "King of Pop",
+            "genre": "Pop / R&B",
+            "count": 0,
+            "state": "Indiana",
+            "region": "Midwest",
+            "label": "Epic / Sony",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 539,
+                    "artist_id": 108,
+                    "album_name": "Thriller",
+                    "year": 1982,
+                    "certifications": "34x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 540,
+                    "artist_id": 108,
+                    "album_name": "Bad",
+                    "year": 1987,
+                    "certifications": "10x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 541,
+                    "artist_id": 108,
+                    "album_name": "Dangerous",
+                    "year": 1991,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 542,
+                    "artist_id": 108,
+                    "album_name": "HIStory: Past, Present and Future, Book I",
+                    "year": 1995,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 543,
+                    "artist_id": 108,
+                    "album_name": "Invincible",
+                    "year": 2001,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 544,
+                    "artist_id": 108,
+                    "album_name": "Off the Wall",
+                    "year": 1979,
+                    "certifications": "8x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 109,
+            "artist_name": "Prince",
+            "aka": "Prince Rogers Nelson",
+            "genre": "Pop / Funk / R&B",
+            "count": 0,
+            "state": "Minnesota",
+            "region": "Midwest",
+            "label": "Warner Bros / Paisley Park",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 545,
+                    "artist_id": 109,
+                    "album_name": "Purple Rain",
+                    "year": 1984,
+                    "certifications": "13x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 546,
+                    "artist_id": 109,
+                    "album_name": "1999",
+                    "year": 1982,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 547,
+                    "artist_id": 109,
+                    "album_name": "Sign o' the Times",
+                    "year": 1987,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 548,
+                    "artist_id": 109,
+                    "album_name": "Diamonds and Pearls",
+                    "year": 1991,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 549,
+                    "artist_id": 109,
+                    "album_name": "The Gold Experience",
+                    "year": 1995,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 550,
+                    "artist_id": 109,
+                    "album_name": "Musicology",
+                    "year": 2004,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 110,
+            "artist_name": "Whitney Houston",
+            "aka": "The Voice",
+            "genre": "Pop / R&B / Soul",
+            "count": 0,
+            "state": "New Jersey",
+            "region": "East Coast",
+            "label": "Arista",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 551,
+                    "artist_id": 110,
+                    "album_name": "Whitney Houston",
+                    "year": 1985,
+                    "certifications": "13x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 552,
+                    "artist_id": 110,
+                    "album_name": "Whitney",
+                    "year": 1987,
+                    "certifications": "9x Platinum"
+                },
+                {
+                    "album_id": 553,
+                    "artist_id": 110,
+                    "album_name": "I'm Your Baby Tonight",
+                    "year": 1990,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 554,
+                    "artist_id": 110,
+                    "album_name": "The Bodyguard: Original Soundtrack Album",
+                    "year": 1992,
+                    "certifications": "18x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 555,
+                    "artist_id": 110,
+                    "album_name": "My Love Is Your Love",
+                    "year": 1998,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 556,
+                    "artist_id": 110,
+                    "album_name": "Just Whitney",
+                    "year": 2002,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 111,
+            "artist_name": "Guns N' Roses",
+            "aka": "GN'R",
+            "genre": "Hard Rock / Heavy Metal",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Geffen",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 557,
+                    "artist_id": 111,
+                    "album_name": "Appetite for Destruction",
+                    "year": 1987,
+                    "certifications": "18x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 558,
+                    "artist_id": 111,
+                    "album_name": "G N' R Lies",
+                    "year": 1988,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 559,
+                    "artist_id": 111,
+                    "album_name": "Use Your Illusion I",
+                    "year": 1991,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 560,
+                    "artist_id": 111,
+                    "album_name": "Use Your Illusion II",
+                    "year": 1991,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 561,
+                    "artist_id": 111,
+                    "album_name": "The Spaghetti Incident?",
+                    "year": 1993,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 562,
+                    "artist_id": 111,
+                    "album_name": "Chinese Democracy",
+                    "year": 2008,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 112,
+            "artist_name": "U2",
+            "aka": null,
+            "genre": "Rock / Alternative Rock",
+            "count": 0,
+            "state": null,
+            "region": "Ireland",
+            "label": "Island / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 563,
+                    "artist_id": 112,
+                    "album_name": "The Joshua Tree",
+                    "year": 1987,
+                    "certifications": "10x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 564,
+                    "artist_id": 112,
+                    "album_name": "Achtung Baby",
+                    "year": 1991,
+                    "certifications": "8x Platinum"
+                },
+                {
+                    "album_id": 565,
+                    "artist_id": 112,
+                    "album_name": "Zooropa",
+                    "year": 1993,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 566,
+                    "artist_id": 112,
+                    "album_name": "Pop",
+                    "year": 1997,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 567,
+                    "artist_id": 112,
+                    "album_name": "All That You Can't Leave Behind",
+                    "year": 2000,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 568,
+                    "artist_id": 112,
+                    "album_name": "How to Dismantle an Atomic Bomb",
+                    "year": 2004,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 569,
+                    "artist_id": 112,
+                    "album_name": "No Line on the Horizon",
+                    "year": 2009,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 570,
+                    "artist_id": 112,
+                    "album_name": "Songs of Innocence",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 571,
+                    "artist_id": 112,
+                    "album_name": "Songs of Experience",
+                    "year": 2017,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 113,
+            "artist_name": "Red Hot Chili Peppers",
+            "aka": "RHCP",
+            "genre": "Rock / Funk Rock",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Warner Bros",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 572,
+                    "artist_id": 113,
+                    "album_name": "Blood Sugar Sex Magik",
+                    "year": 1991,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 573,
+                    "artist_id": 113,
+                    "album_name": "One Hot Minute",
+                    "year": 1995,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 574,
+                    "artist_id": 113,
+                    "album_name": "Californication",
+                    "year": 1999,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 575,
+                    "artist_id": 113,
+                    "album_name": "By the Way",
+                    "year": 2002,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 576,
+                    "artist_id": 113,
+                    "album_name": "Stadium Arcadium",
+                    "year": 2006,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 577,
+                    "artist_id": 113,
+                    "album_name": "I'm with You",
+                    "year": 2011,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 578,
+                    "artist_id": 113,
+                    "album_name": "The Getaway",
+                    "year": 2016,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 579,
+                    "artist_id": 113,
+                    "album_name": "Unlimited Love",
+                    "year": 2022,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 580,
+                    "artist_id": 113,
+                    "album_name": "Return of the Dream Canteen",
+                    "year": 2022,
+                    "certifications": null
+                }
+            ]
+        },
+        {
+            "artist_id": 114,
+            "artist_name": "David Guetta",
+            "aka": "Pierre David Guetta",
+            "genre": "EDM / House",
+            "count": 0,
+            "state": null,
+            "region": "France",
+            "label": "What a Music / Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 581,
+                    "artist_id": 114,
+                    "album_name": "7",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 582,
+                    "artist_id": 114,
+                    "album_name": "Listen",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 583,
+                    "artist_id": 114,
+                    "album_name": "Nothing but the Beat",
+                    "year": 2011,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 584,
+                    "artist_id": 114,
+                    "album_name": "One Love",
+                    "year": 2009,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 585,
+                    "artist_id": 114,
+                    "album_name": "Pop Life",
+                    "year": 2007,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 115,
+            "artist_name": "Ozuna",
+            "aka": "Juan Carlos Ozuna Rosado",
+            "genre": "Reggaeton / Latin Trap",
+            "count": 0,
+            "state": null,
+            "region": "Puerto Rico",
+            "label": "Sony Music Latin",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 586,
+                    "artist_id": 115,
+                    "album_name": "Cosmo",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 587,
+                    "artist_id": 115,
+                    "album_name": "OzuTochi",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 588,
+                    "artist_id": 115,
+                    "album_name": "Enoc",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 589,
+                    "artist_id": 115,
+                    "album_name": "Nibiru",
+                    "year": 2019,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 590,
+                    "artist_id": 115,
+                    "album_name": "Aura",
+                    "year": 2018,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 591,
+                    "artist_id": 115,
+                    "album_name": "Odisea",
+                    "year": 2017,
+                    "certifications": "10x Platinum (Diamond)"
+                }
+            ]
         }
     ]
 }
