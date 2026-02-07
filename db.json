@@ -4004,6 +4004,819 @@
                     "certifications": "4x Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 84,
+            "artist_name": "Queen",
+            "aka": null,
+            "genre": "Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "EMI / Hollywood",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 374,
+                    "artist_id": 84,
+                    "album_name": "Innuendo",
+                    "year": 1991,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 375,
+                    "artist_id": 84,
+                    "album_name": "The Miracle",
+                    "year": 1989,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 376,
+                    "artist_id": 84,
+                    "album_name": "A Kind of Magic",
+                    "year": 1986,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 377,
+                    "artist_id": 84,
+                    "album_name": "The Works",
+                    "year": 1984,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 378,
+                    "artist_id": 84,
+                    "album_name": "Hot Space",
+                    "year": 1982,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 379,
+                    "artist_id": 84,
+                    "album_name": "The Game",
+                    "year": 1980,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 380,
+                    "artist_id": 84,
+                    "album_name": "Jazz",
+                    "year": 1978,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 381,
+                    "artist_id": 84,
+                    "album_name": "News of the World",
+                    "year": 1977,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 382,
+                    "artist_id": 84,
+                    "album_name": "A Day at the Races",
+                    "year": 1976,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 383,
+                    "artist_id": 84,
+                    "album_name": "A Night at the Opera",
+                    "year": 1975,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 384,
+                    "artist_id": 84,
+                    "album_name": "Sheer Heart Attack",
+                    "year": 1974,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 385,
+                    "artist_id": 84,
+                    "album_name": "Queen II",
+                    "year": 1974,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 386,
+                    "artist_id": 84,
+                    "album_name": "Queen",
+                    "year": 1973,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 85,
+            "artist_name": "Led Zeppelin",
+            "aka": null,
+            "genre": "Rock / Hard Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Atlantic / Swan Song",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 387,
+                    "artist_id": 85,
+                    "album_name": "Coda",
+                    "year": 1982,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 388,
+                    "artist_id": 85,
+                    "album_name": "In Through the Out Door",
+                    "year": 1979,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 389,
+                    "artist_id": 85,
+                    "album_name": "Presence",
+                    "year": 1976,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 390,
+                    "artist_id": 85,
+                    "album_name": "Physical Graffiti",
+                    "year": 1975,
+                    "certifications": "16x Platinum"
+                },
+                {
+                    "album_id": 391,
+                    "artist_id": 85,
+                    "album_name": "Houses of the Holy",
+                    "year": 1973,
+                    "certifications": "11x Platinum"
+                },
+                {
+                    "album_id": 392,
+                    "artist_id": 85,
+                    "album_name": "Led Zeppelin IV",
+                    "year": 1971,
+                    "certifications": "24x Platinum"
+                },
+                {
+                    "album_id": 393,
+                    "artist_id": 85,
+                    "album_name": "Led Zeppelin III",
+                    "year": 1970,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 394,
+                    "artist_id": 85,
+                    "album_name": "Led Zeppelin II",
+                    "year": 1969,
+                    "certifications": "12x Platinum"
+                },
+                {
+                    "album_id": 395,
+                    "artist_id": 85,
+                    "album_name": "Led Zeppelin",
+                    "year": 1969,
+                    "certifications": "8x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 86,
+            "artist_name": "Pink Floyd",
+            "aka": null,
+            "genre": "Progressive Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Harvest / Columbia",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 396,
+                    "artist_id": 86,
+                    "album_name": "The Endless River",
+                    "year": 2014,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 397,
+                    "artist_id": 86,
+                    "album_name": "The Division Bell",
+                    "year": 1994,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 398,
+                    "artist_id": 86,
+                    "album_name": "A Momentary Lapse of Reason",
+                    "year": 1987,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 399,
+                    "artist_id": 86,
+                    "album_name": "The Final Cut",
+                    "year": 1983,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 400,
+                    "artist_id": 86,
+                    "album_name": "The Wall",
+                    "year": 1979,
+                    "certifications": "23x Platinum"
+                },
+                {
+                    "album_id": 401,
+                    "artist_id": 86,
+                    "album_name": "Animals",
+                    "year": 1977,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 402,
+                    "artist_id": 86,
+                    "album_name": "Wish You Were Here",
+                    "year": 1975,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 403,
+                    "artist_id": 86,
+                    "album_name": "The Dark Side of the Moon",
+                    "year": 1973,
+                    "certifications": "15x Platinum"
+                },
+                {
+                    "album_id": 404,
+                    "artist_id": 86,
+                    "album_name": "Meddle",
+                    "year": 1971,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 405,
+                    "artist_id": 86,
+                    "album_name": "Atom Heart Mother",
+                    "year": 1970,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 87,
+            "artist_name": "Usher",
+            "aka": "Usher Raymond IV",
+            "genre": "R&B / Pop",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "RCA / Gamma",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 406,
+                    "artist_id": 87,
+                    "album_name": "Coming Home",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 407,
+                    "artist_id": 87,
+                    "album_name": "Hard II Love",
+                    "year": 2016,
+                    "certifications": null
+                },
+                {
+                    "album_id": 408,
+                    "artist_id": 87,
+                    "album_name": "Looking 4 Myself",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 409,
+                    "artist_id": 87,
+                    "album_name": "Raymond v. Raymond",
+                    "year": 2010,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 410,
+                    "artist_id": 87,
+                    "album_name": "Here I Stand",
+                    "year": 2008,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 411,
+                    "artist_id": 87,
+                    "album_name": "Confessions",
+                    "year": 2004,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 412,
+                    "artist_id": 87,
+                    "album_name": "8701",
+                    "year": 2001,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 413,
+                    "artist_id": 87,
+                    "album_name": "My Way",
+                    "year": 1997,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 414,
+                    "artist_id": 87,
+                    "album_name": "Usher",
+                    "year": 1994,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 88,
+            "artist_name": "Chris Brown",
+            "aka": "Christopher Maurice Brown",
+            "genre": "R&B / Pop",
+            "count": 0,
+            "state": "Virginia",
+            "region": "East Coast",
+            "label": "RCA",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 415,
+                    "artist_id": 88,
+                    "album_name": "11:11",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 416,
+                    "artist_id": 88,
+                    "album_name": "Breezy",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 417,
+                    "artist_id": 88,
+                    "album_name": "Indigo",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 418,
+                    "artist_id": 88,
+                    "album_name": "Heartbreak on a Full Moon",
+                    "year": 2017,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 419,
+                    "artist_id": 88,
+                    "album_name": "Royalty",
+                    "year": 2015,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 420,
+                    "artist_id": 88,
+                    "album_name": "X",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 421,
+                    "artist_id": 88,
+                    "album_name": "Fortune",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 422,
+                    "artist_id": 88,
+                    "album_name": "F.A.M.E.",
+                    "year": 2011,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 423,
+                    "artist_id": 88,
+                    "album_name": "Graffiti",
+                    "year": 2009,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 424,
+                    "artist_id": 88,
+                    "album_name": "Exclusive",
+                    "year": 2007,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 425,
+                    "artist_id": 88,
+                    "album_name": "Chris Brown",
+                    "year": 2005,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 89,
+            "artist_name": "Frank Ocean",
+            "aka": "Christopher Edwin Breaux",
+            "genre": "R&B / Alternative",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Boys Don't Cry",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 426,
+                    "artist_id": 89,
+                    "album_name": "Blonde",
+                    "year": 2016,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 427,
+                    "artist_id": 89,
+                    "album_name": "Channel Orange",
+                    "year": 2012,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 90,
+            "artist_name": "J Balvin",
+            "aka": "José Álvaro Osorio Balvín",
+            "genre": "Reggaeton / Latin Pop",
+            "count": 0,
+            "state": null,
+            "region": "Colombia",
+            "label": "Universal Music Latino",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 428,
+                    "artist_id": 90,
+                    "album_name": "Rayo",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 429,
+                    "artist_id": 90,
+                    "album_name": "José",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 430,
+                    "artist_id": 90,
+                    "album_name": "Colores",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 431,
+                    "artist_id": 90,
+                    "album_name": "Oasis",
+                    "year": 2019,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 432,
+                    "artist_id": 90,
+                    "album_name": "Vibras",
+                    "year": 2018,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 433,
+                    "artist_id": 90,
+                    "album_name": "Energía",
+                    "year": 2016,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 434,
+                    "artist_id": 90,
+                    "album_name": "La Familia",
+                    "year": 2013,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 91,
+            "artist_name": "Daddy Yankee",
+            "aka": "Ramón Luis Ayala Rodríguez",
+            "genre": "Reggaeton",
+            "count": 0,
+            "state": null,
+            "region": "Puerto Rico",
+            "label": "El Cartel",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 435,
+                    "artist_id": 91,
+                    "album_name": "Legendaddy",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 436,
+                    "artist_id": 91,
+                    "album_name": "Prestige",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 437,
+                    "artist_id": 91,
+                    "album_name": "Mundial",
+                    "year": 2010,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 438,
+                    "artist_id": 91,
+                    "album_name": "El Cartel: The Big Boss",
+                    "year": 2007,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 439,
+                    "artist_id": 91,
+                    "album_name": "Barrio Fino",
+                    "year": 2004,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 440,
+                    "artist_id": 91,
+                    "album_name": "El Cangri.com",
+                    "year": 2002,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 92,
+            "artist_name": "Calvin Harris",
+            "aka": "Adam Richard Wiles",
+            "genre": "EDM / Dance",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Columbia / Sony",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 441,
+                    "artist_id": 92,
+                    "album_name": "Funk Wav Bounces Vol. 2",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 442,
+                    "artist_id": 92,
+                    "album_name": "Funk Wav Bounces Vol. 1",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 443,
+                    "artist_id": 92,
+                    "album_name": "Motion",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 444,
+                    "artist_id": 92,
+                    "album_name": "18 Months",
+                    "year": 2012,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 445,
+                    "artist_id": 92,
+                    "album_name": "Ready for the Weekend",
+                    "year": 2009,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 446,
+                    "artist_id": 92,
+                    "album_name": "I Created Disco",
+                    "year": 2007,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 93,
+            "artist_name": "Zach Bryan",
+            "aka": "Zachary Lane Bryan",
+            "genre": "Country / Folk",
+            "count": 0,
+            "state": "Oklahoma",
+            "region": "South",
+            "label": "Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 447,
+                    "artist_id": 93,
+                    "album_name": "The Great American Bar Scene",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 448,
+                    "artist_id": 93,
+                    "album_name": "Zach Bryan",
+                    "year": 2023,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 449,
+                    "artist_id": 93,
+                    "album_name": "American Heartbreak",
+                    "year": 2022,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 450,
+                    "artist_id": 93,
+                    "album_name": "Elisabeth",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 451,
+                    "artist_id": 93,
+                    "album_name": "DeAnn",
+                    "year": 2019,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 94,
+            "artist_name": "Chris Stapleton",
+            "aka": "Christopher Alvin Stapleton",
+            "genre": "Country / Blues Rock",
+            "count": 0,
+            "state": "Kentucky",
+            "region": "South",
+            "label": "Mercury Nashville",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 452,
+                    "artist_id": 94,
+                    "album_name": "Higher",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 453,
+                    "artist_id": 94,
+                    "album_name": "Starting Over",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 454,
+                    "artist_id": 94,
+                    "album_name": "From A Room: Volume 2",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 455,
+                    "artist_id": 94,
+                    "album_name": "From A Room: Volume 1",
+                    "year": 2017,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 456,
+                    "artist_id": 94,
+                    "album_name": "Traveller",
+                    "year": 2015,
+                    "certifications": "7x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 95,
+            "artist_name": "Karol G",
+            "aka": "Carolina Giraldo Navarro",
+            "genre": "Reggaeton / Latin Pop",
+            "count": 0,
+            "state": null,
+            "region": "Colombia",
+            "label": "Universal Music Latino",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 457,
+                    "artist_id": 95,
+                    "album_name": "Mañana Será Bonito",
+                    "year": 2023,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 458,
+                    "artist_id": 95,
+                    "album_name": "KG0516",
+                    "year": 2021,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 459,
+                    "artist_id": 95,
+                    "album_name": "Ocean",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 460,
+                    "artist_id": 95,
+                    "album_name": "Unstoppable",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                }
+            ]
         }
     ]
 }
