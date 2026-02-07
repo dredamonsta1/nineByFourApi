@@ -275,7 +275,7 @@
         },
         {
             "artist_id": 17,
-            "artist_name": "Beyoncé",
+            "artist_name": "Beyonc\u00e9",
             "aka": "Queen Bey",
             "genre": "R&B / Pop",
             "count": 0,
@@ -1135,7 +1135,7 @@
         {
             "artist_id": 27,
             "artist_name": "21 Savage",
-            "aka": "Shéyaa Bin Abraham-Joseph",
+            "aka": "Sh\u00e9yaa Bin Abraham-Joseph",
             "genre": "Hip Hop / Trap",
             "count": 0,
             "state": "Georgia",
@@ -2183,7 +2183,7 @@
         {
             "artist_id": 52,
             "artist_name": "SZA",
-            "aka": "Solána Imani Rowe",
+            "aka": "Sol\u00e1na Imani Rowe",
             "genre": "R&B / Neo-Soul",
             "count": 0,
             "state": "New Jersey",
@@ -3225,14 +3225,14 @@
                 {
                     "album_id": 294,
                     "artist_id": 70,
-                    "album_name": "Debí Tirar Más Fotos",
+                    "album_name": "Deb\u00ed Tirar M\u00e1s Fotos",
                     "year": 2025,
                     "certifications": null
                 },
                 {
                     "album_id": 295,
                     "artist_id": 70,
-                    "album_name": "Nadie Sabe Lo Que Va a Pasar Mañana",
+                    "album_name": "Nadie Sabe Lo Que Va a Pasar Ma\u00f1ana",
                     "year": 2023,
                     "certifications": "Platinum"
                 },
@@ -3246,7 +3246,7 @@
                 {
                     "album_id": 297,
                     "artist_id": 70,
-                    "album_name": "El Último Tour Del Mundo",
+                    "album_name": "El \u00daltimo Tour Del Mundo",
                     "year": 2020,
                     "certifications": "3x Platinum"
                 },
@@ -3999,7 +3999,7 @@
                 {
                     "album_id": 373,
                     "artist_id": 83,
-                    "album_name": "Dónde Están los Ladrones?",
+                    "album_name": "D\u00f3nde Est\u00e1n los Ladrones?",
                     "year": 1998,
                     "certifications": "4x Platinum"
                 }
@@ -4488,7 +4488,7 @@
         {
             "artist_id": 90,
             "artist_name": "J Balvin",
-            "aka": "José Álvaro Osorio Balvín",
+            "aka": "Jos\u00e9 \u00c1lvaro Osorio Balv\u00edn",
             "genre": "Reggaeton / Latin Pop",
             "count": 0,
             "state": null,
@@ -4510,7 +4510,7 @@
                 {
                     "album_id": 429,
                     "artist_id": 90,
-                    "album_name": "José",
+                    "album_name": "Jos\u00e9",
                     "year": 2021,
                     "certifications": "Platinum"
                 },
@@ -4538,7 +4538,7 @@
                 {
                     "album_id": 433,
                     "artist_id": 90,
-                    "album_name": "Energía",
+                    "album_name": "Energ\u00eda",
                     "year": 2016,
                     "certifications": "2x Platinum"
                 },
@@ -4554,7 +4554,7 @@
         {
             "artist_id": 91,
             "artist_name": "Daddy Yankee",
-            "aka": "Ramón Luis Ayala Rodríguez",
+            "aka": "Ram\u00f3n Luis Ayala Rodr\u00edguez",
             "genre": "Reggaeton",
             "count": 0,
             "state": null,
@@ -4791,7 +4791,7 @@
                 {
                     "album_id": 457,
                     "artist_id": 95,
-                    "album_name": "Mañana Será Bonito",
+                    "album_name": "Ma\u00f1ana Ser\u00e1 Bonito",
                     "year": 2023,
                     "certifications": "4x Platinum"
                 },
@@ -5519,7 +5519,7 @@
         {
             "artist_id": 107,
             "artist_name": "Rauw Alejandro",
-            "aka": "Raúl Alejandro Ocasio Ruiz",
+            "aka": "Ra\u00fal Alejandro Ocasio Ruiz",
             "genre": "Reggaeton / Latin R&B",
             "count": 0,
             "state": null,
@@ -5562,7 +5562,7 @@
                 {
                     "album_id": 538,
                     "artist_id": 107,
-                    "album_name": "Afrodisíaco",
+                    "album_name": "Afrodis\u00edaco",
                     "year": 2020,
                     "certifications": "Platinum"
                 }
@@ -6072,6 +6072,413 @@
                     "album_name": "Odisea",
                     "year": 2017,
                     "certifications": "10x Platinum (Diamond)"
+                }
+            ]
+        },
+        {
+            "artist_id": 116,
+            "artist_name": "Pearl Jam",
+            "aka": null,
+            "genre": "Alternative Rock / Grunge",
+            "count": 0,
+            "state": "Washington",
+            "region": "Pacific Northwest",
+            "label": "Epic / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 592,
+                    "artist_id": 116,
+                    "album_name": "Dark Matter",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 593,
+                    "artist_id": 116,
+                    "album_name": "Gigaton",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 594,
+                    "artist_id": 116,
+                    "album_name": "Lightning Bolt",
+                    "year": 2013,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 595,
+                    "artist_id": 116,
+                    "album_name": "Backspacer",
+                    "year": 2009,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 596,
+                    "artist_id": 116,
+                    "album_name": "Pearl Jam",
+                    "year": 2006,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 597,
+                    "artist_id": 116,
+                    "album_name": "Riot Act",
+                    "year": 2002,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 598,
+                    "artist_id": 116,
+                    "album_name": "Binaural",
+                    "year": 2000,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 599,
+                    "artist_id": 116,
+                    "album_name": "Yield",
+                    "year": 1998,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 600,
+                    "artist_id": 116,
+                    "album_name": "No Code",
+                    "year": 1996,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 601,
+                    "artist_id": 116,
+                    "album_name": "Vitalogy",
+                    "year": 1994,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 602,
+                    "artist_id": 116,
+                    "album_name": "Vs.",
+                    "year": 1993,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 603,
+                    "artist_id": 116,
+                    "album_name": "Ten",
+                    "year": 1991,
+                    "certifications": "13x Platinum (Diamond)"
+                }
+            ]
+        },
+        {
+            "artist_id": 119,
+            "artist_name": "Bon Jovi",
+            "aka": null,
+            "genre": "Hard Rock / Glam Metal",
+            "count": 0,
+            "state": "New Jersey",
+            "region": "East Coast",
+            "label": "Island / Mercury",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 622,
+                    "artist_id": 119,
+                    "album_name": "2020",
+                    "year": 2020,
+                    "certifications": null
+                },
+                {
+                    "album_id": 623,
+                    "artist_id": 119,
+                    "album_name": "This House Is Not for Sale",
+                    "year": 2016,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 624,
+                    "artist_id": 119,
+                    "album_name": "The Circle",
+                    "year": 2009,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 625,
+                    "artist_id": 119,
+                    "album_name": "Lost Highway",
+                    "year": 2007,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 626,
+                    "artist_id": 119,
+                    "album_name": "Have a Nice Day",
+                    "year": 2005,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 627,
+                    "artist_id": 119,
+                    "album_name": "Crush",
+                    "year": 2000,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 628,
+                    "artist_id": 119,
+                    "album_name": "Keep the Faith",
+                    "year": 1992,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 629,
+                    "artist_id": 119,
+                    "album_name": "New Jersey",
+                    "year": 1988,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 630,
+                    "artist_id": 119,
+                    "album_name": "Slippery When Wet",
+                    "year": 1986,
+                    "certifications": "15x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 631,
+                    "artist_id": 119,
+                    "album_name": "7800\u00b0 Fahrenheit",
+                    "year": 1985,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 632,
+                    "artist_id": 119,
+                    "album_name": "Bon Jovi",
+                    "year": 1984,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 120,
+            "artist_name": "Aerosmith",
+            "aka": null,
+            "genre": "Hard Rock / Blues Rock",
+            "count": 0,
+            "state": "Massachusetts",
+            "region": "East Coast",
+            "label": "Columbia / Geffen",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 633,
+                    "artist_id": 120,
+                    "album_name": "Music from Another Dimension!",
+                    "year": 2012,
+                    "certifications": null
+                },
+                {
+                    "album_id": 634,
+                    "artist_id": 120,
+                    "album_name": "Just Push Play",
+                    "year": 2001,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 635,
+                    "artist_id": 120,
+                    "album_name": "Nine Lives",
+                    "year": 1997,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 636,
+                    "artist_id": 120,
+                    "album_name": "Get a Grip",
+                    "year": 1993,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 637,
+                    "artist_id": 120,
+                    "album_name": "Pump",
+                    "year": 1989,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 638,
+                    "artist_id": 120,
+                    "album_name": "Permanent Vacation",
+                    "year": 1987,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 639,
+                    "artist_id": 120,
+                    "album_name": "Rocks",
+                    "year": 1976,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 640,
+                    "artist_id": 120,
+                    "album_name": "Toys in the Attic",
+                    "year": 1975,
+                    "certifications": "8x Platinum"
+                },
+                {
+                    "album_id": 641,
+                    "artist_id": 120,
+                    "album_name": "Get Your Wings",
+                    "year": 1974,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 642,
+                    "artist_id": 120,
+                    "album_name": "Aerosmith",
+                    "year": 1973,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 121,
+            "artist_name": "Fleetwood Mac",
+            "aka": null,
+            "genre": "Rock / Soft Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom / United States",
+            "label": "Reprise / Warner Bros",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 643,
+                    "artist_id": 121,
+                    "album_name": "Say You Will",
+                    "year": 2003,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 644,
+                    "artist_id": 121,
+                    "album_name": "Tango in the Night",
+                    "year": 1987,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 645,
+                    "artist_id": 121,
+                    "album_name": "Mirage",
+                    "year": 1982,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 646,
+                    "artist_id": 121,
+                    "album_name": "Tusk",
+                    "year": 1979,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 647,
+                    "artist_id": 121,
+                    "album_name": "Rumours",
+                    "year": 1977,
+                    "certifications": "20x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 648,
+                    "artist_id": 121,
+                    "album_name": "Fleetwood Mac",
+                    "year": 1975,
+                    "certifications": "8x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 122,
+            "artist_name": "Eagles",
+            "aka": null,
+            "genre": "Rock / Country Rock",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Asylum",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 649,
+                    "artist_id": 122,
+                    "album_name": "Long Road Out of Eden",
+                    "year": 2007,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 650,
+                    "artist_id": 122,
+                    "album_name": "The Long Run",
+                    "year": 1979,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 651,
+                    "artist_id": 122,
+                    "album_name": "Hotel California",
+                    "year": 1976,
+                    "certifications": "28x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 652,
+                    "artist_id": 122,
+                    "album_name": "One of These Nights",
+                    "year": 1975,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 653,
+                    "artist_id": 122,
+                    "album_name": "On the Border",
+                    "year": 1974,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 654,
+                    "artist_id": 122,
+                    "album_name": "Desperado",
+                    "year": 1973,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 655,
+                    "artist_id": 122,
+                    "album_name": "Eagles",
+                    "year": 1972,
+                    "certifications": "Platinum"
                 }
             ]
         }
