@@ -6481,6 +6481,382 @@
                     "certifications": "Platinum"
                 }
             ]
+        },
+        {
+            "artist_id": 123,
+            "artist_name": "Van Halen",
+            "aka": null,
+            "genre": "Hard Rock / Heavy Metal",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Warner Bros",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 656,
+                    "artist_id": 123,
+                    "album_name": "A Different Kind of Truth",
+                    "year": 2012,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 657,
+                    "artist_id": 123,
+                    "album_name": "Balance",
+                    "year": 1995,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 658,
+                    "artist_id": 123,
+                    "album_name": "For Unlawful Carnal Knowledge",
+                    "year": 1991,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 659,
+                    "artist_id": 123,
+                    "album_name": "OU812",
+                    "year": 1988,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 660,
+                    "artist_id": 123,
+                    "album_name": "5150",
+                    "year": 1986,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 661,
+                    "artist_id": 123,
+                    "album_name": "1984",
+                    "year": 1984,
+                    "certifications": "10x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 662,
+                    "artist_id": 123,
+                    "album_name": "Diver Down",
+                    "year": 1982,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 663,
+                    "artist_id": 123,
+                    "album_name": "Fair Warning",
+                    "year": 1981,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 664,
+                    "artist_id": 123,
+                    "album_name": "Women and Children First",
+                    "year": 1980,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 665,
+                    "artist_id": 123,
+                    "album_name": "Van Halen II",
+                    "year": 1979,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 666,
+                    "artist_id": 123,
+                    "album_name": "Van Halen",
+                    "year": 1978,
+                    "certifications": "10x Platinum (Diamond)"
+                }
+            ]
+        },
+        {
+            "artist_id": 128,
+            "artist_name": "The Rolling Stones",
+            "aka": null,
+            "genre": "Rock / Blues Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "ABKCO / Rolling Stones Records",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 700,
+                    "artist_id": 128,
+                    "album_name": "Hackney Diamonds",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 701,
+                    "artist_id": 128,
+                    "album_name": "Blue & Lonesome",
+                    "year": 2016,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 702,
+                    "artist_id": 128,
+                    "album_name": "A Bigger Bang",
+                    "year": 2005,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 703,
+                    "artist_id": 128,
+                    "album_name": "Voodoo Lounge",
+                    "year": 1994,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 704,
+                    "artist_id": 128,
+                    "album_name": "Steel Wheels",
+                    "year": 1989,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 705,
+                    "artist_id": 128,
+                    "album_name": "Tattoo You",
+                    "year": 1981,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 706,
+                    "artist_id": 128,
+                    "album_name": "Some Girls",
+                    "year": 1978,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 707,
+                    "artist_id": 128,
+                    "album_name": "Exile on Main St.",
+                    "year": 1972,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 708,
+                    "artist_id": 128,
+                    "album_name": "Sticky Fingers",
+                    "year": 1971,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 709,
+                    "artist_id": 128,
+                    "album_name": "Let It Bleed",
+                    "year": 1969,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 129,
+            "artist_name": "Def Leppard",
+            "aka": null,
+            "genre": "Hard Rock / Glam Metal",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Mercury / Island",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 710,
+                    "artist_id": 129,
+                    "album_name": "Diamond Star Halos",
+                    "year": 2022,
+                    "certifications": null
+                },
+                {
+                    "album_id": 711,
+                    "artist_id": 129,
+                    "album_name": "Def Leppard",
+                    "year": 2015,
+                    "certifications": null
+                },
+                {
+                    "album_id": 712,
+                    "artist_id": 129,
+                    "album_name": "Euphoria",
+                    "year": 1999,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 713,
+                    "artist_id": 129,
+                    "album_name": "Slang",
+                    "year": 1996,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 714,
+                    "artist_id": 129,
+                    "album_name": "Adrenalize",
+                    "year": 1992,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 715,
+                    "artist_id": 129,
+                    "album_name": "Hysteria",
+                    "year": 1987,
+                    "certifications": "12x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 716,
+                    "artist_id": 129,
+                    "album_name": "Pyromania",
+                    "year": 1983,
+                    "certifications": "10x Platinum (Diamond)"
+                },
+                {
+                    "album_id": 717,
+                    "artist_id": 129,
+                    "album_name": "High 'n' Dry",
+                    "year": 1981,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 718,
+                    "artist_id": 129,
+                    "album_name": "On Through the Night",
+                    "year": 1980,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 130,
+            "artist_name": "KISS",
+            "aka": null,
+            "genre": "Hard Rock / Glam Metal",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Casablanca / Mercury",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 719,
+                    "artist_id": 130,
+                    "album_name": "Monster",
+                    "year": 2012,
+                    "certifications": null
+                },
+                {
+                    "album_id": 720,
+                    "artist_id": 130,
+                    "album_name": "Sonic Boom",
+                    "year": 2009,
+                    "certifications": null
+                },
+                {
+                    "album_id": 721,
+                    "artist_id": 130,
+                    "album_name": "Psycho Circus",
+                    "year": 1998,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 722,
+                    "artist_id": 130,
+                    "album_name": "Revenge",
+                    "year": 1992,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 723,
+                    "artist_id": 130,
+                    "album_name": "Hot in the Shade",
+                    "year": 1989,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 724,
+                    "artist_id": 130,
+                    "album_name": "Crazy Nights",
+                    "year": 1987,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 725,
+                    "artist_id": 130,
+                    "album_name": "Animalize",
+                    "year": 1984,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 726,
+                    "artist_id": 130,
+                    "album_name": "Lick It Up",
+                    "year": 1983,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 727,
+                    "artist_id": 130,
+                    "album_name": "Dynasty",
+                    "year": 1979,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 728,
+                    "artist_id": 130,
+                    "album_name": "Love Gun",
+                    "year": 1977,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 729,
+                    "artist_id": 130,
+                    "album_name": "Destroyer",
+                    "year": 1976,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 730,
+                    "artist_id": 130,
+                    "album_name": "Dressed to Kill",
+                    "year": 1975,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 731,
+                    "artist_id": 130,
+                    "album_name": "Hotter Than Hell",
+                    "year": 1974,
+                    "certifications": "Gold"
+                },
+                {
+                    "album_id": 732,
+                    "artist_id": 130,
+                    "album_name": "Kiss",
+                    "year": 1974,
+                    "certifications": "Gold"
+                }
+            ]
         }
     ]
 }
