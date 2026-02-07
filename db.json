@@ -2883,6 +2883,1127 @@
                     "certifications": null
                 }
             ]
+        },
+        {
+            "artist_id": 65,
+            "artist_name": "Taylor Swift",
+            "aka": null,
+            "genre": "Pop / Country",
+            "count": 0,
+            "state": "Pennsylvania",
+            "region": "East Coast",
+            "label": "Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 260,
+                    "artist_id": 65,
+                    "album_name": "The Tortured Poets Department",
+                    "year": 2024,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 261,
+                    "artist_id": 65,
+                    "album_name": "Midnights",
+                    "year": 2022,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 262,
+                    "artist_id": 65,
+                    "album_name": "Evermore",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 263,
+                    "artist_id": 65,
+                    "album_name": "Folklore",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 264,
+                    "artist_id": 65,
+                    "album_name": "Lover",
+                    "year": 2019,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 265,
+                    "artist_id": 65,
+                    "album_name": "Reputation",
+                    "year": 2017,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 266,
+                    "artist_id": 65,
+                    "album_name": "1989",
+                    "year": 2014,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 267,
+                    "artist_id": 65,
+                    "album_name": "Red",
+                    "year": 2012,
+                    "certifications": "7x Platinum"
+                },
+                {
+                    "album_id": 268,
+                    "artist_id": 65,
+                    "album_name": "Speak Now",
+                    "year": 2010,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 269,
+                    "artist_id": 65,
+                    "album_name": "Fearless",
+                    "year": 2008,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 270,
+                    "artist_id": 65,
+                    "album_name": "Taylor Swift",
+                    "year": 2006,
+                    "certifications": "7x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 66,
+            "artist_name": "Ed Sheeran",
+            "aka": "Edward Christopher Sheeran",
+            "genre": "Pop / Folk",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Atlantic / Asylum",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 271,
+                    "artist_id": 66,
+                    "album_name": "Autumn Variations",
+                    "year": 2023,
+                    "certifications": null
+                },
+                {
+                    "album_id": 272,
+                    "artist_id": 66,
+                    "album_name": "Subtract",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 273,
+                    "artist_id": 66,
+                    "album_name": "Equals",
+                    "year": 2021,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 274,
+                    "artist_id": 66,
+                    "album_name": "No.6 Collaborations Project",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 275,
+                    "artist_id": 66,
+                    "album_name": "Divide",
+                    "year": 2017,
+                    "certifications": "8x Platinum"
+                },
+                {
+                    "album_id": 276,
+                    "artist_id": 66,
+                    "album_name": "Multiply",
+                    "year": 2014,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 277,
+                    "artist_id": 66,
+                    "album_name": "Plus",
+                    "year": 2011,
+                    "certifications": "7x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 67,
+            "artist_name": "Bruno Mars",
+            "aka": "Peter Gene Hernandez",
+            "genre": "Pop / R&B / Funk",
+            "count": 0,
+            "state": "Hawaii",
+            "region": "West Coast",
+            "label": "Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 278,
+                    "artist_id": 67,
+                    "album_name": "An Evening with Silk Sonic",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 279,
+                    "artist_id": 67,
+                    "album_name": "24K Magic",
+                    "year": 2016,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 280,
+                    "artist_id": 67,
+                    "album_name": "Unorthodox Jukebox",
+                    "year": 2012,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 281,
+                    "artist_id": 67,
+                    "album_name": "Doo-Wops & Hooligans",
+                    "year": 2010,
+                    "certifications": "6x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 68,
+            "artist_name": "Adele",
+            "aka": "Adele Laurie Blue Adkins",
+            "genre": "Pop / Soul",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Columbia / XL",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 282,
+                    "artist_id": 68,
+                    "album_name": "30",
+                    "year": 2021,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 283,
+                    "artist_id": 68,
+                    "album_name": "25",
+                    "year": 2015,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 284,
+                    "artist_id": 68,
+                    "album_name": "21",
+                    "year": 2011,
+                    "certifications": "Diamond"
+                },
+                {
+                    "album_id": 285,
+                    "artist_id": 68,
+                    "album_name": "19",
+                    "year": 2008,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 69,
+            "artist_name": "Rihanna",
+            "aka": "Robyn Rihanna Fenty",
+            "genre": "R&B / Pop / Dancehall",
+            "count": 0,
+            "state": null,
+            "region": "Barbados",
+            "label": "Roc Nation / Def Jam",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 286,
+                    "artist_id": 69,
+                    "album_name": "Anti",
+                    "year": 2016,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 287,
+                    "artist_id": 69,
+                    "album_name": "Unapologetic",
+                    "year": 2012,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 288,
+                    "artist_id": 69,
+                    "album_name": "Talk That Talk",
+                    "year": 2011,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 289,
+                    "artist_id": 69,
+                    "album_name": "Loud",
+                    "year": 2010,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 290,
+                    "artist_id": 69,
+                    "album_name": "Rated R",
+                    "year": 2009,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 291,
+                    "artist_id": 69,
+                    "album_name": "Good Girl Gone Bad",
+                    "year": 2007,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 292,
+                    "artist_id": 69,
+                    "album_name": "A Girl Like Me",
+                    "year": 2006,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 293,
+                    "artist_id": 69,
+                    "album_name": "Music of the Sun",
+                    "year": 2005,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 70,
+            "artist_name": "Bad Bunny",
+            "aka": "Benito Antonio Martinez Ocasio",
+            "genre": "Reggaeton / Latin Trap",
+            "count": 0,
+            "state": null,
+            "region": "Puerto Rico",
+            "label": "Rimas Entertainment",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 294,
+                    "artist_id": 70,
+                    "album_name": "Debí Tirar Más Fotos",
+                    "year": 2025,
+                    "certifications": null
+                },
+                {
+                    "album_id": 295,
+                    "artist_id": 70,
+                    "album_name": "Nadie Sabe Lo Que Va a Pasar Mañana",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 296,
+                    "artist_id": 70,
+                    "album_name": "Un Verano Sin Ti",
+                    "year": 2022,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 297,
+                    "artist_id": 70,
+                    "album_name": "El Último Tour Del Mundo",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 298,
+                    "artist_id": 70,
+                    "album_name": "YHLQMDLG",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 299,
+                    "artist_id": 70,
+                    "album_name": "X 100pre",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 71,
+            "artist_name": "Billie Eilish",
+            "aka": "Billie Eilish Pirate Baird O'Connell",
+            "genre": "Pop / Alternative",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Darkroom / Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 300,
+                    "artist_id": 71,
+                    "album_name": "Hit Me Hard and Soft",
+                    "year": 2024,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 301,
+                    "artist_id": 71,
+                    "album_name": "Happier Than Ever",
+                    "year": 2021,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 302,
+                    "artist_id": 71,
+                    "album_name": "When We All Fall Asleep, Where Do We Go?",
+                    "year": 2019,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 72,
+            "artist_name": "Harry Styles",
+            "aka": "Harry Edward Styles",
+            "genre": "Pop / Rock",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Columbia / Erskine",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 303,
+                    "artist_id": 72,
+                    "album_name": "Harry's House",
+                    "year": 2022,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 304,
+                    "artist_id": 72,
+                    "album_name": "Fine Line",
+                    "year": 2019,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 305,
+                    "artist_id": 72,
+                    "album_name": "Harry Styles",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 73,
+            "artist_name": "Dua Lipa",
+            "aka": null,
+            "genre": "Pop / Dance",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Warner",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 306,
+                    "artist_id": 73,
+                    "album_name": "Radical Optimism",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 307,
+                    "artist_id": 73,
+                    "album_name": "Future Nostalgia",
+                    "year": 2020,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 308,
+                    "artist_id": 73,
+                    "album_name": "Dua Lipa",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 74,
+            "artist_name": "Ariana Grande",
+            "aka": "Ariana Grande-Butera",
+            "genre": "Pop / R&B",
+            "count": 0,
+            "state": "Florida",
+            "region": "South",
+            "label": "Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 309,
+                    "artist_id": 74,
+                    "album_name": "Eternal Sunshine",
+                    "year": 2024,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 310,
+                    "artist_id": 74,
+                    "album_name": "Positions",
+                    "year": 2020,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 311,
+                    "artist_id": 74,
+                    "album_name": "Thank U, Next",
+                    "year": 2019,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 312,
+                    "artist_id": 74,
+                    "album_name": "Sweetener",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 313,
+                    "artist_id": 74,
+                    "album_name": "Dangerous Woman",
+                    "year": 2016,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 314,
+                    "artist_id": 74,
+                    "album_name": "My Everything",
+                    "year": 2014,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 315,
+                    "artist_id": 74,
+                    "album_name": "Yours Truly",
+                    "year": 2013,
+                    "certifications": "Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 75,
+            "artist_name": "Coldplay",
+            "aka": null,
+            "genre": "Rock / Alternative",
+            "count": 0,
+            "state": null,
+            "region": "United Kingdom",
+            "label": "Parlophone / Atlantic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 316,
+                    "artist_id": 75,
+                    "album_name": "Moon Music",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 317,
+                    "artist_id": 75,
+                    "album_name": "Music of the Spheres",
+                    "year": 2021,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 318,
+                    "artist_id": 75,
+                    "album_name": "Everyday Life",
+                    "year": 2019,
+                    "certifications": null
+                },
+                {
+                    "album_id": 319,
+                    "artist_id": 75,
+                    "album_name": "A Head Full of Dreams",
+                    "year": 2015,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 320,
+                    "artist_id": 75,
+                    "album_name": "Ghost Stories",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 321,
+                    "artist_id": 75,
+                    "album_name": "Mylo Xyloto",
+                    "year": 2011,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 322,
+                    "artist_id": 75,
+                    "album_name": "Viva la Vida or Death and All His Friends",
+                    "year": 2008,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 323,
+                    "artist_id": 75,
+                    "album_name": "X&Y",
+                    "year": 2005,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 324,
+                    "artist_id": 75,
+                    "album_name": "A Rush of Blood to the Head",
+                    "year": 2002,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 325,
+                    "artist_id": 75,
+                    "album_name": "Parachutes",
+                    "year": 2000,
+                    "certifications": "5x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 76,
+            "artist_name": "Imagine Dragons",
+            "aka": null,
+            "genre": "Rock / Pop",
+            "count": 0,
+            "state": "Nevada",
+            "region": "West Coast",
+            "label": "Interscope / KIDinaKORNER",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 326,
+                    "artist_id": 76,
+                    "album_name": "Loom",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 327,
+                    "artist_id": 76,
+                    "album_name": "Mercury - Acts 1 & 2",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 328,
+                    "artist_id": 76,
+                    "album_name": "Origins",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 329,
+                    "artist_id": 76,
+                    "album_name": "Evolve",
+                    "year": 2017,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 330,
+                    "artist_id": 76,
+                    "album_name": "Smoke + Mirrors",
+                    "year": 2015,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 331,
+                    "artist_id": 76,
+                    "album_name": "Night Visions",
+                    "year": 2012,
+                    "certifications": "5x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 77,
+            "artist_name": "Maroon 5",
+            "aka": null,
+            "genre": "Pop / Rock",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Interscope / 222",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 332,
+                    "artist_id": 77,
+                    "album_name": "Jordi",
+                    "year": 2021,
+                    "certifications": null
+                },
+                {
+                    "album_id": 333,
+                    "artist_id": 77,
+                    "album_name": "Red Pill Blues",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 334,
+                    "artist_id": 77,
+                    "album_name": "V",
+                    "year": 2014,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 335,
+                    "artist_id": 77,
+                    "album_name": "Overexposed",
+                    "year": 2012,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 336,
+                    "artist_id": 77,
+                    "album_name": "Hands All Over",
+                    "year": 2010,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 337,
+                    "artist_id": 77,
+                    "album_name": "It Won't Be Soon Before Long",
+                    "year": 2007,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 338,
+                    "artist_id": 77,
+                    "album_name": "Songs About Jane",
+                    "year": 2002,
+                    "certifications": "6x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 78,
+            "artist_name": "Lady Gaga",
+            "aka": "Stefani Joanne Angelina Germanotta",
+            "genre": "Pop / Dance",
+            "count": 0,
+            "state": "New York",
+            "region": "East Coast",
+            "label": "Interscope",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 339,
+                    "artist_id": 78,
+                    "album_name": "Chromatica",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 340,
+                    "artist_id": 78,
+                    "album_name": "A Star Is Born Soundtrack",
+                    "year": 2018,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 341,
+                    "artist_id": 78,
+                    "album_name": "Joanne",
+                    "year": 2016,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 342,
+                    "artist_id": 78,
+                    "album_name": "Artpop",
+                    "year": 2013,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 343,
+                    "artist_id": 78,
+                    "album_name": "Born This Way",
+                    "year": 2011,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 344,
+                    "artist_id": 78,
+                    "album_name": "The Fame Monster",
+                    "year": 2009,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 345,
+                    "artist_id": 78,
+                    "album_name": "The Fame",
+                    "year": 2008,
+                    "certifications": "5x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 79,
+            "artist_name": "Justin Bieber",
+            "aka": "Justin Drew Bieber",
+            "genre": "Pop / R&B",
+            "count": 0,
+            "state": null,
+            "region": "Canada",
+            "label": "Def Jam / RBMG",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 346,
+                    "artist_id": 79,
+                    "album_name": "Justice",
+                    "year": 2021,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 347,
+                    "artist_id": 79,
+                    "album_name": "Changes",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 348,
+                    "artist_id": 79,
+                    "album_name": "Purpose",
+                    "year": 2015,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 349,
+                    "artist_id": 79,
+                    "album_name": "Believe",
+                    "year": 2012,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 350,
+                    "artist_id": 79,
+                    "album_name": "Under the Mistletoe",
+                    "year": 2011,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 351,
+                    "artist_id": 79,
+                    "album_name": "My World 2.0",
+                    "year": 2010,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 80,
+            "artist_name": "Morgan Wallen",
+            "aka": "Morgan Cole Wallen",
+            "genre": "Country",
+            "count": 0,
+            "state": "Tennessee",
+            "region": "South",
+            "label": "Big Loud / Republic",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 352,
+                    "artist_id": 80,
+                    "album_name": "I'm the Problem",
+                    "year": 2025,
+                    "certifications": null
+                },
+                {
+                    "album_id": 353,
+                    "artist_id": 80,
+                    "album_name": "One Thing at a Time",
+                    "year": 2023,
+                    "certifications": "5x Platinum"
+                },
+                {
+                    "album_id": 354,
+                    "artist_id": 80,
+                    "album_name": "Dangerous: The Double Album",
+                    "year": 2021,
+                    "certifications": "6x Platinum"
+                },
+                {
+                    "album_id": 355,
+                    "artist_id": 80,
+                    "album_name": "If I Know Me",
+                    "year": 2018,
+                    "certifications": "3x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 81,
+            "artist_name": "Luke Combs",
+            "aka": "Luke Albert Combs",
+            "genre": "Country",
+            "count": 0,
+            "state": "North Carolina",
+            "region": "South",
+            "label": "Columbia Nashville",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 356,
+                    "artist_id": 81,
+                    "album_name": "Fathers & Sons",
+                    "year": 2024,
+                    "certifications": null
+                },
+                {
+                    "album_id": 357,
+                    "artist_id": 81,
+                    "album_name": "Gettin' Old",
+                    "year": 2023,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 358,
+                    "artist_id": 81,
+                    "album_name": "Growin' Up",
+                    "year": 2022,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 359,
+                    "artist_id": 81,
+                    "album_name": "What You See Is What You Get",
+                    "year": 2019,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 360,
+                    "artist_id": 81,
+                    "album_name": "This One's for You",
+                    "year": 2017,
+                    "certifications": "4x Platinum"
+                }
+            ]
+        },
+        {
+            "artist_id": 82,
+            "artist_name": "BTS",
+            "aka": "Bangtan Sonyeondan",
+            "genre": "K-Pop / Hip Hop",
+            "count": 0,
+            "state": null,
+            "region": "South Korea",
+            "label": "BigHit / HYBE",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 361,
+                    "artist_id": 82,
+                    "album_name": "Map of the Soul: 7",
+                    "year": 2020,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 362,
+                    "artist_id": 82,
+                    "album_name": "Map of the Soul: Persona",
+                    "year": 2019,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 363,
+                    "artist_id": 82,
+                    "album_name": "Love Yourself: Answer",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 364,
+                    "artist_id": 82,
+                    "album_name": "Love Yourself: Tear",
+                    "year": 2018,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 365,
+                    "artist_id": 82,
+                    "album_name": "Wings",
+                    "year": 2016,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 83,
+            "artist_name": "Shakira",
+            "aka": "Shakira Isabel Mebarak Ripoll",
+            "genre": "Latin Pop / Rock",
+            "count": 0,
+            "state": null,
+            "region": "Colombia",
+            "label": "Sony Latin",
+            "mixtape": null,
+            "album": null,
+            "year": null,
+            "certifications": null,
+            "image_url": null,
+            "albums": [
+                {
+                    "album_id": 366,
+                    "artist_id": 83,
+                    "album_name": "Las Mujeres Ya No Lloran",
+                    "year": 2024,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 367,
+                    "artist_id": 83,
+                    "album_name": "El Dorado",
+                    "year": 2017,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 368,
+                    "artist_id": 83,
+                    "album_name": "Shakira",
+                    "year": 2014,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 369,
+                    "artist_id": 83,
+                    "album_name": "Sale el Sol",
+                    "year": 2010,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 370,
+                    "artist_id": 83,
+                    "album_name": "She Wolf",
+                    "year": 2009,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 371,
+                    "artist_id": 83,
+                    "album_name": "Oral Fixation Vol. 2",
+                    "year": 2005,
+                    "certifications": "3x Platinum"
+                },
+                {
+                    "album_id": 372,
+                    "artist_id": 83,
+                    "album_name": "Laundry Service",
+                    "year": 2001,
+                    "certifications": "4x Platinum"
+                },
+                {
+                    "album_id": 373,
+                    "artist_id": 83,
+                    "album_name": "Dónde Están los Ladrones?",
+                    "year": 1998,
+                    "certifications": "4x Platinum"
+                }
+            ]
         }
     ]
 }
