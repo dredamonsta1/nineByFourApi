@@ -27,21 +27,67 @@ router.post(
 
 // GET /api/artists
 router.get("/", async (req, res) => {
-  const sql = `
-    SELECT
-      a.*,
-      COALESCE(
-        (SELECT json_agg(alb ORDER BY alb.year DESC, alb.album_name ASC)
-         FROM albums AS alb
-         WHERE alb.artist_id = a.artist_id),
-        '[]'::json
-      ) AS albums
-    FROM artists AS a
-    ORDER BY a.artist_name ASC;
-  `;
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.min(200, Math.max(1, parseInt(req.query.limit) || 50));
+  const offset = (page - 1) * limit;
+  const search = req.query.search?.trim() || "";
+  const genre = req.query.genre?.trim() || "";
+  const state = req.query.state?.trim() || "";
+
+  const conditions = [];
+  const params = [];
+  let paramIndex = 1;
+
+  if (search) {
+    conditions.push(`a.artist_name ILIKE $${paramIndex}`);
+    params.push(`%${search}%`);
+    paramIndex++;
+  }
+  if (genre) {
+    conditions.push(`a.genre ILIKE $${paramIndex}`);
+    params.push(`%${genre}%`);
+    paramIndex++;
+  }
+  if (state) {
+    conditions.push(`a.state ILIKE $${paramIndex}`);
+    params.push(`%${state}%`);
+    paramIndex++;
+  }
+
+  const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+
   try {
-    const result = await pool.query(sql);
-    res.json({ artists: result.rows });
+    // Get total count for pagination metadata
+    const countSql = `SELECT COUNT(*) FROM artists AS a ${whereClause}`;
+    const countResult = await pool.query(countSql, params);
+    const totalCount = parseInt(countResult.rows[0].count);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    // Get paginated artists with albums
+    const sql = `
+      SELECT
+        a.*,
+        COALESCE(
+          (SELECT json_agg(alb ORDER BY alb.year DESC, alb.album_name ASC)
+           FROM albums AS alb
+           WHERE alb.artist_id = a.artist_id),
+          '[]'::json
+        ) AS albums
+      FROM artists AS a
+      ${whereClause}
+      ORDER BY a.artist_name ASC
+      LIMIT $${paramIndex} OFFSET $${paramIndex + 1};
+    `;
+
+    const result = await pool.query(sql, [...params, limit, offset]);
+    res.json({
+      artists: result.rows,
+      page,
+      limit,
+      totalCount,
+      totalPages,
+      hasMore: page < totalPages,
+    });
   } catch (err) {
     console.error("Error fetching artists:", err.message);
     res.status(500).json({ code: 500, status: err.message });

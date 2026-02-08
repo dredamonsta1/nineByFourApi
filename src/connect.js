@@ -99,6 +99,21 @@ export async function createTables() {
       );
     `);
 
+    // Artist indexes for pagination & search performance
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_name ON artists(artist_name);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_genre ON artists(genre);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_state ON artists(state);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_count ON artists(count DESC);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_albums_artist_id ON albums(artist_id);`);
+
+    // Trigram index for ILIKE search (requires pg_trgm extension)
+    try {
+      await pool.query(`CREATE EXTENSION IF NOT EXISTS pg_trgm;`);
+      await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_name_trgm ON artists USING gin(artist_name gin_trgm_ops);`);
+    } catch (trgmErr) {
+      console.log("pg_trgm extension not available, skipping trigram index:", trgmErr.message);
+    }
+
     await pool.query(`
       CREATE TABLE IF NOT EXISTS posts (
         post_id SERIAL PRIMARY KEY,
