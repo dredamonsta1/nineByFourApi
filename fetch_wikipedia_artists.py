@@ -30,7 +30,7 @@ USER_AGENT = "9by4app-ArtistFetcher/1.0 (https://github.com/9by4app; contact@9by
 REQUEST_DELAY = 2          # seconds between requests
 MAX_RETRIES = 4
 BACKOFF_BASE = 3           # exponential backoff base in seconds
-DISCOVERY_BATCH = 4000     # LIMIT per discovery query
+DISCOVERY_BATCH = 2000     # LIMIT per discovery query
 METADATA_BATCH = 200       # artists per metadata query
 ALBUM_BATCH = 50           # artists per album query
 
@@ -81,18 +81,29 @@ REGION_MAP = {
 # ---------------------------------------------------------------------------
 # SPARQL helpers
 # ---------------------------------------------------------------------------
-def sparql_query(query: str) -> list[dict]:
-    """Execute a SPARQL query against Wikidata and return results (POST method)."""
-    body = urllib.parse.urlencode({"query": query}).encode("utf-8")
-    req = urllib.request.Request(
-        WIKIDATA_SPARQL_URL,
-        data=body,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-    )
+def sparql_query(query: str, use_post: bool = False) -> list[dict]:
+    """Execute a SPARQL query against Wikidata and return results.
+
+    Uses GET for short discovery queries (more reliable) and POST for
+    queries with large VALUES clauses.
+    """
+    if use_post:
+        body = urllib.parse.urlencode({"query": query}).encode("utf-8")
+        req = urllib.request.Request(
+            WIKIDATA_SPARQL_URL,
+            data=body,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        )
+    else:
+        params = urllib.parse.urlencode({"query": query, "format": "json"})
+        url = f"{WIKIDATA_SPARQL_URL}?{params}"
+        req = urllib.request.Request(
+            url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"}
+        )
 
     for attempt in range(MAX_RETRIES):
         try:
@@ -112,7 +123,7 @@ def sparql_query(query: str) -> list[dict]:
             wait = BACKOFF_BASE ** (attempt + 1)
             print(f"  Network error: {e.reason} — retrying in {wait}s")
             time.sleep(wait)
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError:
             wait = BACKOFF_BASE ** (attempt + 1)
             print(f"  JSON parse error (truncated response?) — retrying in {wait}s")
             time.sleep(wait)
@@ -291,7 +302,7 @@ def fetch_metadata(names: list[str]) -> dict[str, dict]:
         query = METADATA_QUERY_TEMPLATE.format(values=values)
 
         print(f"  Batch {batch_num}/{batches} ({len(batch)} artists) ...", end=" ", flush=True)
-        results = sparql_query(query)
+        results = sparql_query(query, use_post=True)
         found = 0
         for r in results:
             name = r.get("artistLabel", {}).get("value", "").strip()
@@ -376,7 +387,7 @@ def fetch_albums(names: list[str]) -> dict[str, list[dict]]:
         query = ALBUM_QUERY_TEMPLATE.format(values=values)
 
         print(f"  Batch {batch_num}/{batches} ({len(batch)} artists) ...", end=" ", flush=True)
-        results = sparql_query(query)
+        results = sparql_query(query, use_post=True)
         found = 0
         for r in results:
             artist = r.get("artistLabel", {}).get("value", "").strip()
