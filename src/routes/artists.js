@@ -39,8 +39,8 @@ router.get("/", async (req, res) => {
   let paramIndex = 1;
 
   if (search) {
-    conditions.push(`a.artist_name ILIKE $${paramIndex}`);
-    params.push(`%${search}%`);
+    conditions.push(`a.artist_name % $${paramIndex}`);
+    params.push(search);
     paramIndex++;
   }
   if (genre) {
