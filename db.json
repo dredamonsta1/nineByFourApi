@@ -17981,22 +17981,6 @@
             ]
         },
         {
-            "artist_id": 469,
-            "artist_name": "Currensy",
-            "aka": null,
-            "genre": "Hip Hop",
-            "count": 0,
-            "state": "Louisiana",
-            "region": "South",
-            "label": "Jet Life",
-            "image_url": null,
-            "mixtape": null,
-            "album": null,
-            "year": null,
-            "certifications": null,
-            "albums": []
-        },
-        {
             "artist_id": 470,
             "artist_name": "Devin the Dude",
             "aka": "Devin Copeland",
@@ -33024,6 +33008,89 @@
                     "artist_id": 910,
                     "album_name": "Did You Know That There's a Tunnel Under Ocean Blvd",
                     "year": 2023,
+                    "certifications": null
+                }
+            ]
+        },
+        {
+            "artist_id": 911,
+            "artist_name": "Tevin Campbell",
+            "aka": null,
+            "genre": "R&B / New Jack Swing / Pop",
+            "count": 0,
+            "state": "Texas",
+            "region": "South",
+            "label": "Qwest / Warner Bros.",
+            "image_url": null,
+            "mixtape": null,
+            "album": "I'm Ready",
+            "year": 1993,
+            "certifications": "2x Platinum",
+            "albums": [
+                {
+                    "album_id": 2582,
+                    "artist_id": 911,
+                    "album_name": "T.E.V.I.N.",
+                    "year": 1991,
+                    "certifications": "Platinum"
+                },
+                {
+                    "album_id": 2583,
+                    "artist_id": 911,
+                    "album_name": "I'm Ready",
+                    "year": 1993,
+                    "certifications": "2x Platinum"
+                },
+                {
+                    "album_id": 2584,
+                    "artist_id": 911,
+                    "album_name": "Back to the World",
+                    "year": 1996,
+                    "certifications": "Gold"
+                }
+            ]
+        },
+        {
+            "artist_id": 912,
+            "artist_name": "The Internet",
+            "aka": "Syd / Matt Martians",
+            "genre": "R&B / Neo-Soul / Funk",
+            "count": 0,
+            "state": "California",
+            "region": "West Coast",
+            "label": "Odd Future / Columbia",
+            "image_url": null,
+            "mixtape": null,
+            "album": "Ego Death",
+            "year": 2015,
+            "certifications": null,
+            "albums": [
+                {
+                    "album_id": 2585,
+                    "artist_id": 912,
+                    "album_name": "Purple Naked Ladies",
+                    "year": 2011,
+                    "certifications": null
+                },
+                {
+                    "album_id": 2586,
+                    "artist_id": 912,
+                    "album_name": "Feel Good",
+                    "year": 2013,
+                    "certifications": null
+                },
+                {
+                    "album_id": 2587,
+                    "artist_id": 912,
+                    "album_name": "Ego Death",
+                    "year": 2015,
+                    "certifications": null
+                },
+                {
+                    "album_id": 2588,
+                    "artist_id": 912,
+                    "album_name": "Hive Mind",
+                    "year": 2018,
                     "certifications": null
                 }
             ]
