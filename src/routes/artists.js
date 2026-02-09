@@ -33,6 +33,15 @@ router.get("/", async (req, res) => {
   const search = req.query.search?.trim() || "";
   const genre = req.query.genre?.trim() || "";
   const state = req.query.state?.trim() || "";
+  const sort = req.query.sort?.trim() || "clout";
+
+  // Determine ORDER BY clause
+  const sortOptions = {
+    clout: "a.count DESC, a.artist_name ASC",
+    name: "a.artist_name ASC",
+    newest: "a.artist_id DESC",
+  };
+  const orderBy = sortOptions[sort] || sortOptions.clout;
 
   const conditions = [];
   const params = [];
@@ -75,7 +84,7 @@ router.get("/", async (req, res) => {
         ) AS albums
       FROM artists AS a
       ${whereClause}
-      ORDER BY a.artist_name ASC
+      ORDER BY ${orderBy}
       LIMIT $${paramIndex} OFFSET $${paramIndex + 1};
     `;
 
