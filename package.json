@@ -10,7 +10,9 @@
     "test:coverage": "vitest --coverage",
     "test:watch": "vitest --watch",
     "start": "node src/index.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "seed:production": "node src/seed-production.js",
+    "seed:production:fresh": "node src/seed-production.js --fresh"
   },
   "repository": {
     "type": "git",
