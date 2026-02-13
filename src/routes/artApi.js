@@ -133,4 +133,64 @@ router.get("/combined-video-feed", authenticateToken, async (req, res) => {
   }
 });
 
+// Cache for music videos (1 hour TTL)
+let mvCache = { data: null, timestamp: 0 };
+const MV_CACHE_TTL = 60 * 60 * 1000;
+
+router.get("/music-videos", async (req, res) => {
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: "YouTube API key not configured" });
+  }
+
+  // Return cached data if fresh
+  if (mvCache.data && Date.now() - mvCache.timestamp < MV_CACHE_TTL) {
+    return res.json(mvCache.data);
+  }
+
+  const artists = ["Drake", "Kendrick Lamar"];
+  const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
+
+  try {
+    const results = await Promise.all(
+      artists.map(async (artist) => {
+        const response = await axios.get(YOUTUBE_SEARCH_URL, {
+          params: {
+            part: "snippet",
+            q: `${artist} official music video`,
+            type: "video",
+            videoCategoryId: "10", // Music category
+            order: "date",
+            maxResults: 10,
+            key: apiKey,
+          },
+        });
+
+        return response.data.items.map((item) => ({
+          videoId: item.id.videoId,
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.default?.url,
+          artist,
+          publishedAt: item.snippet.publishedAt,
+          channelTitle: item.snippet.channelTitle,
+        }));
+      })
+    );
+
+    // Flatten and sort by publish date (newest first)
+    const allVideos = results.flat().sort(
+      (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+    );
+
+    // Cache the result
+    mvCache = { data: allVideos, timestamp: Date.now() };
+
+    res.json(allVideos);
+  } catch (err) {
+    console.error("Music videos fetch error:", err.response?.data || err.message);
+    if (mvCache.data) return res.json(mvCache.data);
+    res.status(500).json({ error: "Failed to fetch music videos" });
+  }
+});
+
 export default router;
