@@ -234,60 +234,118 @@ import express from "express";
 import axios from "axios";
 const router = express.Router();
 
+async function fetchSpotifyReleases() {
+  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
+  if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
+    console.warn("Spotify env vars missing, skipping Spotify source");
+    return [];
+  }
+
+  const authBuffer = Buffer.from(
+    `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
+  ).toString("base64");
+
+  const tokenRes = await axios.post(
+    "https://accounts.spotify.com/api/token",
+    "grant_type=client_credentials",
+    {
+      headers: {
+        Authorization: `Basic ${authBuffer}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+
+  const token = tokenRes.data.access_token;
+
+  const spotifyRes = await axios.get(
+    "https://api.spotify.com/v1/browse/new-releases?limit=20",
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+
+  return spotifyRes.data.albums.items.map((album) => ({
+    id: `sp-${album.id}`,
+    title: album.name,
+    artist: album.artists[0]?.name || "Unknown Artist",
+    date: album.release_date,
+    imageUrl: album.images[0]?.url || null,
+    source: "Spotify",
+  }));
+}
+
+async function fetchMusicBrainzReleases() {
+  const today = new Date().toISOString().split("T")[0];
+  const mbQuery = encodeURIComponent(
+    `date:[${today} TO 2027-12-31] AND status:official`
+  );
+
+  const mbRes = await axios.get(
+    `https://musicbrainz.org/ws/2/release/?query=${mbQuery}&fmt=json&limit=20`,
+    {
+      headers: {
+        "User-Agent": "9by4App/1.0.0 (admin@9by4.com)",
+      },
+      timeout: 8000,
+    }
+  );
+
+  return mbRes.data.releases.map((release) => ({
+    id: `mb-${release.id}`,
+    title: release.title,
+    artist: release["artist-credit"]?.[0]?.name || "Unknown Artist",
+    date: release.date || null,
+    imageUrl: null,
+    source: "MusicBrainz",
+  }));
+}
+
 router.get("/upcoming", async (req, res) => {
   try {
-    const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
+    const today = new Date().toISOString().split("T")[0];
 
-    // CRITICAL: If these aren't in Heroku, the server crashes here
-    if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
-      console.error("CRITICAL ERROR: Spotify Env Vars Missing");
-      return res
-        .status(500)
-        .json({ error: "Server Configuration Error: Missing API Keys" });
+    // Fetch both sources in parallel; if one fails, use the other
+    const results = await Promise.allSettled([
+      fetchSpotifyReleases(),
+      fetchMusicBrainzReleases(),
+    ]);
+
+    const spotifyData =
+      results[0].status === "fulfilled" ? results[0].value : [];
+    const mbData =
+      results[1].status === "fulfilled" ? results[1].value : [];
+
+    if (results[0].status === "rejected") {
+      console.error("Spotify fetch failed:", results[0].reason?.message);
+    }
+    if (results[1].status === "rejected") {
+      console.error("MusicBrainz fetch failed:", results[1].reason?.message);
     }
 
-    const authBuffer = Buffer.from(
-      `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
-    ).toString("base64");
-
-    // 1. OFFICIAL SPOTIFY AUTH ENDPOINT
-    const tokenRes = await axios.post(
-      "https://accounts.spotify.com/api/token",
-      "grant_type=client_credentials",
-      {
-        headers: {
-          Authorization: `Basic ${authBuffer}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
+    // Combine and filter to only include releases from today onward
+    const combined = [...spotifyData, ...mbData].filter(
+      (r) => r.date && r.date >= today
     );
 
-    const token = tokenRes.data.access_token;
-
-    // 2. OFFICIAL SPOTIFY NEW RELEASES ENDPOINT
-    const spotifyRes = await axios.get(
-      "https://api.spotify.com/v1/browse/new-releases?limit=10",
-      {
-        headers: { Authorization: `Bearer ${token}` },
+    // Deduplicate by title+artist (case-insensitive)
+    const seen = new Map();
+    const unique = [];
+    for (const release of combined) {
+      const key = `${release.title.toLowerCase()}-${release.artist.toLowerCase()}`;
+      if (!seen.has(key)) {
+        seen.set(key, true);
+        unique.push(release);
       }
-    );
+    }
 
-    const spotifyData = spotifyRes.data.albums.items.map((album) => ({
-      id: `sp-${album.id}`,
-      title: album.name,
-      artist: album.artists[0]?.name,
-      date: album.release_date,
-      imageUrl: album.images[0]?.url,
-      source: "Spotify",
-    }));
+    // Sort by release date ascending (soonest first)
+    unique.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    res.json(spotifyData); // Let's test JUST Spotify first to find the break
+    res.json(unique);
   } catch (error) {
-    console.error("SPOTIFY ERROR LOG:", error.response?.data || error.message);
-    res.status(500).json({
-      error: "Backend failed to fetch Spotify data",
-      details: error.response?.data || error.message,
-    });
+    console.error("Music Aggregator Error:", error.message);
+    res.status(500).json({ error: "Failed to fetch upcoming music" });
   }
 });
 
