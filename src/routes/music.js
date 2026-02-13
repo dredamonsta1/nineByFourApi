@@ -297,44 +297,46 @@ async function fetchMusicBrainzReleases() {
   );
 
   const mbRes = await axios.get(
-    `https://musicbrainz.org/ws/2/release/?query=${mbQuery}&fmt=json&limit=20`,
+    `https://musicbrainz.org/ws/2/release/?query=${mbQuery}&fmt=json&limit=15`,
     {
       headers: {
-        "User-Agent": "9by4App/1.0.0 (admin@9by4.com)",
+        "User-Agent": "9by4App/1.0.0 ( admin@arspar.io )",
+        Accept: "application/json",
       },
-      timeout: 8000,
+      timeout: 10000,
     }
   );
 
-  // Fetch cover art from Cover Art Archive in parallel
-  const releases = await Promise.all(
-    mbRes.data.releases.map(async (release) => {
-      let imageUrl = null;
-      try {
-        const caRes = await axios.get(
-          `https://coverartarchive.org/release/${release.id}`,
-          { timeout: 3000 }
-        );
-        imageUrl =
-          caRes.data.images?.[0]?.thumbnails?.small ||
-          caRes.data.images?.[0]?.thumbnails?.["250"] ||
-          caRes.data.images?.[0]?.image ||
-          null;
-      } catch {
-        // 404 or timeout — no cover art available
-      }
-      return {
-        id: `mb-${release.id}`,
-        title: release.title,
-        artist: release["artist-credit"]?.[0]?.name || "Unknown Artist",
-        date: release.date || null,
-        imageUrl,
-        source: "MusicBrainz",
-      };
-    })
-  );
+  // Map releases first, then fetch cover art sequentially to avoid rate limits
+  const releases = mbRes.data.releases.map((release) => ({
+    id: `mb-${release.id}`,
+    mbid: release.id,
+    title: release.title,
+    artist: release["artist-credit"]?.[0]?.name || "Unknown Artist",
+    date: release.date || null,
+    imageUrl: null,
+    source: "MusicBrainz",
+  }));
 
-  return releases;
+  // Fetch cover art one at a time with small delay to respect rate limits
+  for (const release of releases) {
+    try {
+      const caRes = await axios.get(
+        `https://coverartarchive.org/release/${release.mbid}`,
+        { timeout: 3000 }
+      );
+      release.imageUrl =
+        caRes.data.images?.[0]?.thumbnails?.small ||
+        caRes.data.images?.[0]?.thumbnails?.["250"] ||
+        caRes.data.images?.[0]?.image ||
+        null;
+    } catch {
+      // 404 or timeout — no cover art available
+    }
+  }
+
+  // Remove internal mbid before returning
+  return releases.map(({ mbid, ...rest }) => rest);
 }
 
 router.get("/upcoming", async (req, res) => {
@@ -348,8 +350,8 @@ router.get("/upcoming", async (req, res) => {
 
     // Fetch both sources in parallel with retry; if one fails, use the other
     const results = await Promise.allSettled([
-      withRetry(() => fetchSpotifyReleases()),
-      withRetry(() => fetchMusicBrainzReleases()),
+      withRetry(() => fetchSpotifyReleases(), 1, 500),
+      withRetry(() => fetchMusicBrainzReleases(), 2, 2000),
     ]);
 
     const spotifyData =
