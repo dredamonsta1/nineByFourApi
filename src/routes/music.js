@@ -234,6 +234,21 @@ import express from "express";
 import axios from "axios";
 const router = express.Router();
 
+// Simple in-memory cache (15 min TTL)
+let cache = { data: null, timestamp: 0 };
+const CACHE_TTL = 15 * 60 * 1000;
+
+async function withRetry(fn, retries = 2, delay = 1000) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === retries) throw err;
+      await new Promise((r) => setTimeout(r, delay));
+    }
+  }
+}
+
 async function fetchSpotifyReleases() {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
@@ -324,12 +339,17 @@ async function fetchMusicBrainzReleases() {
 
 router.get("/upcoming", async (req, res) => {
   try {
+    // Return cached data if still fresh
+    if (cache.data && Date.now() - cache.timestamp < CACHE_TTL) {
+      return res.json(cache.data);
+    }
+
     const today = new Date().toISOString().split("T")[0];
 
-    // Fetch both sources in parallel; if one fails, use the other
+    // Fetch both sources in parallel with retry; if one fails, use the other
     const results = await Promise.allSettled([
-      fetchSpotifyReleases(),
-      fetchMusicBrainzReleases(),
+      withRetry(() => fetchSpotifyReleases()),
+      withRetry(() => fetchMusicBrainzReleases()),
     ]);
 
     const spotifyData =
@@ -363,9 +383,14 @@ router.get("/upcoming", async (req, res) => {
     // Sort by release date ascending (soonest first)
     unique.sort((a, b) => new Date(a.date) - new Date(b.date));
 
+    // Cache the result
+    cache = { data: unique, timestamp: Date.now() };
+
     res.json(unique);
   } catch (error) {
     console.error("Music Aggregator Error:", error.message);
+    // Return stale cache if available
+    if (cache.data) return res.json(cache.data);
     res.status(500).json({ error: "Failed to fetch upcoming music" });
   }
 });
