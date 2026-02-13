@@ -291,14 +291,35 @@ async function fetchMusicBrainzReleases() {
     }
   );
 
-  return mbRes.data.releases.map((release) => ({
-    id: `mb-${release.id}`,
-    title: release.title,
-    artist: release["artist-credit"]?.[0]?.name || "Unknown Artist",
-    date: release.date || null,
-    imageUrl: null,
-    source: "MusicBrainz",
-  }));
+  // Fetch cover art from Cover Art Archive in parallel
+  const releases = await Promise.all(
+    mbRes.data.releases.map(async (release) => {
+      let imageUrl = null;
+      try {
+        const caRes = await axios.get(
+          `https://coverartarchive.org/release/${release.id}`,
+          { timeout: 3000 }
+        );
+        imageUrl =
+          caRes.data.images?.[0]?.thumbnails?.small ||
+          caRes.data.images?.[0]?.thumbnails?.["250"] ||
+          caRes.data.images?.[0]?.image ||
+          null;
+      } catch {
+        // 404 or timeout — no cover art available
+      }
+      return {
+        id: `mb-${release.id}`,
+        title: release.title,
+        artist: release["artist-credit"]?.[0]?.name || "Unknown Artist",
+        date: release.date || null,
+        imageUrl,
+        source: "MusicBrainz",
+      };
+    })
+  );
+
+  return releases;
 }
 
 router.get("/upcoming", async (req, res) => {
