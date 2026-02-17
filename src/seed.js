@@ -2,6 +2,9 @@ import { pool } from "./connect.js";
 import fs from "fs/promises";
 import path from "path";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function seedDatabase() {
   const client = await pool.connect();
@@ -20,15 +23,17 @@ async function seedDatabase() {
     const data = await fs.readFile(dataPath, "utf-8");
     const { artists: artistsToSeed } = JSON.parse(data);
 
-    // Add a default user for testing
-    console.log("Inserting a default user...");
-    const defaultPassword = "password123";
-    const hashedPassword = await bcrypt.hash(defaultPassword, 10);
+    // Add a default admin user from env vars
+    const adminUser = process.env.ADMIN_USERNAME || "admin";
+    const adminPass = process.env.ADMIN_PASSWORD || "changeme";
+    const adminEmail = process.env.ADMIN_EMAIL || "admin@example.com";
+    console.log("Inserting admin user...");
+    const hashedPassword = await bcrypt.hash(adminPass, 10);
     await client.query(
       `INSERT INTO users(username, password, email, role) VALUES ($1, $2, $3, $4)`,
-      ["admin", hashedPassword, "admin@example.com", "admin"]
+      [adminUser, hashedPassword, adminEmail, "admin"]
     );
-    console.log("Default user 'admin' with password 'password123' created.");
+    console.log(`Admin user '${adminUser}' created.`);
 
     let artistCount = 0;
     let albumCount = 0;
