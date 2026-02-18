@@ -12,7 +12,9 @@
     "start": "node src/index.js",
     "seed": "node src/seed.js",
     "seed:production": "node src/seed-production.js",
-    "seed:production:fresh": "node src/seed-production.js --fresh"
+    "seed:production:fresh": "node src/seed-production.js --fresh",
+    "populate-images": "node src/populate-images.js",
+    "populate-images:dry": "node src/populate-images.js --dry-run"
   },
   "repository": {
     "type": "git",

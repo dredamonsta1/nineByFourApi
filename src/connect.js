@@ -99,6 +99,15 @@ export async function createTables() {
       );
     `);
 
+    // Migrations: add album_image_url and widen image_url
+    try {
+      await pool.query(`ALTER TABLE albums ADD COLUMN IF NOT EXISTS album_image_url TEXT;`);
+      await pool.query(`ALTER TABLE artists ALTER COLUMN image_url TYPE TEXT;`);
+      console.log("Album image columns verified.");
+    } catch (migErr) {
+      console.log("Migration note:", migErr.message);
+    }
+
     // Artist indexes for pagination & search performance
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_name ON artists(artist_name);`);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_genre ON artists(genre);`);
