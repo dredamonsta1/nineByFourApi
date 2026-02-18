@@ -3,7 +3,7 @@ import { Router } from "express";
 import { pool } from "../connect.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { authenticateToken } from "../middleware.js";
+import { authenticateToken, upload } from "../middleware.js";
 import { isWaitlistEnabled } from "./waitlist.js";
 import { Resend } from "resend";
 
@@ -96,7 +96,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({
       token,
-      user: { id: user.user_id, username: user.username, role: user.role },
+      user: { id: user.user_id, username: user.username, role: user.role, profile_image: user.profile_image },
     });
   } catch (error) {
     res.status(500).json({ message: "Login server error." });
@@ -108,7 +108,7 @@ router.get("/me", authenticateToken, async (req, res) => {
   try {
     // req.user comes from your authenticateToken middleware
     const result = await pool.query(
-      "SELECT user_id, username, email, role FROM users WHERE user_id = $1",
+      "SELECT user_id, username, email, role, profile_image FROM users WHERE user_id = $1",
       [req.user.id]
     );
     if (result.rows.length === 0)
@@ -124,7 +124,7 @@ router.get("/:userId/profile", authenticateToken, async (req, res) => {
   const { userId } = req.params;
   try {
     const result = await pool.query(
-      "SELECT user_id, username, role FROM users WHERE user_id = $1",
+      "SELECT user_id, username, role, profile_image FROM users WHERE user_id = $1",
       [userId]
     );
     const user = result.rows[0];
@@ -135,11 +135,37 @@ router.get("/:userId/profile", authenticateToken, async (req, res) => {
       user_id: user.user_id,
       username: user.username,
       role: user.role,
+      profile_image: user.profile_image,
     });
   } catch (err) {
     console.error("Error fetching user profile:", err.message);
     res.status(500).json({ message: "Server error." });
   }
 });
+
+// --- ROUTE: UPLOAD PROFILE IMAGE ---
+router.post(
+  "/profile-image",
+  authenticateToken,
+  upload.single("profileImage"),
+  async (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ message: "No image file provided." });
+    }
+
+    const imageUrl = `/uploads/${req.file.filename}`;
+
+    try {
+      await pool.query(
+        "UPDATE users SET profile_image = $1 WHERE user_id = $2",
+        [imageUrl, req.user.id]
+      );
+      res.json({ profile_image: imageUrl });
+    } catch (err) {
+      console.error("Error updating profile image:", err.message);
+      res.status(500).json({ message: "Failed to update profile image." });
+    }
+  }
+);
 
 export default router;

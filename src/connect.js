@@ -99,11 +99,12 @@ export async function createTables() {
       );
     `);
 
-    // Migrations: add album_image_url and widen image_url
+    // Migrations: add album_image_url, widen image_url, add profile_image
     try {
       await pool.query(`ALTER TABLE albums ADD COLUMN IF NOT EXISTS album_image_url TEXT;`);
       await pool.query(`ALTER TABLE artists ALTER COLUMN image_url TYPE TEXT;`);
-      console.log("Album image columns verified.");
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_image TEXT;`);
+      console.log("Image columns verified.");
     } catch (migErr) {
       console.log("Migration note:", migErr.message);
     }
