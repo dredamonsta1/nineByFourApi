@@ -70,4 +70,20 @@ router.post("/list/:artistId", authenticateToken, async (req, res) => {
   }
 });
 
+// DELETE /api/profile/list/:artistId - Remove an artist from the user's list
+router.delete("/list/:artistId", authenticateToken, async (req, res) => {
+  const userId = req.user.id;
+  const { artistId } = req.params;
+  try {
+    await pool.query(
+      "DELETE FROM user_profile_artists WHERE user_id = $1 AND artist_id = $2",
+      [userId, artistId]
+    );
+    res.status(200).json({ message: "Artist removed from profile list." });
+  } catch (error) {
+    console.error("Error removing artist from profile list:", error.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;
