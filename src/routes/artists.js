@@ -450,6 +450,36 @@ router.put("/:artist_id/clout", authenticateToken, async (req, res) => {
   }
 });
 
+// PUT /api/artists/:artist_id/clout/remove
+router.put("/:artist_id/clout/remove", authenticateToken, async (req, res) => {
+  const { artist_id } = req.params;
+  const sql =
+    "UPDATE artists SET count = GREATEST(count - 1, 0) WHERE artist_id = $1 RETURNING count";
+  try {
+    const result = await pool.query(sql, [artist_id]);
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ message: `Artist with ID ${artist_id} not found.` });
+    }
+    res.json({
+      message: "Clout removed successfully",
+      artist_id: artist_id,
+      new_clout_count: result.rows[0].count,
+    });
+  } catch (err) {
+    console.error(
+      "Error removing clout for artist ID",
+      artist_id,
+      ":",
+      err.message
+    );
+    return res
+      .status(500)
+      .json({ message: "Failed to remove clout", error: err.message });
+  }
+});
+
 // DELETE /api/artists/:artist_id
 router.delete("/:artist_id", authenticateToken, async (req, res) => {
   const requestingUser = req.user;
