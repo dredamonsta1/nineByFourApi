@@ -4,6 +4,7 @@ import { pool } from "../connect.js"; // Assuming this is your DB connection
 import { authenticateToken } from "../middleware.js"; // Your auth middleware
 
 const router = Router();
+const MAX_FAVORITE_ARTISTS = 20;
 
 // GET /api/profile/list - Fetch the user's curated list
 router.get("/list", authenticateToken, async (req, res) => {
@@ -48,7 +49,14 @@ router.post("/list/:artistId", authenticateToken, async (req, res) => {
   const userId = req.user.id;
   const { artistId } = req.params;
   try {
-    // Use "INSERT ... ON CONFLICT DO NOTHING" to prevent adding duplicates
+    const countResult = await pool.query(
+      "SELECT COUNT(*) FROM user_profile_artists WHERE user_id = $1",
+      [userId]
+    );
+    if (parseInt(countResult.rows[0].count) >= MAX_FAVORITE_ARTISTS) {
+      return res.status(400).json({ message: `Favorite artists list is limited to ${MAX_FAVORITE_ARTISTS}.` });
+    }
+
     const sql = `
       INSERT INTO user_profile_artists (user_id, artist_id)
       VALUES ($1, $2)
