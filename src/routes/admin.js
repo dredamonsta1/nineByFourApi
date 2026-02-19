@@ -60,9 +60,10 @@ router.patch("/approve-creator", authenticateToken, async (req, res) => {
           `Sending invite email to ${email.trim()} with code ${inviteCode}`
         );
         const emailResult = await resend.emails.send({
-          from: process.env.FROM_EMAIL || "onboarding@vedioz.me",
+          from: process.env.FROM_EMAIL || "9by4 <onboarding@vedioz.me>",
           to: [email.trim()],
           subject: "Your 9by4 Creator Invite",
+          text: `You're in!\n\nYour invite code for 9by4 is: ${inviteCode}\n\nComplete your registration here: https://vedioz.me/register?code=${inviteCode}&email=${encodeURIComponent(email.trim())}`,
           html: `
             <div style="font-family: sans-serif; padding: 20px; background: #f9f9f9;">
               <h1 style="color: #000;">You're in.</h1>

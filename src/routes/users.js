@@ -57,9 +57,10 @@ router.post("/register", async (req, res) => {
     try {
       if (process.env.RESEND_API_KEY) {
         await resend.emails.send({
-          from: process.env.FROM_EMAIL || "onboarding@vedioz.me",
+          from: process.env.FROM_EMAIL || "9by4 <onboarding@vedioz.me>",
           to: [cleanEmail],
           subject: "Welcome to 9by4!",
+          text: `Welcome, ${username}! You're now part of 9by4.`,
           html: `<h1>Welcome, ${username}!</h1>`,
         });
       }
