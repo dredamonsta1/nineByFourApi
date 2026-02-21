@@ -18,6 +18,7 @@ import followsRouter from "./routes/follower.js";
 import musicRouter from "./routes/music.js";
 import adminRouter from "./routes/admin.js";
 import feedRouter from "./routes/feed.js";
+import messagesRouter from "./routes/messages.js";
 
 dotenv.config();
 
@@ -56,6 +57,7 @@ app.use("/api/users", followsRouter);
 app.use("/api/music", musicRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/feed", feedRouter);
+app.use("/api/messages", messagesRouter);
 
 const startServer = async () => {
   try {

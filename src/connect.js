@@ -209,8 +209,48 @@ export async function createTables() {
       // Don't exit - let other tables still work
     }
 
+    // === FOLLOWS TABLE (required by follower.js routes) ===
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS follows (
+        follower_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        following_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (follower_id, following_id)
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_follows_follower ON follows(follower_id);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_follows_following ON follows(following_id);`);
+
+    // === DM TABLES ===
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS conversations (
+        conversation_id SERIAL PRIMARY KEY,
+        user_one INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        user_two INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(user_one, user_two),
+        CHECK (user_one < user_two)
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_conversations_user_one ON conversations(user_one);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_conversations_user_two ON conversations(user_two);`);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS messages (
+        message_id SERIAL PRIMARY KEY,
+        conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+        sender_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        content TEXT NOT NULL,
+        is_read BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_messages_unread ON messages(conversation_id, is_read) WHERE is_read = FALSE;`);
+
     console.log(
-      'Tables "users", "artists", "albums", "posts", and "waitlist" checked/created successfully.'
+      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", and "messages" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);
