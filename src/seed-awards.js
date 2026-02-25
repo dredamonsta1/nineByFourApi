@@ -159,11 +159,32 @@ async function main() {
   console.log("  Existing data will NOT be modified.");
   console.log("===========================================\n");
 
-  // 1. Load all artists
-  const { rows: artists } = await pool.query(
-    "SELECT artist_id, artist_name FROM artists ORDER BY artist_id"
-  );
-  console.log(`Loaded ${artists.length} artists from DB\n`);
+  // 0. Ensure awards table exists
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS awards (
+      award_id SERIAL PRIMARY KEY,
+      artist_id INTEGER NOT NULL,
+      award_name VARCHAR(255) NOT NULL,
+      show VARCHAR(255),
+      category VARCHAR(255),
+      year INTEGER,
+      FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
+    );
+  `);
+  await pool.query(`CREATE INDEX IF NOT EXISTS idx_awards_artist_id ON awards(artist_id);`);
+  console.log("Awards table ready.\n");
+
+  // 1. Load hip-hop/rap artists only (excludes the 100k+ Wikidata-seeded artists)
+  const { rows: artists } = await pool.query(`
+    SELECT artist_id, artist_name FROM artists
+    WHERE genre ILIKE '%hip hop%'
+       OR genre ILIKE '%rap%'
+       OR genre ILIKE '%trap%'
+       OR genre ILIKE '%drill%'
+       OR genre ILIKE '%r&b%'
+    ORDER BY artist_id
+  `);
+  console.log(`Loaded ${artists.length} hip-hop/rap artists from DB\n`);
 
   const artistIdByName = new Map(artists.map((a) => [a.artist_name, a.artist_id]));
 
@@ -253,12 +274,12 @@ async function main() {
         // Only insert if this exact award+year doesn't already exist for this artist
         const result = await pool.query(
           `INSERT INTO awards (artist_id, award_name, show, category, year)
-           SELECT $1, $2, $3, $4, $5
+           SELECT $1::int, $2::text, $3::text, $4::text, $5::int
            WHERE NOT EXISTS (
              SELECT 1 FROM awards
-             WHERE artist_id = $1
-               AND award_name = $2
-               AND (year IS NOT DISTINCT FROM $5)
+             WHERE artist_id = $1::int
+               AND award_name = $2::text
+               AND (year IS NOT DISTINCT FROM $5::int)
            )`,
           [artistId, awardName, show, category, year]
         );
