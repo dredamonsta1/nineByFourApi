@@ -25,6 +25,14 @@ const SPARQL_ENDPOINT = "https://query.wikidata.org/sparql";
 const BATCH_SIZE = 50;   // artists per SPARQL request
 const DELAY_MS = 1500;   // polite delay between requests
 
+// ---------------------------------------------------------------------------
+// Name aliases: DB name → Wikidata label
+// Add entries here whenever a DB artist name doesn't match Wikidata exactly.
+// ---------------------------------------------------------------------------
+const NAME_ALIASES = {
+  "Jaÿ-Z": "Jay-Z",
+};
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ---------------------------------------------------------------------------
@@ -159,17 +167,32 @@ async function main() {
 
   const artistIdByName = new Map(artists.map((a) => [a.artist_name, a.artist_id]));
 
-  // 2. Match names → QIDs in batches
-  const nameToQID = new Map();
-  const totalNameBatches = Math.ceil(artists.length / BATCH_SIZE);
+  // Build reverse alias map: Wikidata name → DB name
+  const wikidataToDbName = new Map(
+    Object.entries(NAME_ALIASES).map(([db, wikidata]) => [wikidata, db])
+  );
 
-  for (let i = 0; i < artists.length; i += BATCH_SIZE) {
-    const batch = artists.slice(i, i + BATCH_SIZE);
+  // Apply aliases so SPARQL searches use the Wikidata-compatible name
+  const artistsForSearch = artists.map((a) => ({
+    ...a,
+    artist_name: NAME_ALIASES[a.artist_name] ?? a.artist_name,
+  }));
+
+  // 2. Match names → QIDs in batches
+  const nameToQID = new Map(); // keyed by DB name
+  const totalNameBatches = Math.ceil(artistsForSearch.length / BATCH_SIZE);
+
+  for (let i = 0; i < artistsForSearch.length; i += BATCH_SIZE) {
+    const batch = artistsForSearch.slice(i, i + BATCH_SIZE);
     const batchNum = Math.floor(i / BATCH_SIZE) + 1;
     process.stdout.write(`Matching names [${batchNum}/${totalNameBatches}]... `);
 
     const map = await matchNamesToQIDs(batch);
-    for (const [name, qid] of map) nameToQID.set(name, qid);
+    for (const [wikidataName, qid] of map) {
+      // Convert back to DB name (via alias reverse map, or use as-is)
+      const dbName = wikidataToDbName.get(wikidataName) ?? wikidataName;
+      nameToQID.set(dbName, qid);
+    }
 
     console.log(`${map.size} matched`);
     await sleep(DELAY_MS);
