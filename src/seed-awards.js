@@ -26,11 +26,63 @@ const BATCH_SIZE = 50;   // artists per SPARQL request
 const DELAY_MS = 1500;   // polite delay between requests
 
 // ---------------------------------------------------------------------------
+// Direct QID overrides: DB name → Wikidata QID
+// Used for artists with no rdfs:label, disambiguation issues, or groups.
+// Takes priority over name matching entirely.
+// ---------------------------------------------------------------------------
+const DIRECT_QIDS = {
+  // No rdfs:label in Wikidata
+  "Eminem":         "Q5608",
+  "Snoop Dogg":     "Q6096",
+  // Disambiguation (multiple Wikidata entities share the name)
+  "Travis Scott":   "Q13605596",
+  "Future":         "Q3445057",
+  "Nas":            "Q194220",
+  "Gunna":          "Q55613105",
+  // Groups (use P31 not P106, bypasses occupation filter)
+  "Migos":          "Q15777045",
+  "Wu-Tang Clan":   "Q52463",
+  "BTS":            "Q13580495",
+  "OutKast":        "Q472595",
+  // Wikidata label uses $ sign (same as DB)
+  "A$AP Rocky":     "Q129910",
+  // Other known QIDs for reliability
+  "Jay-Z":          "Q62766",
+  "Dr. Dre":        "Q6078",
+  "Lil Wayne":      "Q15615",
+  "Lil Baby":       "Q50527563",
+  "Lil Durk":       "Q2899818",
+  "DaBaby":         "Q62107457",
+  "Young Thug":     "Q15637814",
+  "Gucci Mane":     "Q206032",
+  "Playboi Carti":  "Q27671080",
+  "Pop Smoke":      "Q81698554",
+  "Metro Boomin":   "Q16235273",
+  "Kodak Black":    "Q22005867",
+  "Pusha T":        "Q2329709",
+  "Lil Uzi Vert":   "Q23771950",
+  "21 Savage":      "Q25095399",
+  "Mac Miller":     "Q324726",
+  "MF DOOM":        "Q304675",
+  "Juice WRLD":     "Q52151598",
+  "Roddy Ricch":    "Q59209423",
+  "Polo G":         "Q62953486",
+};
+
+// ---------------------------------------------------------------------------
 // Name aliases: DB name → Wikidata label
-// Add entries here whenever a DB artist name doesn't match Wikidata exactly.
+// Only needed when the Wikidata English label differs from the DB artist name
+// AND the artist is not already in DIRECT_QIDS above.
 // ---------------------------------------------------------------------------
 const NAME_ALIASES = {
-  "Jaÿ-Z": "Jay-Z",
+  "Jaÿ-Z":        "Jay-Z",
+  "2Pac":          "Tupac Shakur",
+  "NBA YoungBoy":  "YoungBoy Never Broke Again",
+  "ScHoolboy Q":   "Schoolboy Q",
+  "Mos Def":       "Yasiin Bey",
+  "Travis $cott":  "Travis Scott",
+  "A$AP Ferg":     "ASAP Ferg",
+  "A$AP Mob":      "ASAP Mob",
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -101,12 +153,15 @@ async function matchNamesToQIDs(artists) {
       ?item rdfs:label ?name .
       ?item wdt:P106 ?occ .
       FILTER(?occ IN (
-        wd:Q639669,   # rapper
-        wd:Q488205,   # hip hop musician
-        wd:Q753110,   # musician
+        wd:Q2252262,  # rapper
+        wd:Q639669,   # musician
+        wd:Q753110,   # songwriter (reused QID)
         wd:Q177220,   # singer
         wd:Q36834,    # composer
-        wd:Q1371941   # disc jockey
+        wd:Q1371941,  # disc jockey
+        wd:Q183945,   # record producer
+        wd:Q855091,   # singer-songwriter
+        wd:Q2516866   # urban music artist
       ))
     }
   `;
@@ -193,14 +248,24 @@ async function main() {
     Object.entries(NAME_ALIASES).map(([db, wikidata]) => [wikidata, db])
   );
 
-  // Apply aliases so SPARQL searches use the Wikidata-compatible name
-  const artistsForSearch = artists.map((a) => ({
-    ...a,
-    artist_name: NAME_ALIASES[a.artist_name] ?? a.artist_name,
-  }));
-
-  // 2. Match names → QIDs in batches
+  // 2a. Pre-populate nameToQID from DIRECT_QIDS (no SPARQL needed for these)
   const nameToQID = new Map(); // keyed by DB name
+  for (const artist of artists) {
+    const qid = DIRECT_QIDS[artist.artist_name];
+    if (qid) nameToQID.set(artist.artist_name, qid);
+  }
+  console.log(`Direct QID overrides applied: ${nameToQID.size}\n`);
+
+  // Apply aliases so SPARQL searches use the Wikidata-compatible name,
+  // but skip artists already handled by DIRECT_QIDS
+  const artistsForSearch = artists
+    .filter((a) => !nameToQID.has(a.artist_name))
+    .map((a) => ({
+      ...a,
+      artist_name: NAME_ALIASES[a.artist_name] ?? a.artist_name,
+    }));
+
+  // 2b. Match remaining names → QIDs in batches
   const totalNameBatches = Math.ceil(artistsForSearch.length / BATCH_SIZE);
 
   for (let i = 0; i < artistsForSearch.length; i += BATCH_SIZE) {
