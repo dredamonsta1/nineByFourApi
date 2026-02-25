@@ -249,8 +249,22 @@ export async function createTables() {
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id);`);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_messages_unread ON messages(conversation_id, is_read) WHERE is_read = FALSE;`);
 
+    // === AWARDS TABLE ===
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS awards (
+        award_id SERIAL PRIMARY KEY,
+        artist_id INTEGER NOT NULL,
+        award_name VARCHAR(255) NOT NULL,
+        show VARCHAR(255),
+        category VARCHAR(255),
+        year INTEGER,
+        FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_awards_artist_id ON awards(artist_id);`);
+
     console.log(
-      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", and "messages" checked/created successfully.'
+      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", and "awards" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);

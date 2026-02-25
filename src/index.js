@@ -19,6 +19,7 @@ import musicRouter from "./routes/music.js";
 import adminRouter from "./routes/admin.js";
 import feedRouter from "./routes/feed.js";
 import messagesRouter from "./routes/messages.js";
+import awardsRouter from "./routes/awards.js";
 
 dotenv.config();
 
@@ -58,6 +59,7 @@ app.use("/api/music", musicRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/feed", feedRouter);
 app.use("/api/messages", messagesRouter);
+app.use("/api/awards", awardsRouter);
 
 const startServer = async () => {
   try {
