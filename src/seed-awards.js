@@ -40,6 +40,7 @@ const DIRECT_QIDS = {
   "Nas":                 "Q194220",
   "Gunna":               "Q55613105",
   "SZA":                 "Q16210722",
+  "Summer Walker":       "Q64177065",
   "DMX":                 "Q223769",
   "JID":                 "Q29588830",
   "J.I.D":               "Q29588830",
