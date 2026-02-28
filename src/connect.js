@@ -6,8 +6,8 @@ dotenv.config(); // Load environment variables from .env file
 
 // 1. Check if we are local
 const isLocal =
-  process.env.DATABASE_URL.includes("localhost") ||
-  process.env.DATABASE_URL.includes("127.0.0.1");
+  process.env.DATABASE_URL?.includes("localhost") ||
+  process.env.DATABASE_URL?.includes("127.0.0.1");
 
 const { Pool } = pg;
 
@@ -39,7 +39,7 @@ pool.on("connect", () => {
 pool.on("connect", () => {
   console.log("Database connected!");
 });
-const dbName = process.env.DATABASE_URL.split("/").pop();
+const dbName = process.env.DATABASE_URL?.split("/").pop() ?? "unknown";
 console.log("---------------------");
 console.log("🚨 APP IS CONNECTED TO DATABASE:", dbName);
 console.log("---------------------");
