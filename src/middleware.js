@@ -77,6 +77,7 @@ export const upload = {
         req.file.path = result.secure_url;
         next();
       } catch (uploadErr) {
+        console.error("Cloudinary image upload error:", uploadErr.message || uploadErr);
         next(uploadErr);
       }
     });
