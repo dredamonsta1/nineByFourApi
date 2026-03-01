@@ -2,8 +2,7 @@ import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
-import multerCloudinary from "multer-storage-cloudinary";
-const { CloudinaryStorage } = multerCloudinary;
+import CloudinaryStorage from "multer-storage-cloudinary";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -45,11 +44,9 @@ export const authenticateToken = (req, res, next) => {
 //-------Cloudinary Image Storage -------
 const imageStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "9by4/images",
-    allowed_formats: ["jpeg", "jpg", "png", "gif"],
-    transformation: [{ quality: "auto", fetch_format: "auto" }],
-  },
+  folder: "9by4/images",
+  allowedFormats: ["jpeg", "jpg", "png", "gif"],
+  transformation: [{ quality: "auto", fetch_format: "auto" }],
 });
 
 export const upload = multer({
@@ -72,11 +69,9 @@ export const upload = multer({
 //-------Cloudinary Video Storage -------
 const videoStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "9by4/videos",
-    resource_type: "video",
-    allowed_formats: ["mp4", "webm", "mov", "avi"],
-  },
+  folder: "9by4/videos",
+  resource_type: "video",
+  allowedFormats: ["mp4", "webm", "mov", "avi"],
 });
 
 export const videoUpload = multer({
