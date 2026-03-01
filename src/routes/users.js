@@ -154,7 +154,7 @@ router.post(
       return res.status(400).json({ message: "No image file provided." });
     }
 
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const imageUrl = req.file.path;
 
     try {
       await pool.query(

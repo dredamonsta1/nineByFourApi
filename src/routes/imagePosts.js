@@ -25,7 +25,7 @@ router.post(
     }
 
     // Construct the URL for the image
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const imageUrl = req.file.path;
 
     try {
       const query = `

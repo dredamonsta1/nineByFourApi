@@ -130,7 +130,7 @@ router.post(
       return res.status(400).json({ message: "Image file is required." });
     }
 
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const imageUrl = req.file.path;
 
     try {
       const query = `
@@ -176,7 +176,7 @@ router.post(
       return res.status(400).json({ message: "Video file is required." });
     }
 
-    const videoUrl = `/uploads/${req.file.filename}`;
+    const videoUrl = req.file.path;
 
     try {
       const query = `

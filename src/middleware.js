@@ -1,6 +1,14 @@
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
@@ -33,21 +41,18 @@ export const authenticateToken = (req, res, next) => {
   });
 };
 
-//-------Multer Storage Config -------
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+//-------Cloudinary Image Storage -------
+const imageStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "9by4/images",
+    allowed_formats: ["jpeg", "jpg", "png", "gif"],
+    transformation: [{ quality: "auto", fetch_format: "auto" }],
   },
 });
 
 export const upload = multer({
-  storage: storage,
+  storage: imageStorage,
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png|gif/;
@@ -55,7 +60,6 @@ export const upload = multer({
     const extname = filetypes.test(
       path.extname(file.originalname).toLowerCase()
     );
-
     if (mimetype && extname) {
       return cb(null, true);
     } else {
@@ -64,19 +68,19 @@ export const upload = multer({
   },
 });
 
-//-------Video Multer Config -------
-const videoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, "video-" + Date.now() + path.extname(file.originalname));
+//-------Cloudinary Video Storage -------
+const videoStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "9by4/videos",
+    resource_type: "video",
+    allowed_formats: ["mp4", "webm", "mov", "avi"],
   },
 });
 
 export const videoUpload = multer({
   storage: videoStorage,
-  limits: { fileSize: 100 * 1024 * 1024 }, // 100MB for videos
+  limits: { fileSize: 100 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const filetypes = /mp4|webm|mov|avi/;
     const mimetypes = /video\/mp4|video\/webm|video\/quicktime|video\/x-msvideo/;
@@ -84,7 +88,6 @@ export const videoUpload = multer({
     const extname = filetypes.test(
       path.extname(file.originalname).toLowerCase()
     );
-
     if (mimetype && extname) {
       return cb(null, true);
     } else {

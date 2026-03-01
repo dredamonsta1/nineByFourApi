@@ -11,7 +11,7 @@ router.post(
   upload.single("artistImage"),
   (req, res) => {
     if (req.file) {
-      const imageUrl = `/uploads/${req.file.filename}`;
+      const imageUrl = req.file.path;
       res.status(200).json({
         message: "Image uploaded successfully!",
         imageUrl: imageUrl,
