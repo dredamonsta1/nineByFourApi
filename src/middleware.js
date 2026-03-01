@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
+import { Readable } from "stream";
 import { v2 as cloudinary } from "cloudinary";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -41,60 +41,80 @@ export const authenticateToken = (req, res, next) => {
   });
 };
 
-//-------Cloudinary Image Storage -------
-const imageStorage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "9by4/images",
-    allowed_formats: ["jpeg", "jpg", "png", "gif"],
-    transformation: [{ quality: "auto", fetch_format: "auto" }],
-  },
-});
+// --- Cloudinary upload helper ---
+const streamUpload = (buffer, options) =>
+  new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(options, (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+    Readable.from(buffer).pipe(stream);
+  });
 
-export const upload = multer({
-  storage: imageStorage,
+// --- Image upload (memory → Cloudinary) ---
+const imageMulter = multer({
+  storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error("Error: Images Only Please!"));
-    }
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    if (mimetype && extname) return cb(null, true);
+    cb(new Error("Error: Images Only Please!"));
   },
 });
 
-//-------Cloudinary Video Storage -------
-const videoStorage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "9by4/videos",
-    resource_type: "video",
-    allowed_formats: ["mp4", "webm", "mov", "avi"],
+export const upload = {
+  single: (fieldName) => (req, res, next) => {
+    imageMulter.single(fieldName)(req, res, async (err) => {
+      if (err) return next(err);
+      if (!req.file) return next();
+      try {
+        const result = await streamUpload(req.file.buffer, {
+          folder: "9by4/images",
+          transformation: [{ quality: "auto", fetch_format: "auto" }],
+        });
+        req.file.path = result.secure_url;
+        next();
+      } catch (uploadErr) {
+        next(uploadErr);
+      }
+    });
   },
-});
+};
 
-export const videoUpload = multer({
-  storage: videoStorage,
+// --- Video upload (memory → Cloudinary) ---
+const videoMulter = multer({
+  storage: multer.memoryStorage(),
   limits: { fileSize: 100 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const filetypes = /mp4|webm|mov|avi/;
     const mimetypes = /video\/mp4|video\/webm|video\/quicktime|video\/x-msvideo/;
-    const mimetype = mimetypes.test(file.mimetype);
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    if (mimetype && extname) {
+    if (mimetypes.test(file.mimetype) && filetypes.test(path.extname(file.originalname).toLowerCase())) {
       return cb(null, true);
-    } else {
-      cb(new Error("Error: Video files only (mp4, webm, mov, avi)!"));
     }
+    cb(new Error("Error: Video files only (mp4, webm, mov, avi)!"));
   },
 });
+
+export const videoUpload = {
+  single: (fieldName) => (req, res, next) => {
+    videoMulter.single(fieldName)(req, res, async (err) => {
+      if (err) return next(err);
+      if (!req.file) return next();
+      try {
+        const result = await streamUpload(req.file.buffer, {
+          folder: "9by4/videos",
+          resource_type: "video",
+        });
+        req.file.path = result.secure_url;
+        next();
+      } catch (uploadErr) {
+        next(uploadErr);
+      }
+    });
+  },
+};
 
 // Multer error handler middleware
 export const handleMulterError = (err, req, res, next) => {
