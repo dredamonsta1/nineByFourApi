@@ -120,6 +120,24 @@ router.get("/me", authenticateToken, async (req, res) => {
   }
 });
 
+// --- ROUTE: SEARCH USERS ---
+router.get("/search", authenticateToken, async (req, res) => {
+  const { q } = req.query;
+  if (!q || q.trim().length < 2) {
+    return res.json([]);
+  }
+  try {
+    const result = await pool.query(
+      "SELECT user_id, username FROM users WHERE username ILIKE $1 AND user_id != $2 LIMIT 20",
+      [`%${q.trim()}%`, req.user.id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("User search error:", err.message);
+    res.status(500).json({ message: "Search failed." });
+  }
+});
+
 // --- ROUTE: PUBLIC USER PROFILE ---
 router.get("/:userId/profile", authenticateToken, async (req, res) => {
   const { userId } = req.params;
