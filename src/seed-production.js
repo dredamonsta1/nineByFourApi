@@ -87,12 +87,10 @@ async function seedProduction() {
     const data = await fs.readFile(dataPath, "utf-8");
     const { artists: allArtists } = JSON.parse(data);
 
-    // Filter for hip hop and pop artists with valid names
-    const artistsToSeed = allArtists.filter(
-      (a) => a.artist_name && isHipHopOrPop(a.genre)
-    );
+    // Filter for artists with valid names (no genre restriction)
+    const artistsToSeed = allArtists.filter((a) => a.artist_name);
 
-    console.log(`Found ${artistsToSeed.length} hip hop/pop artists in db.json`);
+    console.log(`Found ${artistsToSeed.length} artists in db.json`);
     console.log(`Inserting in batches of ${BATCH_SIZE}...\n`);
 
     if (FRESH_MODE) {
