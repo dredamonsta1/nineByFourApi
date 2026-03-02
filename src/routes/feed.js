@@ -258,6 +258,93 @@ router.post("/video-url", authenticateToken, async (req, res) => {
 });
 
 /**
+ * @route   GET /api/feed/comments/:postType/:postId
+ * @desc    Get comments for a post
+ * @access  Private
+ */
+router.get("/comments/:postType/:postId", authenticateToken, async (req, res) => {
+  const { postType, postId } = req.params;
+  if (!["text", "image", "video"].includes(postType)) {
+    return res.status(400).json({ message: "Invalid post type." });
+  }
+  try {
+    const result = await pool.query(
+      `SELECT c.comment_id, c.content, c.created_at, c.user_id, u.username
+       FROM post_comments c
+       JOIN users u ON c.user_id = u.user_id
+       WHERE c.post_type = $1 AND c.post_id = $2
+       ORDER BY c.created_at ASC`,
+      [postType, parseInt(postId)]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching comments:", err);
+    res.status(500).json({ message: "Failed to fetch comments." });
+  }
+});
+
+/**
+ * @route   POST /api/feed/comments/:postType/:postId
+ * @desc    Add a comment to a post
+ * @access  Private
+ */
+router.post("/comments/:postType/:postId", authenticateToken, async (req, res) => {
+  const { postType, postId } = req.params;
+  const { content } = req.body;
+  const userId = req.user.id;
+
+  if (!["text", "image", "video"].includes(postType)) {
+    return res.status(400).json({ message: "Invalid post type." });
+  }
+  if (!content || !content.trim()) {
+    return res.status(400).json({ message: "Comment cannot be empty." });
+  }
+  try {
+    const result = await pool.query(
+      `INSERT INTO post_comments (post_type, post_id, user_id, content)
+       VALUES ($1, $2, $3, $4) RETURNING *`,
+      [postType, parseInt(postId), userId, content.trim()]
+    );
+    const userResult = await pool.query(
+      "SELECT username FROM users WHERE user_id = $1",
+      [userId]
+    );
+    res.status(201).json({ ...result.rows[0], username: userResult.rows[0]?.username });
+  } catch (err) {
+    console.error("Error creating comment:", err);
+    res.status(500).json({ message: "Failed to create comment." });
+  }
+});
+
+/**
+ * @route   DELETE /api/feed/comments/:commentId
+ * @desc    Delete a comment (owner or admin)
+ * @access  Private
+ */
+router.delete("/comments/:commentId", authenticateToken, async (req, res) => {
+  const { commentId } = req.params;
+  const userId = req.user.id;
+  const userRole = req.user.role;
+  try {
+    const check = await pool.query(
+      "SELECT user_id FROM post_comments WHERE comment_id = $1",
+      [commentId]
+    );
+    if (check.rows.length === 0) {
+      return res.status(404).json({ message: "Comment not found." });
+    }
+    if (check.rows[0].user_id !== userId && userRole !== "admin") {
+      return res.status(403).json({ message: "Not authorized." });
+    }
+    await pool.query("DELETE FROM post_comments WHERE comment_id = $1", [commentId]);
+    res.json({ message: "Comment deleted." });
+  } catch (err) {
+    console.error("Error deleting comment:", err);
+    res.status(500).json({ message: "Failed to delete comment." });
+  }
+});
+
+/**
  * @route   DELETE /api/feed/:type/:id
  * @desc    Delete a post (text, image, or video)
  * @access  Private (owner or admin)

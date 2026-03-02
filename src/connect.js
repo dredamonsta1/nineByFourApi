@@ -263,6 +263,18 @@ export async function createTables() {
     `);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_awards_artist_id ON awards(artist_id);`);
 
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS post_comments (
+        comment_id SERIAL PRIMARY KEY,
+        post_type VARCHAR(10) NOT NULL CHECK (post_type IN ('text', 'image', 'video')),
+        post_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        content TEXT NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_post_comments_post ON post_comments(post_type, post_id);`);
+
     console.log(
       'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", and "awards" checked/created successfully.'
     );
