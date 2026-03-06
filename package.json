@@ -15,7 +15,9 @@
     "seed:production:fresh": "node src/seed-production.js --fresh",
     "populate-images": "node src/populate-images.js",
     "populate-images:dry": "node src/populate-images.js --dry-run",
-    "seed:awards": "node src/seed-awards.js"
+    "seed:awards": "node src/seed-awards.js",
+    "enrich-artists": "node src/enrich-artists.js",
+    "enrich-artists:dry": "node src/enrich-artists.js --dry-run"
   },
   "repository": {
     "type": "git",
