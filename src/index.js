@@ -6,8 +6,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import path from "path";
-import cron from "node-cron";
-import { runAgentPoster } from "./agent-poster.js";
 
 import artistsRouter from "./routes/artists.js";
 import usersRouter from "./routes/users.js";
@@ -70,13 +68,6 @@ const startServer = async () => {
       console.log(`LISTENING on port ${PORT}`);
     });
 
-    // Schedule agent poster: every 2 hours (at minute 0)
-    cron.schedule("0 */2 * * *", () => {
-      runAgentPoster(pool).catch((err) =>
-        console.error("Agent poster cron error:", err.message)
-      );
-    });
-    console.log("Agent poster scheduled: every 2 hours.");
   } catch (err) {
     console.error("Failed to start server:", err.message);
     process.exit(1); // Exit if server fails to start due to DB issues
