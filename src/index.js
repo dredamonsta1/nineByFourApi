@@ -21,6 +21,7 @@ import feedRouter from "./routes/feed.js";
 import messagesRouter from "./routes/messages.js";
 import awardsRouter from "./routes/awards.js";
 import eventsRouter from "./routes/events.js";
+import roomsRouter from "./routes/rooms.js";
 
 dotenv.config();
 
@@ -62,6 +63,7 @@ app.use("/api/feed", feedRouter);
 app.use("/api/messages", messagesRouter);
 app.use("/api/awards", awardsRouter);
 app.use("/api/events", eventsRouter);
+app.use("/api/rooms", roomsRouter);
 
 const startServer = async () => {
   try {
