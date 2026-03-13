@@ -298,8 +298,38 @@ export async function createTables() {
     `);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_post_comments_post ON post_comments(post_type, post_id);`);
 
+    // Music posts
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS music_posts (
+        post_id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        title VARCHAR(255),
+        audio_url TEXT,
+        stream_url TEXT,
+        platform VARCHAR(50),
+        caption TEXT,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Events
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS events (
+        event_id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        title VARCHAR(255) NOT NULL,
+        event_date DATE NOT NULL,
+        event_time TIME,
+        venue VARCHAR(255),
+        city VARCHAR(255),
+        flyer_url TEXT,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_events_date ON events(event_date ASC);`);
+
     console.log(
-      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", and "awards" checked/created successfully.'
+      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", and "events" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);

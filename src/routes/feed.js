@@ -2,7 +2,7 @@
 
 import { Router } from "express";
 import { pool } from "../connect.js";
-import { authenticateToken, upload, videoUpload, handleMulterError } from "../middleware.js";
+import { authenticateToken, upload, videoUpload, audioUpload, handleMulterError } from "../middleware.js";
 
 const router = Router();
 
@@ -27,7 +27,11 @@ router.get("/", authenticateToken, async (req, res) => {
         p.created_at,
         u.username,
         p.is_agent_post,
-        p.source_url
+        p.source_url,
+        NULL as music_title,
+        NULL as audio_url,
+        NULL as stream_url,
+        NULL as platform
       FROM posts p
       LEFT JOIN users u ON p.user_id = u.user_id
 
@@ -45,7 +49,11 @@ router.get("/", authenticateToken, async (req, res) => {
         ip.created_at,
         u.username,
         ip.is_agent_post,
-        ip.source_url
+        ip.source_url,
+        NULL as music_title,
+        NULL as audio_url,
+        NULL as stream_url,
+        NULL as platform
       FROM image_posts ip
       LEFT JOIN users u ON ip.user_id = u.user_id
 
@@ -63,9 +71,35 @@ router.get("/", authenticateToken, async (req, res) => {
         vp.created_at,
         u.username,
         vp.is_agent_post,
-        vp.source_url
+        vp.source_url,
+        NULL as music_title,
+        NULL as audio_url,
+        NULL as stream_url,
+        NULL as platform
       FROM video_posts vp
       LEFT JOIN users u ON vp.user_id = u.user_id
+
+      UNION ALL
+
+      SELECT
+        mp.post_id as id,
+        mp.user_id,
+        NULL as content,
+        NULL as image_url,
+        mp.caption,
+        NULL as video_url,
+        NULL as video_type,
+        'music' as post_type,
+        mp.created_at,
+        u.username,
+        FALSE as is_agent_post,
+        NULL as source_url,
+        mp.title as music_title,
+        mp.audio_url,
+        mp.stream_url,
+        mp.platform
+      FROM music_posts mp
+      LEFT JOIN users u ON mp.user_id = u.user_id
 
       ORDER BY created_at DESC
       LIMIT 50;
@@ -264,6 +298,64 @@ router.post("/video-url", authenticateToken, async (req, res) => {
 });
 
 /**
+ * @route   POST /api/feed/music
+ * @desc    Create a music post (file upload or stream link)
+ * @access  Private
+ */
+router.post(
+  "/music",
+  authenticateToken,
+  audioUpload.single("audio"),
+  handleMulterError,
+  async (req, res) => {
+    const userId = req.user.id;
+    const { streamUrl, title, caption } = req.body;
+
+    if (!req.file && !streamUrl) {
+      return res.status(400).json({ message: "Audio file or stream URL is required." });
+    }
+
+    let audioUrl = null;
+    let finalStreamUrl = null;
+    let platform = null;
+
+    if (req.file) {
+      audioUrl = req.file.path;
+    } else {
+      finalStreamUrl = streamUrl.trim();
+      if (/spotify\.com/i.test(finalStreamUrl)) platform = "spotify";
+      else if (/soundcloud\.com/i.test(finalStreamUrl)) platform = "soundcloud";
+      else if (/music\.apple\.com/i.test(finalStreamUrl)) platform = "apple";
+      else platform = "other";
+    }
+
+    try {
+      const result = await pool.query(
+        `INSERT INTO music_posts (user_id, title, audio_url, stream_url, platform, caption)
+         VALUES ($1, $2, $3, $4, $5, $6)
+         RETURNING *`,
+        [userId, title || null, audioUrl, finalStreamUrl, platform, caption || null]
+      );
+      const userQuery = await pool.query(
+        "SELECT username FROM users WHERE user_id = $1",
+        [userId]
+      );
+      const post = {
+        ...result.rows[0],
+        id: result.rows[0].post_id,
+        post_type: "music",
+        music_title: result.rows[0].title,
+        username: userQuery.rows[0]?.username,
+      };
+      res.status(201).json(post);
+    } catch (err) {
+      console.error("Error creating music post:", err);
+      res.status(500).json({ message: "Failed to create music post." });
+    }
+  }
+);
+
+/**
  * @route   GET /api/feed/comments/:postType/:postId
  * @desc    Get comments for a post
  * @access  Private
@@ -367,15 +459,21 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
   } else if (type === "video") {
     table = "video_posts";
     idColumn = "id";
+  } else if (type === "music") {
+    table = "music_posts";
+    idColumn = "post_id";
   } else {
     table = "posts";
     idColumn = "post_id";
   }
 
+  const hasAgentPost = type !== "music";
+
   try {
     // Check if post exists and get owner
+    const selectCols = hasAgentPost ? "user_id, is_agent_post" : "user_id";
     const checkQuery = await pool.query(
-      `SELECT user_id, is_agent_post FROM ${table} WHERE ${idColumn} = $1`,
+      `SELECT ${selectCols} FROM ${table} WHERE ${idColumn} = $1`,
       [id]
     );
 
@@ -386,7 +484,7 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
     const post = checkQuery.rows[0];
 
     // Block non-admin deletion of agent posts
-    if (post.is_agent_post && userRole !== "admin") {
+    if (hasAgentPost && post.is_agent_post && userRole !== "admin") {
       return res.status(403).json({ message: "Cannot delete agent posts." });
     }
 

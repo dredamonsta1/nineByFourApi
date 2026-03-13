@@ -117,6 +117,39 @@ export const videoUpload = {
   },
 };
 
+// --- Audio upload (memory → Cloudinary) ---
+const audioMulter = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const filetypes = /mp3|wav|flac|m4a|ogg/;
+    const mimetypes = /audio\/mpeg|audio\/wav|audio\/flac|audio\/mp4|audio\/ogg|audio\/x-m4a/;
+    if (mimetypes.test(file.mimetype) && filetypes.test(path.extname(file.originalname).toLowerCase())) {
+      return cb(null, true);
+    }
+    cb(new Error("Error: Audio files only (mp3, wav, flac, m4a, ogg)!"));
+  },
+});
+
+export const audioUpload = {
+  single: (fieldName) => (req, res, next) => {
+    audioMulter.single(fieldName)(req, res, async (err) => {
+      if (err) return next(err);
+      if (!req.file) return next();
+      try {
+        const result = await streamUpload(req.file.buffer, {
+          folder: "9by4/audio",
+          resource_type: "auto",
+        });
+        req.file.path = result.secure_url;
+        next();
+      } catch (uploadErr) {
+        next(uploadErr);
+      }
+    });
+  },
+};
+
 // Multer error handler middleware
 export const handleMulterError = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
