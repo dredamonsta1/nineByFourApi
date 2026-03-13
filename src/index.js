@@ -1,5 +1,7 @@
 import { pool, createTables } from "./connect.js"; // Import the PostgreSQL connection pool and createTables
 import express from "express";
+import { createServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
 import bodyParser from "body-parser";
 import cors from "cors";
 import bcrypt from "bcrypt";
@@ -21,10 +23,16 @@ import feedRouter from "./routes/feed.js";
 import messagesRouter from "./routes/messages.js";
 import awardsRouter from "./routes/awards.js";
 import eventsRouter from "./routes/events.js";
+import roomsRouter from "./routes/rooms.js";
+import { initRoomSocket } from "./socket/roomSocket.js";
 
 dotenv.config();
 
 const app = express();
+const httpServer = createServer(app);
+const io = new SocketIOServer(httpServer, {
+  cors: { origin: "*", methods: ["GET", "POST"] },
+});
 const PORT = process.env.PORT || 3010;
 
 app.options("*", cors());
@@ -62,17 +70,18 @@ app.use("/api/feed", feedRouter);
 app.use("/api/messages", messagesRouter);
 app.use("/api/awards", awardsRouter);
 app.use("/api/events", eventsRouter);
+app.use("/api/rooms", roomsRouter);
 
 const startServer = async () => {
   try {
-    await createTables(); // Ensure tables are created before starting the server
-    app.listen(PORT, () => {
+    await createTables();
+    initRoomSocket(io, app);
+    httpServer.listen(PORT, () => {
       console.log(`LISTENING on port ${PORT}`);
     });
-
   } catch (err) {
     console.error("Failed to start server:", err.message);
-    process.exit(1); // Exit if server fails to start due to DB issues
+    process.exit(1);
   }
 };
 startServer();
