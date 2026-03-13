@@ -328,6 +328,22 @@ export async function createTables() {
     `);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_events_date ON events(event_date ASC);`);
 
+    // Live Rooms
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS rooms (
+        room_id SERIAL PRIMARY KEY,
+        host_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        status VARCHAR(20) NOT NULL DEFAULT 'live' CHECK (status IN ('live', 'ended')),
+        livekit_room_name VARCHAR(255) UNIQUE NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        ended_at TIMESTAMPTZ
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_rooms_status ON rooms(status);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_rooms_host ON rooms(host_id);`);
+
     console.log(
       'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", and "events" checked/created successfully.'
     );
