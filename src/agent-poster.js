@@ -4,14 +4,16 @@
 //
 // Usage: node src/agent-poster.js
 // Flags: --dry-run  (preview only, no DB writes)
+//
+// Can also be imported and called as runAgentPoster(pool) from the server.
 
 import pg from "pg";
 import Parser from "rss-parser";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const DRY_RUN = process.argv.includes("--dry-run");
 const MAX_NEW_POSTS = 5;
 const MIN_GAP_HOURS = 2;
 
@@ -22,22 +24,11 @@ const RSS_FEEDS = [
   { name: "Uproxx",     url: "https://uproxx.com/music/feed/" },
 ];
 
-const { Pool } = pg;
-const isLocal =
-  process.env.DATABASE_URL?.includes("localhost") ||
-  process.env.DATABASE_URL?.includes("127.0.0.1");
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: isLocal ? false : { rejectUnauthorized: false },
-});
-
 const parser = new Parser({ timeout: 10000 });
 
-async function ensureSchema() {
+async function ensureSchema(pool) {
   await pool.query(`ALTER TABLE posts ADD COLUMN IF NOT EXISTS is_agent_post BOOLEAN DEFAULT FALSE;`);
   await pool.query(`ALTER TABLE posts ADD COLUMN IF NOT EXISTS source_url TEXT;`);
-  // Ensure bot user exists
   await pool.query(`
     INSERT INTO users (username, email, password, role)
     VALUES ('9by4News', 'bot@9by4.internal', 'NOT_A_REAL_PASSWORD', 'agent')
@@ -45,7 +36,7 @@ async function ensureSchema() {
   `);
 }
 
-async function getBotUserId() {
+async function getBotUserId(pool) {
   const result = await pool.query(
     "SELECT user_id FROM users WHERE username = '9by4News' LIMIT 1"
   );
@@ -55,14 +46,14 @@ async function getBotUserId() {
   return result.rows[0].user_id;
 }
 
-async function getLastAgentPostTime() {
+async function getLastAgentPostTime(pool) {
   const result = await pool.query(
     "SELECT MAX(created_at) as last_post FROM posts WHERE is_agent_post = TRUE"
   );
   return result.rows[0].last_post || null;
 }
 
-async function isUrlAlreadyPosted(sourceUrl) {
+async function isUrlAlreadyPosted(pool, sourceUrl) {
   const result = await pool.query(
     "SELECT 1 FROM posts WHERE source_url = $1 LIMIT 1",
     [sourceUrl]
@@ -85,28 +76,25 @@ async function fetchFeedArticles(feed) {
   }
 }
 
-async function run() {
-  console.log(`\n9by4 Agent Poster${DRY_RUN ? " [DRY RUN]" : ""}`);
+// Core logic — accepts a shared pool, returns number of posts created.
+export async function runAgentPoster(pool, { dryRun = false } = {}) {
+  console.log(`\n9by4 Agent Poster${dryRun ? " [DRY RUN]" : ""}`);
   console.log("=".repeat(40));
 
-  await ensureSchema();
-
   // Check minimum gap between agent posts
-  const lastPostTime = await getLastAgentPostTime();
+  const lastPostTime = await getLastAgentPostTime(pool);
   if (lastPostTime) {
     const hoursSinceLast = (Date.now() - new Date(lastPostTime).getTime()) / 3600000;
     if (hoursSinceLast < MIN_GAP_HOURS) {
       const remaining = (MIN_GAP_HOURS - hoursSinceLast).toFixed(1);
       console.log(`Last agent post was ${hoursSinceLast.toFixed(1)}h ago. Min gap is ${MIN_GAP_HOURS}h. Skipping (${remaining}h remaining).`);
-      await pool.end();
-      return;
+      return 0;
     }
   }
 
-  const botUserId = await getBotUserId();
+  const botUserId = await getBotUserId(pool);
   console.log(`Bot user_id: ${botUserId}`);
 
-  // Fetch all feeds in parallel
   const feedResults = await Promise.all(RSS_FEEDS.map(fetchFeedArticles));
   const allArticles = feedResults.flat();
   console.log(`Fetched ${allArticles.length} total articles across ${RSS_FEEDS.length} feeds.`);
@@ -116,8 +104,7 @@ async function run() {
   for (const article of allArticles) {
     if (posted >= MAX_NEW_POSTS) break;
 
-    // Deduplication check
-    const alreadyPosted = await isUrlAlreadyPosted(article.sourceUrl);
+    const alreadyPosted = await isUrlAlreadyPosted(pool, article.sourceUrl);
     if (alreadyPosted) {
       console.log(`  [SKIP] Already posted: ${article.title.slice(0, 60)}`);
       continue;
@@ -127,7 +114,7 @@ async function run() {
       ? `${article.title}\n\n${article.summary}`
       : article.title;
 
-    if (DRY_RUN) {
+    if (dryRun) {
       console.log(`  [DRY RUN] Would post (${article.source}): ${article.title.slice(0, 70)}`);
       console.log(`            source_url: ${article.sourceUrl}`);
       posted++;
@@ -143,12 +130,30 @@ async function run() {
     posted++;
   }
 
-  console.log(`\nDone. ${posted} post(s) ${DRY_RUN ? "would be" : "were"} created.`);
-  await pool.end();
+  console.log(`\nDone. ${posted} post(s) ${dryRun ? "would be" : "were"} created.`);
+  return posted;
 }
 
-run().catch((err) => {
-  console.error("Agent poster error:", err);
-  pool.end();
-  process.exit(1);
-});
+// Standalone CLI entrypoint
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+if (isMain) {
+  const DRY_RUN = process.argv.includes("--dry-run");
+  const { Pool } = pg;
+  const isLocal =
+    process.env.DATABASE_URL?.includes("localhost") ||
+    process.env.DATABASE_URL?.includes("127.0.0.1");
+
+  const standalonePool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: isLocal ? false : { rejectUnauthorized: false },
+  });
+
+  ensureSchema(standalonePool)
+    .then(() => runAgentPoster(standalonePool, { dryRun: DRY_RUN }))
+    .then(() => standalonePool.end())
+    .catch((err) => {
+      console.error("Agent poster error:", err);
+      standalonePool.end();
+      process.exit(1);
+    });
+}
