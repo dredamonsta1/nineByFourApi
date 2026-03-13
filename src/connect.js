@@ -109,6 +109,19 @@ export async function createTables() {
       console.log("Migration note:", migErr.message);
     }
 
+    // Migrations: agent post columns
+    try {
+      await pool.query(`ALTER TABLE posts       ADD COLUMN IF NOT EXISTS is_agent_post BOOLEAN DEFAULT FALSE;`);
+      await pool.query(`ALTER TABLE posts       ADD COLUMN IF NOT EXISTS source_url TEXT;`);
+      await pool.query(`ALTER TABLE image_posts ADD COLUMN IF NOT EXISTS is_agent_post BOOLEAN DEFAULT FALSE;`);
+      await pool.query(`ALTER TABLE image_posts ADD COLUMN IF NOT EXISTS source_url TEXT;`);
+      await pool.query(`ALTER TABLE video_posts ADD COLUMN IF NOT EXISTS is_agent_post BOOLEAN DEFAULT FALSE;`);
+      await pool.query(`ALTER TABLE video_posts ADD COLUMN IF NOT EXISTS source_url TEXT;`);
+      console.log("Agent post columns verified.");
+    } catch (migErr) {
+      console.log("Agent post migration note:", migErr.message);
+    }
+
     // Artist indexes for pagination & search performance
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_name ON artists(artist_name);`);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_artists_genre ON artists(genre);`);
@@ -208,6 +221,16 @@ export async function createTables() {
       console.error("Error creating waitlist tables:", err.message);
       // Don't exit - let other tables still work
     }
+
+    // Bot user for agent posts
+    try {
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS role VARCHAR(50) DEFAULT 'user';`);
+    } catch (_) { /* column may already exist */ }
+    await pool.query(`
+      INSERT INTO users (username, email, password, role)
+      VALUES ('9by4News', 'bot@9by4.internal', 'NOT_A_REAL_PASSWORD', 'agent')
+      ON CONFLICT (username) DO NOTHING;
+    `);
 
     // === FOLLOWS TABLE (required by follower.js routes) ===
     await pool.query(`

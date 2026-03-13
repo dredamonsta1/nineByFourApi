@@ -25,7 +25,9 @@ router.get("/", authenticateToken, async (req, res) => {
         NULL as video_type,
         'text' as post_type,
         p.created_at,
-        u.username
+        u.username,
+        p.is_agent_post,
+        p.source_url
       FROM posts p
       LEFT JOIN users u ON p.user_id = u.user_id
 
@@ -41,7 +43,9 @@ router.get("/", authenticateToken, async (req, res) => {
         NULL as video_type,
         'image' as post_type,
         ip.created_at,
-        u.username
+        u.username,
+        ip.is_agent_post,
+        ip.source_url
       FROM image_posts ip
       LEFT JOIN users u ON ip.user_id = u.user_id
 
@@ -57,7 +61,9 @@ router.get("/", authenticateToken, async (req, res) => {
         vp.video_type,
         'video' as post_type,
         vp.created_at,
-        u.username
+        u.username,
+        vp.is_agent_post,
+        vp.source_url
       FROM video_posts vp
       LEFT JOIN users u ON vp.user_id = u.user_id
 
@@ -369,7 +375,7 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
   try {
     // Check if post exists and get owner
     const checkQuery = await pool.query(
-      `SELECT user_id FROM ${table} WHERE ${idColumn} = $1`,
+      `SELECT user_id, is_agent_post FROM ${table} WHERE ${idColumn} = $1`,
       [id]
     );
 
@@ -378,6 +384,11 @@ router.delete("/:type/:id", authenticateToken, async (req, res) => {
     }
 
     const post = checkQuery.rows[0];
+
+    // Block non-admin deletion of agent posts
+    if (post.is_agent_post && userRole !== "admin") {
+      return res.status(403).json({ message: "Cannot delete agent posts." });
+    }
 
     // Authorization check
     if (post.user_id !== userId && userRole !== "admin") {
