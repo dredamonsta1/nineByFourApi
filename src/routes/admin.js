@@ -150,4 +150,111 @@ router.delete("/reset-user", authenticateToken, async (req, res) => {
   }
 });
 
+// --- 5. USER AUDIT ---
+
+router.get("/users", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  const { search = "", page = 1, limit = 50 } = req.query;
+  const offset = (parseInt(page) - 1) * parseInt(limit);
+  try {
+    const result = await pool.query(
+      `SELECT
+         u.user_id, u.username, u.email, u.role, u.created_at,
+         COUNT(p.post_id) FILTER (WHERE p.post_id IS NOT NULL) AS post_count
+       FROM users u
+       LEFT JOIN posts p ON p.user_id = u.user_id
+       WHERE u.username ILIKE $1 OR u.email ILIKE $1
+       GROUP BY u.user_id
+       ORDER BY u.created_at DESC
+       LIMIT $2 OFFSET $3`,
+      [`%${search}%`, parseInt(limit), offset]
+    );
+    const total = await pool.query(
+      `SELECT COUNT(*) FROM users WHERE username ILIKE $1 OR email ILIKE $1`,
+      [`%${search}%`]
+    );
+    res.json({ users: result.rows, total: parseInt(total.rows[0].count) });
+  } catch (err) {
+    console.error("User audit error:", err);
+    res.status(500).json({ error: "Failed to fetch users." });
+  }
+});
+
+router.patch("/users/:id/role", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  const { role } = req.body;
+  const validRoles = ["user", "admin", "agent"];
+  if (!validRoles.includes(role)) {
+    return res.status(400).json({ message: `role must be one of: ${validRoles.join(", ")}` });
+  }
+  // Prevent self-demotion
+  if (parseInt(req.params.id) === req.user.id && role !== "admin") {
+    return res.status(400).json({ message: "Cannot change your own admin role." });
+  }
+  try {
+    const result = await pool.query(
+      "UPDATE users SET role = $1 WHERE user_id = $2 RETURNING user_id, username, role",
+      [role, req.params.id]
+    );
+    if (result.rows.length === 0) return res.status(404).json({ message: "User not found." });
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update role." });
+  }
+});
+
+router.delete("/users/:id", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  if (parseInt(req.params.id) === req.user.id) {
+    return res.status(400).json({ message: "Cannot delete your own account." });
+  }
+  try {
+    const result = await pool.query(
+      "DELETE FROM users WHERE user_id = $1 RETURNING user_id, username",
+      [req.params.id]
+    );
+    if (result.rows.length === 0) return res.status(404).json({ message: "User not found." });
+    res.json({ message: `User ${result.rows[0].username} deleted.` });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete user." });
+  }
+});
+
+// --- 6. GLOBAL SETTINGS ---
+
+router.get("/settings", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  try {
+    const result = await pool.query("SELECT setting_key, setting_value FROM app_settings ORDER BY setting_key");
+    const settings = {};
+    result.rows.forEach(({ setting_key, setting_value }) => { settings[setting_key] = setting_value; });
+    res.json(settings);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch settings." });
+  }
+});
+
+router.patch("/settings", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  const allowed = ["waitlist_enabled", "agent_posts_enabled", "agent_penalty_hours", "feed_limit"];
+  const updates = Object.entries(req.body).filter(([k]) => allowed.includes(k));
+  if (updates.length === 0) return res.status(400).json({ message: "No valid settings provided." });
+  try {
+    for (const [key, value] of updates) {
+      await pool.query(
+        `INSERT INTO app_settings (setting_key, setting_value)
+         VALUES ($1, $2)
+         ON CONFLICT (setting_key) DO UPDATE SET setting_value = $2, updated_at = CURRENT_TIMESTAMP`,
+        [key, String(value)]
+      );
+    }
+    const result = await pool.query("SELECT setting_key, setting_value FROM app_settings ORDER BY setting_key");
+    const settings = {};
+    result.rows.forEach(({ setting_key, setting_value }) => { settings[setting_key] = setting_value; });
+    res.json(settings);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update settings." });
+  }
+});
+
 export default router;

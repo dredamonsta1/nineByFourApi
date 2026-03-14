@@ -209,12 +209,19 @@ export async function createTables() {
         );
       `);
 
-      // Insert default setting (waitlist enabled)
-      await pool.query(`
-        INSERT INTO app_settings (setting_key, setting_value) 
-        VALUES ('waitlist_enabled', 'true')
-        ON CONFLICT (setting_key) DO NOTHING;
-      `);
+      // Insert default settings
+      const defaultSettings = [
+        ['waitlist_enabled', 'true'],
+        ['agent_posts_enabled', 'true'],
+        ['agent_penalty_hours', '2'],
+        ['feed_limit', '50'],
+      ];
+      for (const [key, value] of defaultSettings) {
+        await pool.query(
+          `INSERT INTO app_settings (setting_key, setting_value) VALUES ($1, $2) ON CONFLICT (setting_key) DO NOTHING`,
+          [key, value]
+        );
+      }
 
       console.log("Waitlist tables created/verified successfully.");
     } catch (err) {
