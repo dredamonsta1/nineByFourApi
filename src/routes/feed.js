@@ -126,7 +126,7 @@ router.get("/", authenticateToken, async (req, res) => {
         COALESCE(v.disputed_count, 0) AS disputed_count
       FROM feed f
       LEFT JOIN verdicts v ON v.post_type = f.post_type AND v.post_id = f.id
-      ORDER BY f.is_agent_post ASC NULLS FIRST, f.created_at DESC
+      ORDER BY (f.created_at - CASE WHEN f.is_agent_post THEN INTERVAL '2 hours' ELSE INTERVAL '0' END) DESC
       LIMIT 50;
     `;
 
