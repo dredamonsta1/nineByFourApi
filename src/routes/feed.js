@@ -122,8 +122,8 @@ router.get("/", authenticateToken, async (req, res) => {
       )
       SELECT
         f.*,
-        COALESCE(v.verified_count, 0) AS verified_count,
-        COALESCE(v.disputed_count, 0) AS disputed_count
+        COALESCE(v.verified_count, 0)::INTEGER AS verified_count,
+        COALESCE(v.disputed_count, 0)::INTEGER AS disputed_count
       FROM feed f
       LEFT JOIN verdicts v ON v.post_type = f.post_type AND v.post_id = f.id
       ORDER BY (f.created_at - CASE WHEN f.is_agent_post THEN INTERVAL '2 hours' ELSE INTERVAL '0' END) DESC
