@@ -22,6 +22,9 @@ import messagesRouter from "./routes/messages.js";
 import awardsRouter from "./routes/awards.js";
 import eventsRouter from "./routes/events.js";
 import roomsRouter from "./routes/rooms.js";
+import agentsRouter from "./routes/agents.js";
+import updatesRouter from "./routes/updates.js";
+import signalsRouter from "./routes/signals.js";
 
 dotenv.config();
 
@@ -64,6 +67,12 @@ app.use("/api/messages", messagesRouter);
 app.use("/api/awards", awardsRouter);
 app.use("/api/events", eventsRouter);
 app.use("/api/rooms", roomsRouter);
+
+// Agent Gateway — versioned at /v1
+app.use("/v1/agents", agentsRouter);
+app.use("/v1/updates", updatesRouter);
+app.use("/v1/stream", signalsRouter);   // GET /v1/stream/mentions
+app.use("/v1/signals", signalsRouter);  // POST /v1/signals/verify
 
 const startServer = async () => {
   try {

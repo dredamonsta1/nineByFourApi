@@ -3,6 +3,8 @@ import multer from "multer";
 import path from "path";
 import { Readable } from "stream";
 import { v2 as cloudinary } from "cloudinary";
+import crypto from "crypto";
+import { pool } from "./connect.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -148,6 +150,29 @@ export const audioUpload = {
       }
     });
   },
+};
+
+// --- Agent authentication middleware ---
+export const authenticateAgent = async (req, res, next) => {
+  const key = req.headers["x-agent-key"];
+  if (!key) return res.status(401).json({ message: "X-Agent-Key header required." });
+
+  const hash = crypto.createHash("sha256").update(key).digest("hex");
+  try {
+    const result = await pool.query(
+      "SELECT * FROM agents WHERE agent_key_hash = $1",
+      [hash]
+    );
+    if (result.rows.length === 0) return res.status(401).json({ message: "Invalid agent key." });
+    const agent = result.rows[0];
+    if (agent.status === "suspended") return res.status(403).json({ message: "Agent suspended." });
+    if (agent.status === "rate_limited") return res.status(429).json({ message: "Agent rate limited." });
+    req.agent = agent;
+    next();
+  } catch (err) {
+    console.error("Agent auth error:", err);
+    res.status(500).json({ message: "Authentication error." });
+  }
 };
 
 // Multer error handler middleware

@@ -344,8 +344,50 @@ export async function createTables() {
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_rooms_status ON rooms(status);`);
     await pool.query(`CREATE INDEX IF NOT EXISTS idx_rooms_host ON rooms(host_id);`);
 
+    // Agent Gateway
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS agents (
+        agent_id SERIAL PRIMARY KEY,
+        owner_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+        name VARCHAR(255) NOT NULL,
+        manifest_url TEXT NOT NULL,
+        agent_key_hash TEXT UNIQUE NOT NULL,
+        status VARCHAR(20) NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'rate_limited', 'suspended')),
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_agents_owner ON agents(owner_id);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_agents_key ON agents(agent_key_hash);`);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS agent_verifications (
+        verification_id SERIAL PRIMARY KEY,
+        post_type VARCHAR(20) NOT NULL,
+        post_id INTEGER NOT NULL,
+        verifier_agent_id INTEGER NOT NULL REFERENCES agents(agent_id) ON DELETE CASCADE,
+        verdict VARCHAR(20) NOT NULL CHECK (verdict IN ('verified', 'disputed')),
+        note TEXT,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (post_type, post_id, verifier_agent_id)
+      );
+    `);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_verifications_post ON agent_verifications(post_type, post_id);`);
+
+    // Agent gateway migrations: provenance_urls + agent_id on post tables
+    try {
+      await pool.query(`ALTER TABLE posts       ADD COLUMN IF NOT EXISTS provenance_urls TEXT[];`);
+      await pool.query(`ALTER TABLE posts       ADD COLUMN IF NOT EXISTS agent_id INTEGER REFERENCES agents(agent_id);`);
+      await pool.query(`ALTER TABLE image_posts ADD COLUMN IF NOT EXISTS provenance_urls TEXT[];`);
+      await pool.query(`ALTER TABLE image_posts ADD COLUMN IF NOT EXISTS agent_id INTEGER REFERENCES agents(agent_id);`);
+      await pool.query(`ALTER TABLE video_posts ADD COLUMN IF NOT EXISTS provenance_urls TEXT[];`);
+      await pool.query(`ALTER TABLE video_posts ADD COLUMN IF NOT EXISTS agent_id INTEGER REFERENCES agents(agent_id);`);
+      console.log("Agent gateway columns verified.");
+    } catch (migErr) {
+      console.log("Agent gateway migration note:", migErr.message);
+    }
+
     console.log(
-      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", and "events" checked/created successfully.'
+      'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", "events", "rooms", "agents", and "agent_verifications" checked/created successfully.'
     );
   } catch (err) {
     console.error("Error creating tables:", err.message);
