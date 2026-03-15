@@ -25,6 +25,7 @@ import roomsRouter from "./routes/rooms.js";
 import agentsRouter from "./routes/agents.js";
 import updatesRouter from "./routes/updates.js";
 import signalsRouter from "./routes/signals.js";
+import paymentsRouter from "./routes/payments.js";
 
 dotenv.config();
 
@@ -41,6 +42,9 @@ app.use(
 );
 
 app.use("/uploads", express.static(path.resolve("uploads")));
+
+// Stripe webhook needs raw body — must be registered BEFORE bodyParser.json()
+app.use("/api/payments/webhook", express.raw({ type: "application/json" }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,6 +71,8 @@ app.use("/api/messages", messagesRouter);
 app.use("/api/awards", awardsRouter);
 app.use("/api/events", eventsRouter);
 app.use("/api/rooms", roomsRouter);
+
+app.use("/api/payments", paymentsRouter);
 
 // Agent Gateway — versioned at /v1
 app.use("/v1/agents", agentsRouter);

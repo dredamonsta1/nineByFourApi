@@ -134,6 +134,17 @@ router.get("/:artist_id", async (req, res) => {
 
 // POST /api/artists
 router.post("/", authenticateToken, async (req, res) => {
+  // Require creator tier or admin (creator_tier lives in DB, not JWT)
+  if (req.user.role !== "admin") {
+    const tierCheck = await pool.query(
+      "SELECT creator_tier FROM users WHERE user_id = $1",
+      [req.user.id]
+    );
+    if (tierCheck.rows[0]?.creator_tier !== "creator") {
+      return res.status(403).json({ message: "A creator account is required to add artists.", upgrade: true });
+    }
+  }
+
   const columns = [
     "artist_name",
     "aka",

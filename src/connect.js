@@ -393,6 +393,17 @@ export async function createTables() {
       console.log("Agent gateway migration note:", migErr.message);
     }
 
+    // Stripe / creator-tier migrations
+    try {
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS creator_tier VARCHAR(20) DEFAULT 'free';`);
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id VARCHAR(255);`);
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id VARCHAR(255);`);
+      await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS tier_type VARCHAR(20);`);
+      console.log("Creator tier columns verified.");
+    } catch (migErr) {
+      console.log("Creator tier migration note:", migErr.message);
+    }
+
     console.log(
       'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", "events", "rooms", "agents", and "agent_verifications" checked/created successfully.'
     );

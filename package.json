@@ -45,7 +45,8 @@
     "multer-storage-cloudinary": "^2.2.1",
     "pg": "^8.16.0",
     "resend": "^6.6.0",
-    "rss-parser": "^3.13.0"
+    "rss-parser": "^3.13.0",
+    "stripe": "^20.4.1"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^3.2.4",
