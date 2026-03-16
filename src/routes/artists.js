@@ -243,12 +243,12 @@ router.put(
         .status(403)
         .json({ message: "Permission denied. Admin role required." });
     }
-    const { album_name, year, certifications } = req.body;
+    const { album_name, year, certifications, album_image_url } = req.body;
 
-    if (!album_name && !year && !certifications) {
+    if (!album_name && !year && !certifications && album_image_url === undefined) {
       return res.status(400).json({
         message:
-          "At least one field (album_name, year, certifications) is required to update.",
+          "At least one field (album_name, year, certifications, album_image_url) is required to update.",
       });
     }
 
@@ -267,6 +267,10 @@ router.put(
     if (certifications !== undefined) {
       fieldsToUpdate.push(`certifications = $${queryIndex++}`);
       values.push(certifications);
+    }
+    if (album_image_url !== undefined) {
+      fieldsToUpdate.push(`album_image_url = $${queryIndex++}`);
+      values.push(album_image_url);
     }
 
     values.push(album_id);
