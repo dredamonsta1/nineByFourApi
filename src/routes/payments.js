@@ -5,7 +5,12 @@ import { pool } from "../connect.js";
 import { authenticateToken } from "../middleware.js";
 
 const router = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// Lazy-initialize Stripe so missing env var doesn't crash the app at startup
+let _stripe = null;
+const getStripe = () => {
+  if (!_stripe) _stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  return _stripe;
+};
 
 const PLANS = {
   subscription: process.env.STRIPE_PRICE_SUBSCRIPTION, // recurring monthly/annual price ID
@@ -58,7 +63,7 @@ router.post("/checkout", authenticateToken, async (req, res) => {
     let customerId = user.stripe_customer_id;
 
     if (!customerId) {
-      const customer = await stripe.customers.create({
+      const customer = await getStripe().customers.create({
         email: user.email,
         name: user.username,
         metadata: { user_id: String(req.user.id) },
@@ -79,7 +84,7 @@ router.post("/checkout", authenticateToken, async (req, res) => {
       metadata: { user_id: String(req.user.id), plan_type: planType },
     };
 
-    const session = await stripe.checkout.sessions.create(sessionParams);
+    const session = await getStripe().checkout.sessions.create(sessionParams);
     res.json({ url: session.url });
   } catch (err) {
     console.error("Stripe checkout error:", err.message);
@@ -96,7 +101,7 @@ router.post("/webhook", async (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    event = getStripe().webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error("Webhook signature error:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
