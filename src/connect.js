@@ -404,6 +404,30 @@ export async function createTables() {
       console.log("Creator tier migration note:", migErr.message);
     }
 
+    // Moderation migrations
+    try {
+      await pool.query(`ALTER TABLE posts ADD COLUMN IF NOT EXISTS moderation_status VARCHAR(20) DEFAULT 'clean';`);
+      await pool.query(`ALTER TABLE posts ADD COLUMN IF NOT EXISTS moderation_reason TEXT;`);
+      await pool.query(`CREATE INDEX IF NOT EXISTS idx_posts_moderation ON posts(moderation_status) WHERE moderation_status = 'flagged';`);
+      console.log("Moderation columns verified.");
+    } catch (migErr) {
+      console.log("Moderation migration note:", migErr.message);
+    }
+
+    // Seed internal fact-checker agent (owned by 9by4News bot)
+    try {
+      await pool.query(`
+        INSERT INTO agents (owner_id, name, manifest_url, agent_key_hash, status)
+        SELECT u.user_id, '9by4FactChecker', 'https://vedioz.netlify.app/agents/factchecker',
+               'internal-system-agent', 'active'
+        FROM users u WHERE u.username = '9by4News'
+        ON CONFLICT (agent_key_hash) DO NOTHING;
+      `);
+      console.log("9by4FactChecker agent seeded.");
+    } catch (migErr) {
+      console.log("FactChecker agent seed note:", migErr.message);
+    }
+
     console.log(
       'Tables "users", "artists", "albums", "posts", "waitlist", "follows", "conversations", "messages", "awards", "music_posts", "events", "rooms", "agents", and "agent_verifications" checked/created successfully.'
     );

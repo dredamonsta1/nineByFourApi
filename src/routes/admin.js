@@ -257,4 +257,56 @@ router.patch("/settings", authenticateToken, async (req, res) => {
   }
 });
 
+// --- 7. MODERATION QUEUE ---
+
+router.get("/moderation-queue", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  try {
+    const result = await pool.query(
+      `SELECT p.post_id, p.content, p.moderation_reason, p.created_at,
+              u.username, u.user_id
+       FROM posts p
+       JOIN users u ON p.user_id = u.user_id
+       WHERE p.moderation_status = 'flagged'
+       ORDER BY p.created_at DESC`
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Moderation queue error:", err);
+    res.status(500).json({ error: "Failed to fetch moderation queue." });
+  }
+});
+
+router.patch("/moderation-queue/:id", authenticateToken, async (req, res) => {
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
+  const { action } = req.body;
+  const postId = parseInt(req.params.id);
+
+  if (!["approve", "remove"].includes(action)) {
+    return res.status(400).json({ message: "action must be 'approve' or 'remove'" });
+  }
+
+  try {
+    if (action === "approve") {
+      const result = await pool.query(
+        `UPDATE posts SET moderation_status = 'clean', moderation_reason = NULL
+         WHERE post_id = $1 RETURNING post_id`,
+        [postId]
+      );
+      if (result.rows.length === 0) return res.status(404).json({ message: "Post not found." });
+      res.json({ message: "Post approved." });
+    } else {
+      const result = await pool.query(
+        `DELETE FROM posts WHERE post_id = $1 RETURNING post_id`,
+        [postId]
+      );
+      if (result.rows.length === 0) return res.status(404).json({ message: "Post not found." });
+      res.json({ message: "Post removed." });
+    }
+  } catch (err) {
+    console.error("Moderation action error:", err);
+    res.status(500).json({ error: "Failed to process moderation action." });
+  }
+});
+
 export default router;

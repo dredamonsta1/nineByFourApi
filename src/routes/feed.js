@@ -3,6 +3,8 @@
 import { Router } from "express";
 import { pool } from "../connect.js";
 import { authenticateToken, upload, videoUpload, audioUpload, handleMulterError } from "../middleware.js";
+import { moderatePost } from "../agent-moderator.js";
+import { factCheckPost } from "../agent-factchecker.js";
 
 const router = Router();
 
@@ -171,6 +173,14 @@ router.post("/text", authenticateToken, async (req, res) => {
     };
 
     res.status(201).json(post);
+
+    // Fire agents async after response — only for human-authored posts
+    if (!post.is_agent_post) {
+      Promise.all([
+        moderatePost(pool, { postId: post.post_id, content }),
+        factCheckPost(pool, { postId: post.post_id, content }),
+      ]).catch(err => console.error('[agents]', err.message));
+    }
   } catch (err) {
     console.error("Error creating text post:", err);
     res.status(500).json({ message: "Failed to create post." });
