@@ -44,11 +44,11 @@ export const authenticateToken = (req, res, next) => {
 };
 
 // --- Cloudinary upload helper ---
-const streamUpload = (buffer, options) =>
+const streamUpload = (buffer: Buffer, options: object): Promise<{ secure_url: string }> =>
   new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(options, (err, result) => {
       if (err) reject(err);
-      else resolve(result);
+      else resolve(result as { secure_url: string });
     });
     Readable.from(buffer).pipe(stream);
   });

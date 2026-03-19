@@ -1,5 +1,6 @@
-// backend/connect.js
+// backend/connect.ts
 import pg from "pg";
+import type { Pool as PgPool } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config(); // Load environment variables from .env file
@@ -26,7 +27,7 @@ const connectionOptions = process.env.DATABASE_URL
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT || 5432,
+      port: parseInt(process.env.DB_PORT || '5432'),
     };
 
 const pool = new Pool(connectionOptions);
@@ -439,3 +440,4 @@ export async function createTables() {
 
 // Export the pool to be used throughout the application
 export { pool };
+export type { PgPool };

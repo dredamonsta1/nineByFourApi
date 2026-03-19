@@ -1,9 +1,10 @@
-// src/agent-factchecker.js
+// src/agent-factchecker.ts
 // Fire-and-forget fact-checking using Claude Sonnet.
 // Checks verifiable claims in text posts, upserts agent_verifications,
 // and posts a 🔍 comment on disputed posts as the 9by4News bot.
 
 import Anthropic from '@anthropic-ai/sdk';
+import type { Pool } from 'pg';
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -20,7 +21,7 @@ Respond with ONLY valid JSON — no markdown, no commentary:
 or
 {"verdict":"disputed","note":"what the claim got wrong","comment":"friendly explanation for the community (1-2 sentences)"}`;
 
-export async function factCheckPost(pool, { postId, content }) {
+export async function factCheckPost(pool: Pool, { postId, content }: { postId: number; content: string }) {
   try {
     // Look up the 9by4News bot and 9by4FactChecker agent
     const [userResult, agentResult] = await Promise.all([
@@ -43,7 +44,8 @@ export async function factCheckPost(pool, { postId, content }) {
       messages: [{ role: 'user', content }],
     });
 
-    const text = response.content[0]?.text?.trim();
+    const block = response.content[0];
+    const text = block?.type === 'text' ? block.text.trim() : undefined;
     if (!text) return;
 
     let result;
