@@ -9,17 +9,19 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:watch": "vitest --watch",
-    "start": "node src/index.js",
-    "seed": "node src/seed.js",
-    "seed:production": "node src/seed-production.js",
-    "seed:production:fresh": "node src/seed-production.js --fresh",
-    "populate-images": "node src/populate-images.js",
-    "populate-images:dry": "node src/populate-images.js --dry-run",
-    "seed:awards": "node src/seed-awards.js",
-    "enrich-artists": "node src/enrich-artists.js",
-    "enrich-artists:dry": "node src/enrich-artists.js --dry-run",
-    "agent-poster": "node src/agent-poster.js",
-    "agent-poster:dry": "node src/agent-poster.js --dry-run"
+    "start": "tsx src/index.ts",
+    "dev": "tsx --watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "seed": "tsx src/seed.js",
+    "seed:production": "tsx src/seed-production.js",
+    "seed:production:fresh": "tsx src/seed-production.js --fresh",
+    "populate-images": "tsx src/populate-images.js",
+    "populate-images:dry": "tsx src/populate-images.js --dry-run",
+    "seed:awards": "tsx src/seed-awards.js",
+    "enrich-artists": "tsx src/enrich-artists.js",
+    "enrich-artists:dry": "tsx src/enrich-artists.js --dry-run",
+    "agent-poster": "tsx src/agent-poster.js",
+    "agent-poster:dry": "tsx src/agent-poster.js --dry-run"
   },
   "repository": {
     "type": "git",
@@ -47,13 +49,22 @@
     "pg": "^8.16.0",
     "resend": "^6.6.0",
     "rss-parser": "^3.13.0",
-    "stripe": "^20.4.1"
+    "stripe": "^20.4.1",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.5.0",
+    "@types/pg": "^8.18.0",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "supabase": "^2.76.15",
     "supertest": "^7.1.4",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   }
 }

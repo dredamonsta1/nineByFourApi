@@ -1,8 +1,9 @@
-// src/agent-moderator.js
+// src/agent-moderator.ts
 // Fire-and-forget content moderation using Claude Haiku.
 // Called after a human text post is inserted — never blocks the HTTP response.
 
 import Anthropic from '@anthropic-ai/sdk';
+import type { Pool } from 'pg';
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -17,7 +18,7 @@ Respond with ONLY valid JSON — no markdown, no commentary:
 or
 {"status":"flagged","reason":"brief reason here"}`;
 
-export async function moderatePost(pool, { postId, content }) {
+export async function moderatePost(pool: Pool, { postId, content }: { postId: number; content: string }) {
   try {
     const response = await client.messages.create({
       model: 'claude-haiku-4-5',
@@ -26,7 +27,8 @@ export async function moderatePost(pool, { postId, content }) {
       messages: [{ role: 'user', content }],
     });
 
-    const text = response.content[0]?.text?.trim();
+    const block = response.content[0];
+    const text = block?.type === 'text' ? block.text.trim() : undefined;
     if (!text) return;
 
     let result;

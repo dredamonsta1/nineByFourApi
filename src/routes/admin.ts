@@ -1,4 +1,4 @@
-// src/routes/admin.js
+// src/routes/admin.ts
 import express from "express";
 import { pool } from "../connect.js";
 import { Resend } from "resend";
@@ -115,7 +115,7 @@ router.get("/waitlist-entries", authenticateToken, async (req, res) => {
   }
 });
 
-// src/routes/admin.js
+// src/routes/admin.ts
 
 // DELETE /api/admin/reset-user
 router.delete("/reset-user", authenticateToken, async (req, res) => {
@@ -154,7 +154,7 @@ router.delete("/reset-user", authenticateToken, async (req, res) => {
 
 router.get("/users", authenticateToken, async (req, res) => {
   if (req.user.role !== "admin") return res.status(403).json({ message: "Forbidden" });
-  const { search = "", page = 1, limit = 50 } = req.query;
+  const { search = "", page = "1", limit = "50" } = req.query as { search?: string; page?: string; limit?: string };
   const offset = (parseInt(page) - 1) * parseInt(limit);
   try {
     const result = await pool.query(

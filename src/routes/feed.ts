@@ -1,4 +1,4 @@
-// routes/feed.js - Combined feed endpoint for text and image posts
+// routes/feed.ts - Combined feed endpoint for text and image posts
 
 import { Router } from "express";
 import { pool } from "../connect.js";

@@ -1,4 +1,4 @@
-// src/routes/users.js
+// src/routes/users.ts
 import { Router } from "express";
 import { pool } from "../connect.js";
 import bcrypt from "bcrypt";
@@ -104,7 +104,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// src/routes/users.js
+// src/routes/users.ts
 router.get("/me", authenticateToken, async (req, res) => {
   try {
     // req.user comes from your authenticateToken middleware
@@ -122,7 +122,7 @@ router.get("/me", authenticateToken, async (req, res) => {
 
 // --- ROUTE: SEARCH USERS ---
 router.get("/search", authenticateToken, async (req, res) => {
-  const { q } = req.query;
+  const q = typeof req.query.q === 'string' ? req.query.q : '';
   if (!q || q.trim().length < 2) {
     return res.json([]);
   }
